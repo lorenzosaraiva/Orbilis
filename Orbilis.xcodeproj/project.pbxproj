@@ -16,6 +16,11 @@
 		0A23B0E21A697121000C78A4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A23B0E11A697121000C78A4 /* Images.xcassets */; };
 		0A23B0E51A697121000C78A4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A23B0E31A697121000C78A4 /* LaunchScreen.xib */; };
 		0A23B0F11A697121000C78A4 /* OrbilisTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A23B0F01A697121000C78A4 /* OrbilisTests.m */; };
+		0A23B0FC1A697197000C78A4 /* SKAnimals.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A23B0FB1A697197000C78A4 /* SKAnimals.m */; };
+		0A23B1001A6971CE000C78A4 /* nuvem.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A23B0FF1A6971CE000C78A4 /* nuvem.png */; };
+		0A23B1021A6971D6000C78A4 /* sun.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A23B1011A6971D6000C78A4 /* sun.jpg */; };
+		0A23B1041A6971E3000C78A4 /* animal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A23B1031A6971E3000C78A4 /* animal.png */; };
+		0A23B1061A697219000C78A4 /* i.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A23B1051A697219000C78A4 /* i.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +50,12 @@
 		0A23B0EA1A697121000C78A4 /* OrbilisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrbilisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A23B0EF1A697121000C78A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A23B0F01A697121000C78A4 /* OrbilisTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrbilisTests.m; sourceTree = "<group>"; };
+		0A23B0FA1A697197000C78A4 /* SKAnimals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAnimals.h; sourceTree = "<group>"; };
+		0A23B0FB1A697197000C78A4 /* SKAnimals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAnimals.m; sourceTree = "<group>"; };
+		0A23B0FF1A6971CE000C78A4 /* nuvem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nuvem.png; sourceTree = "<group>"; };
+		0A23B1011A6971D6000C78A4 /* sun.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sun.jpg; sourceTree = "<group>"; };
+		0A23B1031A6971E3000C78A4 /* animal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animal.png; sourceTree = "<group>"; };
+		0A23B1051A697219000C78A4 /* i.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +97,10 @@
 		0A23B0CE1A697121000C78A4 /* Orbilis */ = {
 			isa = PBXGroup;
 			children = (
+				0A23B0FE1A6971C0000C78A4 /* Assets */,
+				0A23B0FD1A6971BA000C78A4 /* Classes */,
+				0A23B0FA1A697197000C78A4 /* SKAnimals.h */,
+				0A23B0FB1A697197000C78A4 /* SKAnimals.m */,
 				0A23B0D31A697121000C78A4 /* AppDelegate.h */,
 				0A23B0D41A697121000C78A4 /* AppDelegate.m */,
 				0A23B0D61A697121000C78A4 /* GameScene.h */,
@@ -125,6 +140,24 @@
 				0A23B0EF1A697121000C78A4 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0A23B0FD1A6971BA000C78A4 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		0A23B0FE1A6971C0000C78A4 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				0A23B1051A697219000C78A4 /* i.jpg */,
+				0A23B1031A6971E3000C78A4 /* animal.png */,
+				0A23B1011A6971D6000C78A4 /* sun.jpg */,
+				0A23B0FF1A6971CE000C78A4 /* nuvem.png */,
+			);
+			name = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,8 +240,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A23B1041A6971E3000C78A4 /* animal.png in Resources */,
+				0A23B1021A6971D6000C78A4 /* sun.jpg in Resources */,
 				0A23B0E51A697121000C78A4 /* LaunchScreen.xib in Resources */,
 				0A23B0E21A697121000C78A4 /* Images.xcassets in Resources */,
+				0A23B1001A6971CE000C78A4 /* nuvem.png in Resources */,
+				0A23B1061A697219000C78A4 /* i.jpg in Resources */,
 				0A23B0DA1A697121000C78A4 /* GameScene.sks in Resources */,
 				0A23B0E01A697121000C78A4 /* Main.storyboard in Resources */,
 			);
@@ -230,6 +267,7 @@
 			files = (
 				0A23B0DD1A697121000C78A4 /* GameViewController.m in Sources */,
 				0A23B0D51A697121000C78A4 /* AppDelegate.m in Sources */,
+				0A23B0FC1A697197000C78A4 /* SKAnimals.m in Sources */,
 				0A23B0D81A697121000C78A4 /* GameScene.m in Sources */,
 				0A23B0D21A697121000C78A4 /* main.m in Sources */,
 			);

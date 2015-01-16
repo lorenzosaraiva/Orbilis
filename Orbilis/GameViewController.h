@@ -1,9 +1,9 @@
 //
 //  GameViewController.h
-//  Orbilis
+//  GameTest
 //
 
-//  Copyright (c) 2015 BEPID-PucRJ. All rights reserved.
+//  Copyright (c) 2014 Lorenzo Saraiva. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

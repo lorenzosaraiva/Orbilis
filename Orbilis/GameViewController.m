@@ -1,9 +1,9 @@
 //
 //  GameViewController.m
-//  Orbilis
+//  GameTest
 //
-//  Created by Lorenzo Saraiva on 1/16/15.
-//  Copyright (c) 2015 BEPID-PucRJ. All rights reserved.
+//  Created by Lorenzo Saraiva on 12/11/14.
+//  Copyright (c) 2014 Lorenzo Saraiva. All rights reserved.
 //
 
 #import "GameViewController.h"
