@@ -8,14 +8,21 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "SKAnimals.h"
-
-static NSString * const sunNode = @"movable";
+#import "SKVegetables.h"
 
 @interface GameScene : SKScene <UIGestureRecognizerDelegate, SKPhysicsContactDelegate>
 
-@property (strong,nonatomic) SKSpriteNode *sun;
+@property (strong, nonatomic) SKSpriteNode *sun;
+
+@property (strong, nonatomic) SKSpriteNode *island;
+
+@property (strong, nonatomic) SKSpriteNode *sand;
 
 @property (strong ,nonatomic) NSMutableArray *animalArray;
+
+@property (strong, nonatomic) NSMutableArray *sceneryArray;
+
+@property (strong, nonatomic) NSMutableArray *vegetableArray;
 
 @property (strong, nonatomic) NSMutableArray *menuArray;
 

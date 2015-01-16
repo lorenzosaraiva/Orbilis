@@ -12,19 +12,57 @@
 
 @implementation GameScene
 
+int global = 0;
 
 -(void)didMoveToView:(SKView *)view {
     
+    // inicia e alloca as coisas iniciais
+    
     self.isMenu = false;
     self.temperature = 27;
-    SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"i.jpg"];
-    background.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame));
     self.animalArray = [[NSMutableArray alloc]init];
     self.menuArray = [[NSMutableArray alloc]init];
+    self.vegetableArray = [[NSMutableArray alloc]init];
+    self.sceneryArray = [[NSMutableArray alloc]init];
+    // cria e define posicao dos elementos da tela
+    
+    
+    SKSpriteNode *sea = [SKSpriteNode spriteNodeWithImageNamed:@"Sea.png"];
+    sea.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 70);
+    sea.size = CGSizeMake(sea.frame.size.width * 0.67f, sea.frame.size.height * 0.67f);
+    
+    SKSpriteNode *water = [SKSpriteNode spriteNodeWithImageNamed:@"Water.png"];
+    water.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 70);
+    water.size = CGSizeMake(water.frame.size.width * 0.67f, water.frame.size.height * 0.67f);
+    
+    self.sand = [SKSpriteNode spriteNodeWithImageNamed:@"Sand.png"];
+    self.sand.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 70);
+    self.sand.size = CGSizeMake(self.sand.frame.size.width * 0.66f, self.sand.frame.size.height * 0.66f);
+    
+    self.island = [SKSpriteNode spriteNodeWithImageNamed:@"Island.png"];
+    self.island.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 15);
+    self.island.size = CGSizeMake(self.island.frame.size.width * 0.66f, self.island.frame.size.height * 0.66f);
+    
+    SKSpriteNode *sky = [SKSpriteNode spriteNodeWithImageNamed:@"Sky.png"];
+    sky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 31);
+    sky.size = CGSizeMake(sky.frame.size.width * 0.68f, sky.frame.size.height * 0.7f);
+    
+    SKSpriteNode *cage = [SKSpriteNode spriteNodeWithImageNamed:@"Cage.png"];
+    cage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    cage.size = CGSizeMake(cage.frame.size.width * 0.7f, cage.frame.size.height * 0.7f);
+    
     self.sun = [SKSpriteNode spriteNodeWithImageNamed:@"sun.jpg"];
     self.sun.position = CGPointMake(170, 550);
-    [self addChild:background];
+    [self addChild:sky];
+    [self addChild:sea];
+    [self addChild:water];
+    [self addChild:self.sand];
+    [self addChild:self.island];
+    [self addChild:cage];
+    
     [self addChild:self.sun];
+    
+    
     
     
     // configura os gesture recognizer
@@ -80,7 +118,7 @@
     // adiciona o elemento correto do pop-up menu
     
     for (int i = 0; i < self.menuArray.count; i++){
-//        if ([self.menuArray objectAtIndex:i] isKindOfClass: [SKAnimals class])
+        if ([[self.menuArray objectAtIndex:i] isKindOfClass: [SKAnimals class]]){
         SKAnimals *temp = self.menuArray[i];
         if ([temp containsPoint:positionInScene]){
             [self.menuArray removeObject:temp];
@@ -89,6 +127,19 @@
             [self.animalArray addObject:temp];
             self.isMenu = false;
             return;
+            }
+        }
+        else if ([[self.menuArray objectAtIndex:i] isKindOfClass:[SKVegetables class]]){
+            SKVegetables *temp = self.menuArray[i];
+            if ([temp containsPoint:positionInScene]){
+                [self.menuArray removeObject:temp];
+                [self removeChildrenInArray:self.menuArray];
+                [self.menuArray removeAllObjects];
+                [self.vegetableArray addObject:temp];
+                self.isMenu = false;
+                return;
+        
+            }
         }
     }
     
@@ -111,18 +162,46 @@
         return;;
     }
     
-    // cria o menu
+    // cria os menu
     
-    SKSpriteNode *nuvem  = [SKSpriteNode spriteNodeWithImageNamed:@"nuvem.png"];
-    SKAnimals *animal = [SKAnimals spriteNodeWithImageNamed:@"animal.png"];
-    animal.strenght = arc4random()%10;
-    nuvem.position = CGPointMake(positionInScene.x, positionInScene.y + 20);
-    animal.position = CGPointMake(positionInScene.x, positionInScene.y - 20);
-    [self.menuArray addObject:nuvem];
-    [self.menuArray addObject:animal];
-    [self addChild:animal];
-    [self addChild:nuvem];
-    self.isMenu = true;
+    //menu da terra
+    if ([self.island containsPoint:positionInScene]){
+        SKAnimals *herb = [SKAnimals createAnimalofType:Animal_Herbivore];
+        SKAnimals *carn = [SKAnimals createAnimalofType:Animal_Carnivore];
+        SKAnimals *bigCarn = [SKAnimals createAnimalofType:Animal_Predator];
+        SKVegetables *factory = [SKVegetables spriteNodeWithImageNamed:@"tree.png"];
+        carn.size = CGSizeMake(herb.frame.size.width, herb.frame.size.height);
+        bigCarn.size = CGSizeMake(herb.frame.size.width, herb.frame.size.height);
+        factory.animalsToFeed = 10;
+        factory.energyValue = 40;
+        factory.nextFeed = 0;
+        herb.position = CGPointMake(positionInScene.x, positionInScene.y + 30);
+        carn.position = CGPointMake(positionInScene.x, positionInScene.y - 30);
+        bigCarn.position = CGPointMake(positionInScene.x + 30, positionInScene.y);
+        factory.position = CGPointMake(positionInScene.x - 30, positionInScene.y);
+        [self.menuArray addObject:herb];
+        [self.menuArray addObject:carn];
+        [self.menuArray addObject:bigCarn];
+        [self.menuArray addObject:factory];
+        [self addChild:herb];
+        [self addChild:carn];
+        [self addChild:bigCarn];
+        [self addChild:factory];
+        self.isMenu = true;
+        
+        
+    
+    }
+//    SKSpriteNode *nuvem  = [SKSpriteNode spriteNodeWithImageNamed:@"nuvem.png"];
+//    SKAnimals *animal = [SKAnimals spriteNodeWithImageNamed:@"animal.png"];
+//    animal.strenght = arc4random()%10;
+//    nuvem.position = CGPointMake(positionInScene.x, positionInScene.y + 20);
+//    animal.position = CGPointMake(positionInScene.x, positionInScene.y - 20);
+//    [self.menuArray addObject:nuvem];
+//    [self.menuArray addObject:animal];
+//    [self addChild:animal];
+//    [self addChild:nuvem];
+//    self.isMenu = true;
 
 }
 
@@ -134,12 +213,12 @@
 
 
 -(void)update:(CFTimeInterval)currentTime {
-    
+   
     for (int i = 0; i < self.animalArray.count; i++){
         
         // movimento
-        int a = arc4random()%20;
-        int b = arc4random()%20;
+        int a = arc4random()%40;
+        int b = arc4random()%40;
         int c = arc4random()%2;
         int d = arc4random()%2;
         if (!c)
@@ -161,22 +240,85 @@
             }
         }
         
+        //update de energia
+        
+        temp.energy--;
+        if (temp.energy <= 0)
+            [temp removeFromParent];
+        
+        
+        //multiplicacao
+        
+        if (temp.animalType == Animal_Herbivore){
+        
+            int divideChance = arc4random()%100;
+            int c = arc4random()%2;
+            int d = arc4random()%2;
+            if (divideChance < 1){
+                SKAnimals *herb = [SKAnimals spriteNodeWithImageNamed:@"animal.png"];
+                herb.position = CGPointMake(temp.frame.origin.x + 40*c, temp.frame.origin.y + 40*d);
+                [self.animalArray addObject:herb];
+                herb.energyValue = 80;
+                herb.energy = 160;
+                herb.animalType = Animal_Herbivore;
+                [self addChild:herb];
+                return;
+                
+            }
+            
+        }
+        
+        //checa o contato com plantas
+        
+        if (temp.animalType == Animal_Herbivore){
+    
+            for (int k = 0; k < self.vegetableArray.count; k++){
+                SKVegetables *temp2 = self.vegetableArray[k];
+                if (temp2.nextFeed != 0)
+                    temp2.nextFeed--;
+                Boolean viewsOverlap = CGRectIntersectsRect(temp.frame, temp2.frame);
+                
+                if (viewsOverlap){
+                    if (temp2.nextFeed == 0){
+                    SKAction *shrinkTree = [SKAction scaleTo:0.8f duration:0.5];
+                    [temp2 runAction:shrinkTree];
+                    temp2.animalsToFeed--;
+                    temp2.nextFeed = 10;
+                        if (temp2.animalsToFeed <= 0){
+                            SKAction *shrink = [SKAction scaleTo:0 duration:0.5];
+                            SKAction *remove = [SKAction removeFromParent];
+                            SKAction *sequence = [SKAction sequence:@[shrink,remove]];
+                            [temp2 runAction:sequence];
+                        }
+                    }
+                }
+            }
+        }
+        
+        //checa o contato dos animais
         
         for (int j = 0; j< self.animalArray.count; j++){
-            SKSpriteNode *temp2 =self.animalArray[j];
+            SKAnimals *temp2 =self.animalArray[j];
             if (j == i)
+                continue;
+            if (temp.animalType == temp2.animalType)
                 continue;
             
                 Boolean viewsOverlap = CGRectIntersectsRect(temp.frame, temp2.frame);
                 if (viewsOverlap){
+                    SKAction *shrink = [SKAction scaleTo:0 duration:1];
+                    SKAction *remove = [SKAction removeFromParent];
+                    SKAction *sequence = [SKAction sequence:@[shrink,remove]];
                     if ([(SKAnimals*)temp strenght] > [(SKAnimals*)temp2 strenght]){
-                    [temp2 removeFromParent];
-                    [self.animalArray removeObject:temp2];
+                        temp.energy += temp2.energyValue;
+                        [temp2 runAction:sequence];
+                        [self.animalArray removeObject:temp2];
                         NSLog(@"Foi removido o animal de forca %d e o que ficou tinha %d", [(SKAnimals*)temp strenght], [(SKAnimals*)temp2 strenght]);
                         break;
                     }
                     else{
-                        [temp removeFromParent];
+                        temp2.energy += temp2.energyValue;
+                        [temp runAction:sequence];
                         [self.animalArray removeObject:temp];
                         NSLog(@"Foi removido o animal de forca %d e o que ficou tinha %d", [(SKAnimals*)temp strenght], [(SKAnimals*)temp2 strenght]);
                         break;

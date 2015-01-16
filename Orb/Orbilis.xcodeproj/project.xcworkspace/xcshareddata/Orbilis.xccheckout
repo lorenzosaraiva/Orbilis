@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>2C0877C1-E6EC-4728-BC91-92FC443114B9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Orbilis</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D0C8CE53F27B1427865CC21F6EB01F967142625A</key>
+		<string>https://github.com/lorenzosaraiva/Orbilis.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Orb/Orbilis.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D0C8CE53F27B1427865CC21F6EB01F967142625A</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/lorenzosaraiva/Orbilis.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D0C8CE53F27B1427865CC21F6EB01F967142625A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D0C8CE53F27B1427865CC21F6EB01F967142625A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Orbilis</string>
+		</dict>
+	</array>
+</dict>
+</plist>
