@@ -172,8 +172,8 @@ int global = 0;
         SKVegetables *factory = [SKVegetables spriteNodeWithImageNamed:@"tree.png"];
         carn.size = CGSizeMake(herb.frame.size.width, herb.frame.size.height);
         bigCarn.size = CGSizeMake(herb.frame.size.width, herb.frame.size.height);
-        factory.animalsToFeed = 10;
-        factory.energyValue = 40;
+        factory.animalsToFeed = 5;
+        factory.energyValue = 60;
         factory.nextFeed = 0;
         herb.position = CGPointMake(positionInScene.x, positionInScene.y + 30);
         carn.position = CGPointMake(positionInScene.x, positionInScene.y - 30);
@@ -214,8 +214,34 @@ int global = 0;
 
 -(void)update:(CFTimeInterval)currentTime {
    
-    for (int i = 0; i < self.animalArray.count; i++){
+    for (int i = 0; i < self.vegetableArray.count; i++){
         
+        SKVegetables *temp = self.vegetableArray[i];
+        int check = arc4random()%300;
+        if (!check){
+            SKVegetables *new = [SKVegetables spriteNodeWithImageNamed:@"tree.png"];
+            new.animalsToFeed = 5;
+            new.energyValue = 150;
+            new.nextFeed = 0;
+            int a = arc4random()%50;
+            int b = arc4random()%50;
+            int c = arc4random()%2;
+            int d = arc4random()%2;
+            if (!c)
+                a = -a;
+            if (!d)
+                b = -b;
+            new.position = CGPointMake(temp.position.x + a, temp.position.y + b);
+            [self.vegetableArray addObject:new];
+            [self addChild:new];
+                }
+    }
+    
+    for (int i = 0; i < self.animalArray.count; i++){
+        SKAnimals *temp = self.animalArray[i];
+        if (i == 0){
+            NSLog(@"Energia : %d\n", temp.energy);
+        }
         // movimento
         int a = arc4random()%40;
         int b = arc4random()%40;
@@ -227,7 +253,7 @@ int global = 0;
             b = -b;
         a = a/10;
         b = b/10;
-        SKAnimals *temp = self.animalArray[i];
+        
         temp.position = CGPointMake(temp.position.x + a, temp.position.y + b);
         
         //checagem de temperatura
@@ -243,29 +269,21 @@ int global = 0;
         //update de energia
         
         temp.energy--;
-        if (temp.energy <= 0)
+        if (temp.energy <= 0){
             [temp removeFromParent];
+            [self.animalArray removeObject:temp];
         
-        
+        }
         //multiplicacao
         
-        if (temp.animalType == Animal_Herbivore){
-        
-            int divideChance = arc4random()%100;
-            int c = arc4random()%2;
-            int d = arc4random()%2;
-            if (divideChance < 1){
-                SKAnimals *herb = [SKAnimals spriteNodeWithImageNamed:@"animal.png"];
-                herb.position = CGPointMake(temp.frame.origin.x + 40*c, temp.frame.origin.y + 40*d);
-                [self.animalArray addObject:herb];
-                herb.energyValue = 80;
-                herb.energy = 160;
-                herb.animalType = Animal_Herbivore;
-                [self addChild:herb];
-                return;
-                
-            }
-            
+        if (temp.energy >= temp.multiplyLimit){
+            SKAnimals *animal = [SKAnimals createAnimalofType:temp.animalType];
+            animal.position = CGPointMake(temp.frame.origin.x + 10, temp.frame.origin.y + 30);
+            [self addChild:animal];
+            NSLog(@"Antes : %d", temp.energy);
+            [self.animalArray addObject:animal];
+            temp.energy = temp.energy/2;
+            NSLog(@"Depois : %d", temp.energy);
         }
         
         //checa o contato com plantas
@@ -284,6 +302,7 @@ int global = 0;
                     [temp2 runAction:shrinkTree];
                     temp2.animalsToFeed--;
                     temp2.nextFeed = 10;
+                    temp.energy += temp2.energyValue;
                         if (temp2.animalsToFeed <= 0){
                             SKAction *shrink = [SKAction scaleTo:0 duration:0.5];
                             SKAction *remove = [SKAction removeFromParent];
