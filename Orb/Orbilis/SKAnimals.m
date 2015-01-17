@@ -8,6 +8,7 @@
 
 #import "SKAnimals.h"
 
+
 @implementation SKAnimals
 
 +(SKAnimals*)createAnimalofType:(AnimalType)type{
@@ -15,24 +16,24 @@
     if (type == Animal_Herbivore){
         temp = [SKAnimals spriteNodeWithImageNamed:@"animal.png"];
         temp.strenght = 0;
-        temp.energy = 1500;
-        temp.energyValue = 800;
-        temp.multiplyLimit = 3000;
+        temp.energy = 180;
+        temp.energyValue = 100;
+        temp.multiplyLimit = 360;
         temp.animalType = 0;
     }
     if (type == Animal_Carnivore){
         temp = [SKAnimals spriteNodeWithImageNamed:@"donkey.png"];
         temp.strenght = 10;
-        temp.energy = 2000;
-        temp.energyValue = 1200;
-        temp.multiplyLimit = 4000;
+        temp.energy = 180 * 2;
+        temp.energyValue = 240;
+        temp.multiplyLimit = 500;
         temp.animalType = 1;
     }
     if (type == Animal_Predator){
         temp = [SKAnimals spriteNodeWithImageNamed:@"croco.png"];
         temp.strenght = 100;
-        temp.energy = 3000;
-        temp.multiplyLimit = 6000;
+        temp.energy = 180 * 2;
+        temp.multiplyLimit = 600;
         temp.animalType = 2;
     
     }

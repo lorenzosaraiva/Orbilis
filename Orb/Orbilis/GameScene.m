@@ -12,6 +12,7 @@
 
 @implementation GameScene
 
+
 int global = 0;
 
 -(void)didMoveToView:(SKView *)view {
@@ -20,6 +21,7 @@ int global = 0;
     
     self.isMenu = false;
     self.temperature = 27;
+    self.timeSinceLast = 0;
     self.animalArray = [[NSMutableArray alloc]init];
     self.menuArray = [[NSMutableArray alloc]init];
     self.vegetableArray = [[NSMutableArray alloc]init];
@@ -37,11 +39,11 @@ int global = 0;
     
     self.sand = [SKSpriteNode spriteNodeWithImageNamed:@"Sand.png"];
     self.sand.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 70);
-    self.sand.size = CGSizeMake(self.sand.frame.size.width * 0.66f, self.sand.frame.size.height * 0.66f);
+    self.sand.size = CGSizeMake(self.sand.frame.size.width * 1.0f, self.sand.frame.size.height * 1.0f);
     
     self.island = [SKSpriteNode spriteNodeWithImageNamed:@"Island.png"];
     self.island.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 15);
-    self.island.size = CGSizeMake(self.island.frame.size.width * 0.66f, self.island.frame.size.height * 0.66f);
+    self.island.size = CGSizeMake(self.island.frame.size.width * 1.0f, self.island.frame.size.height * 1.0f);
     
     SKSpriteNode *sky = [SKSpriteNode spriteNodeWithImageNamed:@"Sky.png"];
     sky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 31);
@@ -213,8 +215,19 @@ int global = 0;
 
 
 -(void)update:(CFTimeInterval)currentTime {
+  
+   self.timeSinceLast += currentTime - self.lastUpdateTimeInterval;
+    
+    NSLog(@"%f time since", self.timeSinceLast);
+    self.lastUpdateTimeInterval = currentTime;
+    if (self.timeSinceLast > 1) { // more than a second since last update
+        self.timeSinceLast = 0;
+        self.lastUpdateTimeInterval = currentTime;
+
+    
    
     for (int i = 0; i < self.vegetableArray.count; i++){
+        
         
         SKVegetables *temp = self.vegetableArray[i];
         int check = arc4random()%300;
@@ -239,12 +252,11 @@ int global = 0;
     
     for (int i = 0; i < self.animalArray.count; i++){
         SKAnimals *temp = self.animalArray[i];
-        if (i == 0){
-            NSLog(@"Energia : %d\n", temp.energy);
-        }
+
         // movimento
-        int a = arc4random()%40;
-        int b = arc4random()%40;
+        
+        int a = arc4random()%400;
+        int b = arc4random()%400;
         int c = arc4random()%2;
         int d = arc4random()%2;
         if (!c)
@@ -253,8 +265,9 @@ int global = 0;
             b = -b;
         a = a/10;
         b = b/10;
-        
-        temp.position = CGPointMake(temp.position.x + a, temp.position.y + b);
+        SKAction * move = [SKAction moveTo: CGPointMake(temp.position.x + a, temp.position.y + b) duration:1.0f];
+        [temp runAction:move];
+//        temp.position = CGPointMake(temp.position.x + a, temp.position.y + b);
         
         //checagem de temperatura
         
@@ -266,7 +279,9 @@ int global = 0;
             }
         }
         
+        
         //update de energia
+        
         
         temp.energy--;
         if (temp.energy <= 0){
@@ -279,11 +294,10 @@ int global = 0;
         if (temp.energy >= temp.multiplyLimit){
             SKAnimals *animal = [SKAnimals createAnimalofType:temp.animalType];
             animal.position = CGPointMake(temp.frame.origin.x + 10, temp.frame.origin.y + 30);
+            animal.size = CGSizeMake(temp.frame.size.width, temp.frame.size.height);
             [self addChild:animal];
-            NSLog(@"Antes : %d", temp.energy);
             [self.animalArray addObject:animal];
             temp.energy = temp.energy/2;
-            NSLog(@"Depois : %d", temp.energy);
         }
         
         //checa o contato com plantas
@@ -347,8 +361,10 @@ int global = 0;
         }
 
     }
+    }
     
 }
+
 
 //-(void)didBeginContact:(SKPhysicsContact *)contact{
 //    

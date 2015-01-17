@@ -28,6 +28,10 @@
 
 @property (strong, nonatomic) UILabel *temperatureLabel;
 
+@property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
+
+@property (nonatomic) NSTimeInterval timeSinceLast;
+
 @property float temperature;
 
 @property BOOL isMenu;

@@ -10,6 +10,15 @@
 
 @interface SKVegetables : SKSpriteNode
 
+typedef enum SKVegetableType {
+    
+    Vegetable_Tree = 0,
+    Vegetable_Grass  = 1
+    
+} VegetableType;
+
++(SKVegetables*)createVegetableOfType:(VegetableType)type;
+
 @property int idealLight;
 
 @property int idealTemperature;
@@ -22,7 +31,11 @@
 
 @property int energyValue;
 
-//quanto falta para o proximo animal poder comer
+@property int energy;
+
+//numero de folhas
+
+@property int leaves;
 
 @property int nextFeed;
 
