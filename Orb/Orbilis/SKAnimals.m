@@ -26,7 +26,7 @@
         temp.strenght = 10;
         temp.energy = 180 * 2;
         temp.energyValue = 240;
-        temp.multiplyLimit = 500;
+        temp.multiplyLimit = 900;
         temp.animalType = 1;
     }
     if (type == Animal_Predator){

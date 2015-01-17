@@ -10,4 +10,17 @@
 
 @implementation SKVegetables
 
++(SKVegetables*)createVegetableOfType:(VegetableType)type{
+
+    SKVegetables *new = [SKVegetables spriteNodeWithImageNamed:@"tree.png"];
+    new.energyValue = 30;
+    new.leaves = 10;
+    new.energy = 900;
+    new.leavesCounter = 18;
+    new.growthCounter = 0;
+    new.growthTime = 0;
+    return new;
+
+}
+
 @end

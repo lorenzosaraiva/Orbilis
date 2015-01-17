@@ -13,7 +13,7 @@
 @implementation GameScene
 
 
-int global = 0;
+
 
 -(void)didMoveToView:(SKView *)view {
     
@@ -22,6 +22,8 @@ int global = 0;
     self.isMenu = false;
     self.temperature = 27;
     self.timeSinceLast = 0;
+    self.global = 0;
+    self.tree = 0;
     self.animalArray = [[NSMutableArray alloc]init];
     self.menuArray = [[NSMutableArray alloc]init];
     self.vegetableArray = [[NSMutableArray alloc]init];
@@ -171,16 +173,14 @@ int global = 0;
         SKAnimals *herb = [SKAnimals createAnimalofType:Animal_Herbivore];
         SKAnimals *carn = [SKAnimals createAnimalofType:Animal_Carnivore];
         SKAnimals *bigCarn = [SKAnimals createAnimalofType:Animal_Predator];
-        SKVegetables *factory = [SKVegetables spriteNodeWithImageNamed:@"tree.png"];
+        SKVegetables *factory = [SKVegetables createVegetableOfType:Vegetable_Tree];
         carn.size = CGSizeMake(herb.frame.size.width, herb.frame.size.height);
         bigCarn.size = CGSizeMake(herb.frame.size.width, herb.frame.size.height);
-        factory.animalsToFeed = 5;
-        factory.energyValue = 60;
-        factory.nextFeed = 0;
         herb.position = CGPointMake(positionInScene.x, positionInScene.y + 30);
         carn.position = CGPointMake(positionInScene.x, positionInScene.y - 30);
         bigCarn.position = CGPointMake(positionInScene.x + 30, positionInScene.y);
         factory.position = CGPointMake(positionInScene.x - 30, positionInScene.y);
+        factory.growthCounter = 7;
         [self.menuArray addObject:herb];
         [self.menuArray addObject:carn];
         [self.menuArray addObject:bigCarn];
@@ -218,24 +218,61 @@ int global = 0;
   
    self.timeSinceLast += currentTime - self.lastUpdateTimeInterval;
     
-    NSLog(@"%f time since", self.timeSinceLast);
+    // checagem do intervalo de 1 segundo
+    
     self.lastUpdateTimeInterval = currentTime;
     if (self.timeSinceLast > 1) { // more than a second since last update
         self.timeSinceLast = 0;
         self.lastUpdateTimeInterval = currentTime;
-
+        NSLog(@"%d segundos", self.global);
+        self.global++;
     
-   
+   // iteracao pelos vegetais
     for (int i = 0; i < self.vegetableArray.count; i++){
-        
+       
         
         SKVegetables *temp = self.vegetableArray[i];
+        
+        //controla lifespan
+        
+        temp.energy--;
+        if (temp.energy == 0){
+            SKAction *shrink = [SKAction scaleTo:0 duration:0.5];
+            SKAction *remove = [SKAction removeFromParent];
+            SKAction *sequence = [SKAction sequence:@[shrink,remove]];
+            [temp runAction:sequence];
+        
+        }
+        
+        //controla crescimento
+        
+        if (temp.growthTime == 1 ){
+            if (temp.growthCounter < 7){
+                SKAction *scale = [SKAction scaleBy:1.2f duration:0.2];
+                [temp runAction:scale];
+                temp.growthCounter++;
+        
+            }
+            temp.growthTime = 0;
+        }
+        temp.growthTime++;
+        
+        // controla numero de folhas
+        
+        if (temp.leavesCounter == 18){
+            
+            temp.leaves++;
+            temp.leavesCounter = 0;
+            
+        }
+        temp.leavesCounter++;
+        
+        //cria mudas
+        
         int check = arc4random()%300;
         if (!check){
-            SKVegetables *new = [SKVegetables spriteNodeWithImageNamed:@"tree.png"];
-            new.animalsToFeed = 5;
-            new.energyValue = 150;
-            new.nextFeed = 0;
+            SKVegetables *new = [SKVegetables createVegetableOfType:Vegetable_Tree];
+            new.size = CGSizeMake(new.frame.size.width * 0.3f, new.frame.size.height * 0.3f);
             int a = arc4random()%50;
             int b = arc4random()%50;
             int c = arc4random()%2;
@@ -247,6 +284,8 @@ int global = 0;
             new.position = CGPointMake(temp.position.x + a, temp.position.y + b);
             [self.vegetableArray addObject:new];
             [self addChild:new];
+            self.tree++;
+            NSLog(@"%d arvore", self.tree);
                 }
     }
     
@@ -306,23 +345,14 @@ int global = 0;
     
             for (int k = 0; k < self.vegetableArray.count; k++){
                 SKVegetables *temp2 = self.vegetableArray[k];
-                if (temp2.nextFeed != 0)
-                    temp2.nextFeed--;
                 Boolean viewsOverlap = CGRectIntersectsRect(temp.frame, temp2.frame);
                 
                 if (viewsOverlap){
-                    if (temp2.nextFeed == 0){
-                    SKAction *shrinkTree = [SKAction scaleTo:0.8f duration:0.5];
+                    if (temp2.leaves != 0 && temp2.growthCounter == 7){
+                    SKAction *shrinkTree = [SKAction scaleTo:0.96f duration:0.5];
                     [temp2 runAction:shrinkTree];
-                    temp2.animalsToFeed--;
-                    temp2.nextFeed = 10;
+                    temp2.leaves--;
                     temp.energy += temp2.energyValue;
-                        if (temp2.animalsToFeed <= 0){
-                            SKAction *shrink = [SKAction scaleTo:0 duration:0.5];
-                            SKAction *remove = [SKAction removeFromParent];
-                            SKAction *sequence = [SKAction sequence:@[shrink,remove]];
-                            [temp2 runAction:sequence];
-                        }
                     }
                 }
             }
@@ -346,14 +376,12 @@ int global = 0;
                         temp.energy += temp2.energyValue;
                         [temp2 runAction:sequence];
                         [self.animalArray removeObject:temp2];
-                        NSLog(@"Foi removido o animal de forca %d e o que ficou tinha %d", [(SKAnimals*)temp strenght], [(SKAnimals*)temp2 strenght]);
                         break;
                     }
                     else{
                         temp2.energy += temp2.energyValue;
                         [temp runAction:sequence];
                         [self.animalArray removeObject:temp];
-                        NSLog(@"Foi removido o animal de forca %d e o que ficou tinha %d", [(SKAnimals*)temp strenght], [(SKAnimals*)temp2 strenght]);
                         break;
                     }
                     

@@ -34,6 +34,10 @@
 
 @property float temperature;
 
+@property int global;
+
+@property int tree;
+
 @property BOOL isMenu;
 
 @end

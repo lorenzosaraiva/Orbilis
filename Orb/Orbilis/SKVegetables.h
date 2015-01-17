@@ -19,24 +19,26 @@ typedef enum SKVegetableType {
 
 +(SKVegetables*)createVegetableOfType:(VegetableType)type;
 
+@property VegetableType vegetableType;
+
 @property int idealLight;
 
 @property int idealTemperature;
 
 @property int pollutionResistance;
 
-//quantos animais pode ainda alimentar
-
-@property int animalsToFeed;
-
 @property int energyValue;
 
 @property int energy;
 
+@property int leavesCounter;
 //numero de folhas
 
 @property int leaves;
 
-@property int nextFeed;
+@property int growthCounter;
+
+@property int growthTime;
+
 
 @end
