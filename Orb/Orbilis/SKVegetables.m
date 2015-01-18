@@ -19,6 +19,7 @@
     new.leavesCounter = 18;
     new.growthCounter = 0;
     new.growthTime = 0;
+    new.isNew = true;
     return new;
 
 }

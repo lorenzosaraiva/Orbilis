@@ -32,6 +32,8 @@
 
 @property (nonatomic) NSTimeInterval timeSinceLast;
 
+@property (nonatomic) CGPoint lastTouch;
+
 @property float temperature;
 
 @property int global;

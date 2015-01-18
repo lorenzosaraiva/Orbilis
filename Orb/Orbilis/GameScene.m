@@ -28,6 +28,13 @@
     self.sceneryArray = [[NSMutableArray alloc]init];
     // cria e define posicao dos elementos da tela
     
+//    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(40, 260, 240, 120)];
+//    label.backgroundColor = [UIColor yellowColor];
+//    [self.view addSubview:label];
+//    UILabel *label2 = [[UILabel alloc]initWithFrame:CGRectMake(60, 220, 200, 40)];
+//    label2.backgroundColor = [UIColor redColor];
+//    [self.view addSubview:label2];
+//    
     [self drawWolrd];
     
     
@@ -166,6 +173,7 @@
             [self removeChildrenInArray:self.menuArray];
             [self.menuArray removeAllObjects];
             [self.animalArray addObject:temp];
+            temp.position = CGPointMake(self.lastTouch.x, self.lastTouch.y);
             self.isMenu = false;
             return;
             }
@@ -177,6 +185,7 @@
                 [self removeChildrenInArray:self.menuArray];
                 [self.menuArray removeAllObjects];
                 [self.vegetableArray addObject:temp];
+                temp.position = CGPointMake(self.lastTouch.x, self.lastTouch.y);
                 self.isMenu = false;
                 return;
         
@@ -206,7 +215,10 @@
     // cria os menu
     
     //menu da terra
-    if ([self.island containsPoint:positionInScene]){
+    
+    CGRect rect = CGRectMake(40, 260, 240, 120);
+    CGRect rect2 = CGRectMake(60, 220, 200, 40);
+    if (CGRectContainsPoint(rect, positionInScene )||CGRectContainsPoint(rect2, positionInScene)){
         SKAnimals *herb = [SKAnimals createAnimalofType:Animal_Herbivore];
         SKAnimals *carn = [SKAnimals createAnimalofType:Animal_Carnivore];
         SKAnimals *bigCarn = [SKAnimals createAnimalofType:Animal_Predator];
@@ -218,6 +230,7 @@
         bigCarn.position = CGPointMake(positionInScene.x + 30, positionInScene.y);
         factory.position = CGPointMake(positionInScene.x - 30, positionInScene.y);
         factory.growthCounter = 7;
+        factory.isNew = false;
         [self.menuArray addObject:herb];
         [self.menuArray addObject:carn];
         [self.menuArray addObject:bigCarn];
@@ -231,6 +244,7 @@
         
     
     }
+    self.lastTouch = positionInScene;
 //    SKSpriteNode *nuvem  = [SKSpriteNode spriteNodeWithImageNamed:@"nuvem.png"];
 //    SKAnimals *animal = [SKAnimals spriteNodeWithImageNamed:@"animal.png"];
 //    animal.strenght = arc4random()%10;
@@ -283,7 +297,7 @@
         
         //controla crescimento
         
-        if (temp.growthTime == 1 ){
+        if (temp.growthTime == 3 ){
             if (temp.growthCounter < 7){
                 SKAction *scale = [SKAction scaleBy:1.2f duration:0.2];
                 [temp runAction:scale];
@@ -300,6 +314,8 @@
             
             temp.leaves++;
             temp.leavesCounter = 0;
+            SKAction *grow = [SKAction scaleBy:1.05 duration:0.5f];
+            [temp runAction:grow];
             
         }
         temp.leavesCounter++;
@@ -342,7 +358,9 @@
         a = a/10;
         b = b/10;
         SKAction *move = [SKAction moveTo: CGPointMake(temp.position.x + a, temp.position.y + b) duration:1.0f];
-        
+        CGRect rect = CGRectMake(40, 260, 240, 120);
+        CGRect rect2 = CGRectMake(60, 220, 200, 40);
+        if (CGRectContainsPoint(rect, CGPointMake(temp.position.x + a, temp.position.y + b) )||CGRectContainsPoint(rect2, CGPointMake(temp.position.x + a, temp.position.y + b)))
         [temp runAction:move];
         
 //        temp.position = CGPointMake(temp.position.x + a, temp.position.y + b);
@@ -380,15 +398,22 @@
         //checa o contato com plantas
         
         if (temp.animalType == Animal_Herbivore){
-    
+            
             for (int k = 0; k < self.vegetableArray.count; k++){
                 SKVegetables *temp2 = self.vegetableArray[k];
                 Boolean viewsOverlap = CGRectIntersectsRect(temp.frame, temp2.frame);
                 
                 if (viewsOverlap){
+                    NSLog(@"ONE");
                     if (temp2.leaves != 0 && temp2.growthCounter == 7){
-                    SKAction *shrinkTree = [SKAction scaleTo:0.96f duration:0.5];
+                        NSLog(@"TWO");
+                    SKAction *shrinkTree = [SKAction scaleTo:0.95f duration:0.5];
+                    SKAction *shrinkNewTree = [SKAction scaleTo:3.0f duration:0.5];
+                    if (temp2.isNew)
+                        [temp2 runAction:shrinkNewTree];
+                    else {
                     [temp2 runAction:shrinkTree];
+                    }
                     temp2.leaves--;
                     temp.energy += temp2.energyValue;
                     }
