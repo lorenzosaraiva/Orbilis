@@ -18,7 +18,7 @@
         temp.strenght = 0;
         temp.energy = 180;
         temp.energyValue = 100;
-        temp.multiplyLimit = 360;
+        temp.multiplyLimit = 500;
         temp.animalType = 0;
     }
     if (type == Animal_Carnivore){
@@ -26,7 +26,7 @@
         temp.strenght = 10;
         temp.energy = 180 * 2;
         temp.energyValue = 240;
-        temp.multiplyLimit = 900;
+        temp.multiplyLimit = 1200;
         temp.animalType = 1;
     }
     if (type == Animal_Predator){

@@ -336,7 +336,7 @@
             animal.size = CGSizeMake(temp.frame.size.width, temp.frame.size.height);
             [self addChild:animal];
             [self.animalArray addObject:animal];
-            temp.energy = temp.energy/2;
+            temp.energy = temp.energy/3;
         }
         
         //checa o contato com plantas
