@@ -37,44 +37,9 @@
 //    
     [self drawWolrd];
     
-    
-//    SKSpriteNode *sea = [SKSpriteNode spriteNodeWithImageNamed:@"Sea.png"];
-//    sea.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 70);
-//    sea.size = CGSizeMake(sea.frame.size.width * 0.67f, sea.frame.size.height * 0.67f);
-//    
-//    SKSpriteNode *water = [SKSpriteNode spriteNodeWithImageNamed:@"Water.png"];
-//    water.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 70);
-//    water.size = CGSizeMake(water.frame.size.width * 0.67f, water.frame.size.height * 0.67f);
-//    
-//    self.sand = [SKSpriteNode spriteNodeWithImageNamed:@"Sand.png"];
-//    self.sand.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 70);
-//    self.sand.size = CGSizeMake(self.sand.frame.size.width * 1.0f, self.sand.frame.size.height * 1.0f);
-//    
-//    self.island = [SKSpriteNode spriteNodeWithImageNamed:@"Island.png"];
-//    self.island.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 15);
-//    self.island.size = CGSizeMake(self.island.frame.size.width * 1.0f, self.island.frame.size.height * 1.0f);
-//
-//    SKSpriteNode *sky = [SKSpriteNode spriteNodeWithImageNamed:@"Sky.png"];
-//    sky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 31);
-//    sky.size = CGSizeMake(sky.frame.size.width * 0.68f, sky.frame.size.height * 0.7f);
-//    
-//    SKSpriteNode *cage = [SKSpriteNode spriteNodeWithImageNamed:@"Cage.png"];
-//    cage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-//    cage.size = CGSizeMake(cage.frame.size.width * 0.7f, cage.frame.size.height * 0.7f);
-//    
 //    self.sun = [SKSpriteNode spriteNodeWithImageNamed:@"sun.jpg"];
 //    self.sun.position = CGPointMake(170, 550);
-//    [self addChild:sky];
-//    [self addChild:sea];
-//    [self addChild:water];
-//    [self addChild:self.sand];
-//    [self addChild:self.island];
-//    [self addChild:cage];
-//    
 //    [self addChild:self.sun];
-    
-    
-    
     
     // configura os gesture recognizer
     
@@ -240,11 +205,13 @@
         [self addChild:bigCarn];
         [self addChild:factory];
         self.isMenu = true;
-        
-        
     
     }
+<<<<<<< Updated upstream
     self.lastTouch = positionInScene;
+=======
+    
+>>>>>>> Stashed changes
 //    SKSpriteNode *nuvem  = [SKSpriteNode spriteNodeWithImageNamed:@"nuvem.png"];
 //    SKAnimals *animal = [SKAnimals spriteNodeWithImageNamed:@"animal.png"];
 //    animal.strenght = arc4random()%10;
@@ -339,7 +306,7 @@
             [self addChild:new];
             self.tree++;
             NSLog(@"%d arvore", self.tree);
-                }
+        }
     }
     
     for (int i = 0; i < self.animalArray.count; i++) {
