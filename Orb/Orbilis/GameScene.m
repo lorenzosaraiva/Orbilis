@@ -119,7 +119,7 @@
     self.island = [SKSpriteNode spriteNodeWithImageNamed:@"Island.png"];
     self.island.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     self.island.size = CGSizeMake(self.island.frame.size.width*prop, self.island.frame.size.height*prop);
-    self.island.physicsBody = [SKPhysicsBody bodyWithTexture:self.island.texture size:self.island.texture.size];
+    
     [self addChild:self.island];
     
 }
