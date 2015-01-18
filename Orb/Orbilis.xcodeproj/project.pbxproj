@@ -10,7 +10,6 @@
 		0A23B0D21A697121000C78A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A23B0D11A697121000C78A4 /* main.m */; };
 		0A23B0D51A697121000C78A4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A23B0D41A697121000C78A4 /* AppDelegate.m */; };
 		0A23B0D81A697121000C78A4 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A23B0D71A697121000C78A4 /* GameScene.m */; };
-		0A23B0DA1A697121000C78A4 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0A23B0D91A697121000C78A4 /* GameScene.sks */; };
 		0A23B0DD1A697121000C78A4 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A23B0DC1A697121000C78A4 /* GameViewController.m */; };
 		0A23B0E01A697121000C78A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A23B0DE1A697121000C78A4 /* Main.storyboard */; };
 		0A23B0E21A697121000C78A4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A23B0E11A697121000C78A4 /* Images.xcassets */; };
@@ -21,29 +20,29 @@
 		0A23B1021A6971D6000C78A4 /* sun.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A23B1011A6971D6000C78A4 /* sun.jpg */; };
 		0A23B1041A6971E3000C78A4 /* animal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A23B1031A6971E3000C78A4 /* animal.png */; };
 		0A23B1061A697219000C78A4 /* i.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A23B1051A697219000C78A4 /* i.jpg */; };
-		0A55A9031A6974C60028EEA3 /* Cage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A8F11A6974C60028EEA3 /* Cage.png */; };
-		0A55A9041A6974C60028EEA3 /* Cage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A8F21A6974C60028EEA3 /* Cage@2x.png */; };
-		0A55A9051A6974C60028EEA3 /* Cage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A8F31A6974C60028EEA3 /* Cage@3x.png */; };
-		0A55A9061A6974C60028EEA3 /* Island.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A8F41A6974C60028EEA3 /* Island.png */; };
-		0A55A9071A6974C60028EEA3 /* Island@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A8F51A6974C60028EEA3 /* Island@2x.png */; };
-		0A55A9081A6974C60028EEA3 /* Island@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A8F61A6974C60028EEA3 /* Island@3x.png */; };
-		0A55A9091A6974C60028EEA3 /* Sand.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A8F71A6974C60028EEA3 /* Sand.png */; };
-		0A55A90A1A6974C60028EEA3 /* Sand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A8F81A6974C60028EEA3 /* Sand@2x.png */; };
-		0A55A90B1A6974C60028EEA3 /* Sand@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A8F91A6974C60028EEA3 /* Sand@3x.png */; };
-		0A55A90C1A6974C60028EEA3 /* Sea.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A8FA1A6974C60028EEA3 /* Sea.png */; };
-		0A55A90D1A6974C60028EEA3 /* Sea@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A8FB1A6974C60028EEA3 /* Sea@2x.png */; };
-		0A55A90E1A6974C60028EEA3 /* Sea@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A8FC1A6974C60028EEA3 /* Sea@3x.png */; };
-		0A55A90F1A6974C60028EEA3 /* Sky.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A8FD1A6974C60028EEA3 /* Sky.png */; };
-		0A55A9101A6974C60028EEA3 /* Sky@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A8FE1A6974C60028EEA3 /* Sky@2x.png */; };
-		0A55A9111A6974C60028EEA3 /* Sky@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A8FF1A6974C60028EEA3 /* Sky@3x.png */; };
-		0A55A9121A6974C60028EEA3 /* Water.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A9001A6974C60028EEA3 /* Water.png */; };
-		0A55A9131A6974C60028EEA3 /* Water@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A9011A6974C60028EEA3 /* Water@2x.png */; };
-		0A55A9141A6974C60028EEA3 /* Water@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A9021A6974C60028EEA3 /* Water@3x.png */; };
 		0A55A9171A697F3F0028EEA3 /* croco.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A9151A697F3F0028EEA3 /* croco.png */; };
 		0A55A91A1A697F700028EEA3 /* donkey.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A9191A697F700028EEA3 /* donkey.png */; };
 		0A55A91C1A69828E0028EEA3 /* factory.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A91B1A69828E0028EEA3 /* factory.jpg */; };
 		0A55A91E1A6996860028EEA3 /* tree.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A91D1A6996860028EEA3 /* tree.png */; };
 		0A55A9211A6997150028EEA3 /* SKVegetables.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A55A9201A6997150028EEA3 /* SKVegetables.m */; };
+		518634131A6B3346000B6BDF /* Cage.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634011A6B3346000B6BDF /* Cage.png */; };
+		518634141A6B3346000B6BDF /* Cage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634021A6B3346000B6BDF /* Cage@2x.png */; };
+		518634151A6B3346000B6BDF /* Cage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634031A6B3346000B6BDF /* Cage@3x.png */; };
+		518634161A6B3346000B6BDF /* Island.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634041A6B3346000B6BDF /* Island.png */; };
+		518634171A6B3346000B6BDF /* Island@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634051A6B3346000B6BDF /* Island@2x.png */; };
+		518634181A6B3346000B6BDF /* Island@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634061A6B3346000B6BDF /* Island@3x.png */; };
+		518634191A6B3346000B6BDF /* Sand.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634071A6B3346000B6BDF /* Sand.png */; };
+		5186341A1A6B3346000B6BDF /* Sand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634081A6B3346000B6BDF /* Sand@2x.png */; };
+		5186341B1A6B3346000B6BDF /* Sand@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634091A6B3346000B6BDF /* Sand@3x.png */; };
+		5186341C1A6B3346000B6BDF /* Sea.png in Resources */ = {isa = PBXBuildFile; fileRef = 5186340A1A6B3346000B6BDF /* Sea.png */; };
+		5186341D1A6B3346000B6BDF /* Sea@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5186340B1A6B3346000B6BDF /* Sea@2x.png */; };
+		5186341E1A6B3346000B6BDF /* Sea@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5186340C1A6B3346000B6BDF /* Sea@3x.png */; };
+		5186341F1A6B3346000B6BDF /* Sky.png in Resources */ = {isa = PBXBuildFile; fileRef = 5186340D1A6B3346000B6BDF /* Sky.png */; };
+		518634201A6B3346000B6BDF /* Sky@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5186340E1A6B3346000B6BDF /* Sky@2x.png */; };
+		518634211A6B3346000B6BDF /* Sky@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5186340F1A6B3346000B6BDF /* Sky@3x.png */; };
+		518634221A6B3346000B6BDF /* Water.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634101A6B3346000B6BDF /* Water.png */; };
+		518634231A6B3346000B6BDF /* Water@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634111A6B3346000B6BDF /* Water@2x.png */; };
+		518634241A6B3346000B6BDF /* Water@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634121A6B3346000B6BDF /* Water@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +63,6 @@
 		0A23B0D41A697121000C78A4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0A23B0D61A697121000C78A4 /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		0A23B0D71A697121000C78A4 /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
-		0A23B0D91A697121000C78A4 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		0A23B0DB1A697121000C78A4 /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		0A23B0DC1A697121000C78A4 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		0A23B0DF1A697121000C78A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,30 +77,30 @@
 		0A23B1011A6971D6000C78A4 /* sun.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sun.jpg; sourceTree = "<group>"; };
 		0A23B1031A6971E3000C78A4 /* animal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animal.png; sourceTree = "<group>"; };
 		0A23B1051A697219000C78A4 /* i.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i.jpg; sourceTree = "<group>"; };
-		0A55A8F11A6974C60028EEA3 /* Cage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cage.png; sourceTree = "<group>"; };
-		0A55A8F21A6974C60028EEA3 /* Cage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cage@2x.png"; sourceTree = "<group>"; };
-		0A55A8F31A6974C60028EEA3 /* Cage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cage@3x.png"; sourceTree = "<group>"; };
-		0A55A8F41A6974C60028EEA3 /* Island.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Island.png; sourceTree = "<group>"; };
-		0A55A8F51A6974C60028EEA3 /* Island@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Island@2x.png"; sourceTree = "<group>"; };
-		0A55A8F61A6974C60028EEA3 /* Island@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Island@3x.png"; sourceTree = "<group>"; };
-		0A55A8F71A6974C60028EEA3 /* Sand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sand.png; sourceTree = "<group>"; };
-		0A55A8F81A6974C60028EEA3 /* Sand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sand@2x.png"; sourceTree = "<group>"; };
-		0A55A8F91A6974C60028EEA3 /* Sand@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sand@3x.png"; sourceTree = "<group>"; };
-		0A55A8FA1A6974C60028EEA3 /* Sea.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sea.png; sourceTree = "<group>"; };
-		0A55A8FB1A6974C60028EEA3 /* Sea@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sea@2x.png"; sourceTree = "<group>"; };
-		0A55A8FC1A6974C60028EEA3 /* Sea@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sea@3x.png"; sourceTree = "<group>"; };
-		0A55A8FD1A6974C60028EEA3 /* Sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sky.png; sourceTree = "<group>"; };
-		0A55A8FE1A6974C60028EEA3 /* Sky@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sky@2x.png"; sourceTree = "<group>"; };
-		0A55A8FF1A6974C60028EEA3 /* Sky@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sky@3x.png"; sourceTree = "<group>"; };
-		0A55A9001A6974C60028EEA3 /* Water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Water.png; sourceTree = "<group>"; };
-		0A55A9011A6974C60028EEA3 /* Water@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Water@2x.png"; sourceTree = "<group>"; };
-		0A55A9021A6974C60028EEA3 /* Water@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Water@3x.png"; sourceTree = "<group>"; };
 		0A55A9151A697F3F0028EEA3 /* croco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = croco.png; sourceTree = "<group>"; };
 		0A55A9191A697F700028EEA3 /* donkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = donkey.png; sourceTree = "<group>"; };
 		0A55A91B1A69828E0028EEA3 /* factory.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = factory.jpg; sourceTree = "<group>"; };
 		0A55A91D1A6996860028EEA3 /* tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree.png; sourceTree = "<group>"; };
 		0A55A91F1A6997150028EEA3 /* SKVegetables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKVegetables.h; sourceTree = "<group>"; };
 		0A55A9201A6997150028EEA3 /* SKVegetables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKVegetables.m; sourceTree = "<group>"; };
+		518634011A6B3346000B6BDF /* Cage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cage.png; sourceTree = "<group>"; };
+		518634021A6B3346000B6BDF /* Cage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cage@2x.png"; sourceTree = "<group>"; };
+		518634031A6B3346000B6BDF /* Cage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cage@3x.png"; sourceTree = "<group>"; };
+		518634041A6B3346000B6BDF /* Island.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Island.png; sourceTree = "<group>"; };
+		518634051A6B3346000B6BDF /* Island@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Island@2x.png"; sourceTree = "<group>"; };
+		518634061A6B3346000B6BDF /* Island@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Island@3x.png"; sourceTree = "<group>"; };
+		518634071A6B3346000B6BDF /* Sand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sand.png; sourceTree = "<group>"; };
+		518634081A6B3346000B6BDF /* Sand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sand@2x.png"; sourceTree = "<group>"; };
+		518634091A6B3346000B6BDF /* Sand@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sand@3x.png"; sourceTree = "<group>"; };
+		5186340A1A6B3346000B6BDF /* Sea.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sea.png; sourceTree = "<group>"; };
+		5186340B1A6B3346000B6BDF /* Sea@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sea@2x.png"; sourceTree = "<group>"; };
+		5186340C1A6B3346000B6BDF /* Sea@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sea@3x.png"; sourceTree = "<group>"; };
+		5186340D1A6B3346000B6BDF /* Sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sky.png; sourceTree = "<group>"; };
+		5186340E1A6B3346000B6BDF /* Sky@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sky@2x.png"; sourceTree = "<group>"; };
+		5186340F1A6B3346000B6BDF /* Sky@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sky@3x.png"; sourceTree = "<group>"; };
+		518634101A6B3346000B6BDF /* Water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Water.png; sourceTree = "<group>"; };
+		518634111A6B3346000B6BDF /* Water@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Water@2x.png"; sourceTree = "<group>"; };
+		518634121A6B3346000B6BDF /* Water@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Water@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,7 +148,6 @@
 				0A23B0D41A697121000C78A4 /* AppDelegate.m */,
 				0A23B0D61A697121000C78A4 /* GameScene.h */,
 				0A23B0D71A697121000C78A4 /* GameScene.m */,
-				0A23B0D91A697121000C78A4 /* GameScene.sks */,
 				0A23B0DB1A697121000C78A4 /* GameViewController.h */,
 				0A23B0DC1A697121000C78A4 /* GameViewController.m */,
 				0A23B0DE1A697121000C78A4 /* Main.storyboard */,
@@ -213,28 +210,28 @@
 		0A55A8F01A6974C60028EEA3 /* OrbImages */ = {
 			isa = PBXGroup;
 			children = (
+				518634011A6B3346000B6BDF /* Cage.png */,
+				518634021A6B3346000B6BDF /* Cage@2x.png */,
+				518634031A6B3346000B6BDF /* Cage@3x.png */,
+				518634041A6B3346000B6BDF /* Island.png */,
+				518634051A6B3346000B6BDF /* Island@2x.png */,
+				518634061A6B3346000B6BDF /* Island@3x.png */,
+				518634071A6B3346000B6BDF /* Sand.png */,
+				518634081A6B3346000B6BDF /* Sand@2x.png */,
+				518634091A6B3346000B6BDF /* Sand@3x.png */,
+				5186340A1A6B3346000B6BDF /* Sea.png */,
+				5186340B1A6B3346000B6BDF /* Sea@2x.png */,
+				5186340C1A6B3346000B6BDF /* Sea@3x.png */,
+				5186340D1A6B3346000B6BDF /* Sky.png */,
+				5186340E1A6B3346000B6BDF /* Sky@2x.png */,
+				5186340F1A6B3346000B6BDF /* Sky@3x.png */,
+				518634101A6B3346000B6BDF /* Water.png */,
+				518634111A6B3346000B6BDF /* Water@2x.png */,
+				518634121A6B3346000B6BDF /* Water@3x.png */,
 				0A55A91B1A69828E0028EEA3 /* factory.jpg */,
 				0A55A9191A697F700028EEA3 /* donkey.png */,
 				0A55A9151A697F3F0028EEA3 /* croco.png */,
-				0A55A8F11A6974C60028EEA3 /* Cage.png */,
-				0A55A8F21A6974C60028EEA3 /* Cage@2x.png */,
-				0A55A8F31A6974C60028EEA3 /* Cage@3x.png */,
-				0A55A8F41A6974C60028EEA3 /* Island.png */,
-				0A55A8F51A6974C60028EEA3 /* Island@2x.png */,
-				0A55A8F61A6974C60028EEA3 /* Island@3x.png */,
-				0A55A8F71A6974C60028EEA3 /* Sand.png */,
-				0A55A8F81A6974C60028EEA3 /* Sand@2x.png */,
-				0A55A8F91A6974C60028EEA3 /* Sand@3x.png */,
-				0A55A8FA1A6974C60028EEA3 /* Sea.png */,
-				0A55A8FB1A6974C60028EEA3 /* Sea@2x.png */,
 				0A55A91D1A6996860028EEA3 /* tree.png */,
-				0A55A8FC1A6974C60028EEA3 /* Sea@3x.png */,
-				0A55A8FD1A6974C60028EEA3 /* Sky.png */,
-				0A55A8FE1A6974C60028EEA3 /* Sky@2x.png */,
-				0A55A8FF1A6974C60028EEA3 /* Sky@3x.png */,
-				0A55A9001A6974C60028EEA3 /* Water.png */,
-				0A55A9011A6974C60028EEA3 /* Water@2x.png */,
-				0A55A9021A6974C60028EEA3 /* Water@3x.png */,
 			);
 			path = OrbImages;
 			sourceTree = "<group>";
@@ -320,36 +317,35 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				518634231A6B3346000B6BDF /* Water@2x.png in Resources */,
+				5186341D1A6B3346000B6BDF /* Sea@2x.png in Resources */,
 				0A55A9171A697F3F0028EEA3 /* croco.png in Resources */,
-				0A55A9101A6974C60028EEA3 /* Sky@2x.png in Resources */,
-				0A55A90F1A6974C60028EEA3 /* Sky.png in Resources */,
-				0A55A90D1A6974C60028EEA3 /* Sea@2x.png in Resources */,
-				0A55A9041A6974C60028EEA3 /* Cage@2x.png in Resources */,
-				0A55A90B1A6974C60028EEA3 /* Sand@3x.png in Resources */,
-				0A55A9031A6974C60028EEA3 /* Cage.png in Resources */,
+				518634161A6B3346000B6BDF /* Island.png in Resources */,
 				0A23B1041A6971E3000C78A4 /* animal.png in Resources */,
+				5186341E1A6B3346000B6BDF /* Sea@3x.png in Resources */,
+				518634241A6B3346000B6BDF /* Water@3x.png in Resources */,
 				0A23B1021A6971D6000C78A4 /* sun.jpg in Resources */,
-				0A55A9061A6974C60028EEA3 /* Island.png in Resources */,
+				518634131A6B3346000B6BDF /* Cage.png in Resources */,
+				518634171A6B3346000B6BDF /* Island@2x.png in Resources */,
 				0A23B0E51A697121000C78A4 /* LaunchScreen.xib in Resources */,
+				5186341F1A6B3346000B6BDF /* Sky.png in Resources */,
 				0A55A91E1A6996860028EEA3 /* tree.png in Resources */,
 				0A55A91A1A697F700028EEA3 /* donkey.png in Resources */,
-				0A55A9051A6974C60028EEA3 /* Cage@3x.png in Resources */,
+				518634191A6B3346000B6BDF /* Sand.png in Resources */,
+				518634181A6B3346000B6BDF /* Island@3x.png in Resources */,
+				518634141A6B3346000B6BDF /* Cage@2x.png in Resources */,
+				5186341C1A6B3346000B6BDF /* Sea.png in Resources */,
 				0A23B0E21A697121000C78A4 /* Images.xcassets in Resources */,
+				518634151A6B3346000B6BDF /* Cage@3x.png in Resources */,
+				518634221A6B3346000B6BDF /* Water.png in Resources */,
+				518634201A6B3346000B6BDF /* Sky@2x.png in Resources */,
 				0A55A91C1A69828E0028EEA3 /* factory.jpg in Resources */,
-				0A55A90C1A6974C60028EEA3 /* Sea.png in Resources */,
 				0A23B1001A6971CE000C78A4 /* nuvem.png in Resources */,
 				0A23B1061A697219000C78A4 /* i.jpg in Resources */,
-				0A55A9121A6974C60028EEA3 /* Water.png in Resources */,
-				0A55A90E1A6974C60028EEA3 /* Sea@3x.png in Resources */,
-				0A55A9081A6974C60028EEA3 /* Island@3x.png in Resources */,
-				0A55A9071A6974C60028EEA3 /* Island@2x.png in Resources */,
-				0A55A9141A6974C60028EEA3 /* Water@3x.png in Resources */,
-				0A55A9091A6974C60028EEA3 /* Sand.png in Resources */,
-				0A23B0DA1A697121000C78A4 /* GameScene.sks in Resources */,
-				0A55A90A1A6974C60028EEA3 /* Sand@2x.png in Resources */,
-				0A55A9131A6974C60028EEA3 /* Water@2x.png in Resources */,
 				0A23B0E01A697121000C78A4 /* Main.storyboard in Resources */,
-				0A55A9111A6974C60028EEA3 /* Sky@3x.png in Resources */,
+				518634211A6B3346000B6BDF /* Sky@3x.png in Resources */,
+				5186341A1A6B3346000B6BDF /* Sand@2x.png in Resources */,
+				5186341B1A6B3346000B6BDF /* Sand@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

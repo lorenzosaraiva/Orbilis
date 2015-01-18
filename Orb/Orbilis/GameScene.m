@@ -13,8 +13,6 @@
 @implementation GameScene
 
 
-
-
 -(void)didMoveToView:(SKView *)view {
     
     // inicia e alloca as coisas iniciais
@@ -30,41 +28,43 @@
     self.sceneryArray = [[NSMutableArray alloc]init];
     // cria e define posicao dos elementos da tela
     
+    [self drawWolrd];
     
-    SKSpriteNode *sea = [SKSpriteNode spriteNodeWithImageNamed:@"Sea.png"];
-    sea.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 70);
-    sea.size = CGSizeMake(sea.frame.size.width * 0.67f, sea.frame.size.height * 0.67f);
     
-    SKSpriteNode *water = [SKSpriteNode spriteNodeWithImageNamed:@"Water.png"];
-    water.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 70);
-    water.size = CGSizeMake(water.frame.size.width * 0.67f, water.frame.size.height * 0.67f);
-    
-    self.sand = [SKSpriteNode spriteNodeWithImageNamed:@"Sand.png"];
-    self.sand.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 70);
-    self.sand.size = CGSizeMake(self.sand.frame.size.width * 1.0f, self.sand.frame.size.height * 1.0f);
-    
-    self.island = [SKSpriteNode spriteNodeWithImageNamed:@"Island.png"];
-    self.island.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 15);
-    self.island.size = CGSizeMake(self.island.frame.size.width * 1.0f, self.island.frame.size.height * 1.0f);
-    
-    SKSpriteNode *sky = [SKSpriteNode spriteNodeWithImageNamed:@"Sky.png"];
-    sky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 31);
-    sky.size = CGSizeMake(sky.frame.size.width * 0.68f, sky.frame.size.height * 0.7f);
-    
-    SKSpriteNode *cage = [SKSpriteNode spriteNodeWithImageNamed:@"Cage.png"];
-    cage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    cage.size = CGSizeMake(cage.frame.size.width * 0.7f, cage.frame.size.height * 0.7f);
-    
-    self.sun = [SKSpriteNode spriteNodeWithImageNamed:@"sun.jpg"];
-    self.sun.position = CGPointMake(170, 550);
-    [self addChild:sky];
-    [self addChild:sea];
-    [self addChild:water];
-    [self addChild:self.sand];
-    [self addChild:self.island];
-    [self addChild:cage];
-    
-    [self addChild:self.sun];
+//    SKSpriteNode *sea = [SKSpriteNode spriteNodeWithImageNamed:@"Sea.png"];
+//    sea.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 70);
+//    sea.size = CGSizeMake(sea.frame.size.width * 0.67f, sea.frame.size.height * 0.67f);
+//    
+//    SKSpriteNode *water = [SKSpriteNode spriteNodeWithImageNamed:@"Water.png"];
+//    water.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 70);
+//    water.size = CGSizeMake(water.frame.size.width * 0.67f, water.frame.size.height * 0.67f);
+//    
+//    self.sand = [SKSpriteNode spriteNodeWithImageNamed:@"Sand.png"];
+//    self.sand.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 70);
+//    self.sand.size = CGSizeMake(self.sand.frame.size.width * 1.0f, self.sand.frame.size.height * 1.0f);
+//    
+//    self.island = [SKSpriteNode spriteNodeWithImageNamed:@"Island.png"];
+//    self.island.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 15);
+//    self.island.size = CGSizeMake(self.island.frame.size.width * 1.0f, self.island.frame.size.height * 1.0f);
+//
+//    SKSpriteNode *sky = [SKSpriteNode spriteNodeWithImageNamed:@"Sky.png"];
+//    sky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 31);
+//    sky.size = CGSizeMake(sky.frame.size.width * 0.68f, sky.frame.size.height * 0.7f);
+//    
+//    SKSpriteNode *cage = [SKSpriteNode spriteNodeWithImageNamed:@"Cage.png"];
+//    cage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+//    cage.size = CGSizeMake(cage.frame.size.width * 0.7f, cage.frame.size.height * 0.7f);
+//    
+//    self.sun = [SKSpriteNode spriteNodeWithImageNamed:@"sun.jpg"];
+//    self.sun.position = CGPointMake(170, 550);
+//    [self addChild:sky];
+//    [self addChild:sea];
+//    [self addChild:water];
+//    [self addChild:self.sand];
+//    [self addChild:self.island];
+//    [self addChild:cage];
+//    
+//    [self addChild:self.sun];
     
     
     
@@ -84,6 +84,43 @@
     self.temperatureLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 50, 0, 50, 50)];
     self.temperatureLabel.text = [NSString stringWithFormat:@"%.f",self.temperature];
     [self.view addSubview:self.temperatureLabel];
+    
+}
+
+- (void)drawWolrd {
+    
+    float prop = 0.55;
+    
+    SKSpriteNode *cage = [SKSpriteNode spriteNodeWithImageNamed:@"Cage.png"];
+    cage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    cage.size = CGSizeMake(cage.frame.size.width*prop, cage.frame.size.height*prop);
+    [self addChild:cage];
+    
+    SKSpriteNode *sky = [SKSpriteNode spriteNodeWithImageNamed:@"Sky.png"];
+    sky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    sky.size = CGSizeMake(sky.frame.size.width*prop, sky.frame.size.height*prop);
+    [self addChild:sky];
+    
+    SKSpriteNode *water = [SKSpriteNode spriteNodeWithImageNamed:@"Water.png"];
+    water.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    water.size = CGSizeMake(water.frame.size.width*prop, water.frame.size.height*prop);
+    [self addChild:water];
+    
+    SKSpriteNode *sea = [SKSpriteNode spriteNodeWithImageNamed:@"Sea.png"];
+    sea.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    sea.size = CGSizeMake(sea.frame.size.width*prop, sea.frame.size.height*prop);
+    [self addChild:sea];
+    
+    SKSpriteNode *sand = [SKSpriteNode spriteNodeWithImageNamed:@"Sand.png"];
+    sand.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    sand.size = CGSizeMake(sand.frame.size.width*prop, sand.frame.size.height*prop);
+    [self addChild:sand];
+    
+    self.island = [SKSpriteNode spriteNodeWithImageNamed:@"Island.png"];
+    self.island.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    self.island.size = CGSizeMake(self.island.frame.size.width*prop, self.island.frame.size.height*prop);
+    self.island.physicsBody = [SKPhysicsBody bodyWithTexture:self.island.texture size:self.island.texture.size];
+    [self addChild:self.island];
     
 }
 
@@ -110,7 +147,7 @@
     
     UITouch *touch = [touches anyObject];
     CGPoint positionInScene = [touch locationInNode:self];
-    NSLog(@"TAP");
+    NSLog(@"%f",positionInScene.x);
     
     // controla o sol
     
@@ -289,7 +326,7 @@
                 }
     }
     
-    for (int i = 0; i < self.animalArray.count; i++){
+    for (int i = 0; i < self.animalArray.count; i++) {
         SKAnimals *temp = self.animalArray[i];
 
         // movimento
@@ -304,8 +341,10 @@
             b = -b;
         a = a/10;
         b = b/10;
-        SKAction * move = [SKAction moveTo: CGPointMake(temp.position.x + a, temp.position.y + b) duration:1.0f];
+        SKAction *move = [SKAction moveTo: CGPointMake(temp.position.x + a, temp.position.y + b) duration:1.0f];
+        
         [temp runAction:move];
+        
 //        temp.position = CGPointMake(temp.position.x + a, temp.position.y + b);
         
         //checagem de temperatura
@@ -320,7 +359,6 @@
         
         
         //update de energia
-        
         
         temp.energy--;
         if (temp.energy <= 0){
