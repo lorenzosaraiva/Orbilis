@@ -28,6 +28,7 @@
         temp.energyValue = 240;
         temp.multiplyLimit = 1200;
         temp.animalType = 1;
+        temp.nextMeal = 10;
     }
     if (type == Animal_Predator){
         temp = [SKAnimals spriteNodeWithImageNamed:@"croco.png"];
@@ -35,6 +36,7 @@
         temp.energy = 180 * 2;
         temp.multiplyLimit = 600;
         temp.animalType = 2;
+        temp.nextMeal = 15;
     
     }
     return temp;

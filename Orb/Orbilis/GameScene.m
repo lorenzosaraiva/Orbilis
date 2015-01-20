@@ -15,6 +15,38 @@
 
 -(void)didMoveToView:(SKView *)view {
     
+    
+    // inicializando acelererometro
+    /*
+    motionManager = [[CMMotionManager alloc] init];
+    if ([motionManager isAccelerometerAvailable] == YES) {
+        [motionManager startAccelerometerUpdatesToQueue:[[NSOperationQueue alloc] init]
+                                            withHandler:^(CMAccelerometerData *data, NSError *error)
+        {
+            float destX, destY;
+            float currentX = monkey.position.x;
+            float currentY = monkey.position.y;
+            BOOL shouldMove = NO;
+            
+            if(data.acceleration.y < -0.25) { // tilting the device to the right
+                destX = currentX + (data.acceleration.y * kPlayerSpeed);
+                destY = currentY;
+                shouldMove = YES;
+            } else if (data.acceleration.y > 0.25) { // tilting the device to the left
+                destX = currentX + (data.acceleration.y * kPlayerSpeed);
+                destY = currentY;
+                shouldMove = YES;
+            }
+            if(shouldMove) {
+                SKAction *action = [SKAction moveTo:CGPointMake(destX, destY) duration:1];
+                [monkey runAction:action];
+            }
+        }];
+    }
+     */
+    
+    
+    
     // inicia e alloca as coisas iniciais
     
     self.isMenu = false;
@@ -28,54 +60,16 @@
     self.sceneryArray = [[NSMutableArray alloc]init];
     // cria e define posicao dos elementos da tela
     
-//    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(40, 260, 240, 120)];
+//    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 50, 300, 120)];
 //    label.backgroundColor = [UIColor yellowColor];
 //    [self.view addSubview:label];
 //    UILabel *label2 = [[UILabel alloc]initWithFrame:CGRectMake(60, 220, 200, 40)];
 //    label2.backgroundColor = [UIColor redColor];
 //    [self.view addSubview:label2];
-//    
+//
     [self drawWolrd];
     
-    
-//    SKSpriteNode *sea = [SKSpriteNode spriteNodeWithImageNamed:@"Sea.png"];
-//    sea.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 70);
-//    sea.size = CGSizeMake(sea.frame.size.width * 0.67f, sea.frame.size.height * 0.67f);
-//    
-//    SKSpriteNode *water = [SKSpriteNode spriteNodeWithImageNamed:@"Water.png"];
-//    water.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 70);
-//    water.size = CGSizeMake(water.frame.size.width * 0.67f, water.frame.size.height * 0.67f);
-//    
-//    self.sand = [SKSpriteNode spriteNodeWithImageNamed:@"Sand.png"];
-//    self.sand.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 70);
-//    self.sand.size = CGSizeMake(self.sand.frame.size.width * 1.0f, self.sand.frame.size.height * 1.0f);
-//    
-//    self.island = [SKSpriteNode spriteNodeWithImageNamed:@"Island.png"];
-//    self.island.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 15);
-//    self.island.size = CGSizeMake(self.island.frame.size.width * 1.0f, self.island.frame.size.height * 1.0f);
-//
-//    SKSpriteNode *sky = [SKSpriteNode spriteNodeWithImageNamed:@"Sky.png"];
-//    sky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 31);
-//    sky.size = CGSizeMake(sky.frame.size.width * 0.68f, sky.frame.size.height * 0.7f);
-//    
-//    SKSpriteNode *cage = [SKSpriteNode spriteNodeWithImageNamed:@"Cage.png"];
-//    cage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-//    cage.size = CGSizeMake(cage.frame.size.width * 0.7f, cage.frame.size.height * 0.7f);
-//    
-//    self.sun = [SKSpriteNode spriteNodeWithImageNamed:@"sun.jpg"];
-//    self.sun.position = CGPointMake(170, 550);
-//    [self addChild:sky];
-//    [self addChild:sea];
-//    [self addChild:water];
-//    [self addChild:self.sand];
-//    [self addChild:self.island];
-//    [self addChild:cage];
-//    
-//    [self addChild:self.sun];
-    
-    
-    
-    
+
     // configura os gesture recognizer
     
     UISwipeGestureRecognizer *swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
@@ -148,14 +142,38 @@
         }
         self.temperatureLabel.text = [NSString stringWithFormat:@"%.f",self.temperature];
     }
+    
+    CGRect cloudArea = CGRectMake(0, 400, self.scene.frame.size.width, 300);
+
+    if (CGRectContainsPoint(cloudArea, touchLocation)){
+     
+        if ([(UISwipeGestureRecognizer*)recognizer direction] == UISwipeGestureRecognizerDirectionLeft){
+            SKSpriteNode * temp = self.sceneryArray[0];
+            [self.sceneryArray removeObjectAtIndex:0];
+            [temp removeFromParent];
+        }
+        else if ([(UISwipeGestureRecognizer*)recognizer direction] == UISwipeGestureRecognizerDirectionRight ){
+            SKSpriteNode *nuvem = [SKSpriteNode spriteNodeWithImageNamed:@"nuvem"];
+            [self.sceneryArray addObject:nuvem];
+            [self addChild:nuvem];
+            int a = arc4random()%50;
+            int b = arc4random()%50;
+            int c = arc4random()%2;
+            int d = arc4random()%2;
+            if (!c)
+                a = -a;
+            if (!d)
+                b = -b;
+            nuvem.position = CGPointMake(touchLocation.x + a, touchLocation.y + b);
+        }
+    
+    }
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
     UITouch *touch = [touches anyObject];
     CGPoint positionInScene = [touch locationInNode:self];
-    NSLog(@"%f",positionInScene.x);
-    
     // controla o sol
     
     if ([self.sun containsPoint:positionInScene]){
@@ -263,10 +281,39 @@
     self.sun.size = CGSizeMake(self.sun.frame.size.width * 1.5f, self.sun.frame.size.height * 1.5f);
     
 }
-
+//-(void)makeItRain{
+//    NSMutableArray *array = [[NSMutableArray alloc]init];
+//    for (int i = 0; i < 100; i++ ){
+//        int a = arc4random()%(int)self.scene.frame.size.width;
+//        SKSpriteNode *drop = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(2, 5)];
+//        [array addObject:drop];
+//        drop.position = CGPointMake(a, self.scene.frame.size.height);
+//        [self addChild:drop];
+//        
+//    }
+//    [self animateRainFromArray:array];
+//    
+//}
+//
+//-(void)animateRainFromArray:(NSMutableArray*)array{
+//
+//    int b = arc4random()%10;
+//    int c = arc4random()%30;
+//    for (int i; i < array.count; i++) {
+//        SKSpriteNode *temp = array[i];
+//        SKAction *move = [SKAction moveTo:CGPointMake(temp.position.x, self.scene.frame.size.height) duration:3.0f];
+//        SKAction *remove = [SKAction removeFromParent];
+//        SKAction *sequence = [SKAction sequence:@[move,remove]];
+//        [temp runAction:sequence];
+//       
+//    }
+//    
+//}
 
 -(void)update:(CFTimeInterval)currentTime {
-  
+    
+    
+    
    self.timeSinceLast += currentTime - self.lastUpdateTimeInterval;
     
     // checagem do intervalo de 1 segundo
@@ -310,7 +357,7 @@
         
         // controla numero de folhas
         
-        if (temp.leavesCounter == 18){
+        if (temp.leavesCounter == 14){
             
             temp.leaves++;
             temp.leavesCounter = 0;
@@ -404,9 +451,7 @@
                 Boolean viewsOverlap = CGRectIntersectsRect(temp.frame, temp2.frame);
                 
                 if (viewsOverlap){
-                    NSLog(@"ONE");
                     if (temp2.leaves != 0 && temp2.growthCounter == 7){
-                        NSLog(@"TWO");
                     SKAction *shrinkTree = [SKAction scaleTo:0.95f duration:0.5];
                     SKAction *shrinkNewTree = [SKAction scaleTo:3.0f duration:0.5];
                     if (temp2.isNew)
@@ -419,6 +464,11 @@
                     }
                 }
             }
+        }
+        
+        if (temp.animalType != Animal_Herbivore){
+            if (temp.nextMeal > 0)
+                temp.nextMeal--;
         }
         
         //checa o contato dos animais
@@ -436,16 +486,23 @@
                     SKAction *remove = [SKAction removeFromParent];
                     SKAction *sequence = [SKAction sequence:@[shrink,remove]];
                     if ([(SKAnimals*)temp strenght] > [(SKAnimals*)temp2 strenght]){
+                        if (temp.nextMeal == 0){
                         temp.energy += temp2.energyValue;
                         [temp2 runAction:sequence];
                         [self.animalArray removeObject:temp2];
+                        temp.nextMeal = 15;
                         break;
+                        }
                     }
                     else{
-                        temp2.energy += temp2.energyValue;
+
+                        if (temp2.nextMeal == 0){
+                        temp2.energy += temp.energyValue;
                         [temp runAction:sequence];
                         [self.animalArray removeObject:temp];
+                            temp2.nextMeal = 15;
                         break;
+                        }
                     }
                     
             }

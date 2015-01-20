@@ -36,4 +36,6 @@ typedef enum SKAnimalType {
 
 @property int multiplyLimit;
 
+@property int nextMeal;
+
 @end
