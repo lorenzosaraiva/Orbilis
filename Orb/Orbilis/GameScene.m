@@ -66,10 +66,20 @@
 //    UILabel *label2 = [[UILabel alloc]initWithFrame:CGRectMake(60, 220, 200, 40)];
 //    label2.backgroundColor = [UIColor redColor];
 //    [self.view addSubview:label2];
+<<<<<<< HEAD
 //
     [self drawWolrd];
     
 
+=======
+//    
+    [self drawWolrd];
+    
+//    self.sun = [SKSpriteNode spriteNodeWithImageNamed:@"sun.jpg"];
+//    self.sun.position = CGPointMake(170, 550);
+//    [self addChild:self.sun];
+    
+>>>>>>> FETCH_HEAD
     // configura os gesture recognizer
     
     UISwipeGestureRecognizer *swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
@@ -258,11 +268,13 @@
         [self addChild:bigCarn];
         [self addChild:factory];
         self.isMenu = true;
-        
-        
     
     }
+<<<<<<< Updated upstream
     self.lastTouch = positionInScene;
+=======
+    
+>>>>>>> Stashed changes
 //    SKSpriteNode *nuvem  = [SKSpriteNode spriteNodeWithImageNamed:@"nuvem.png"];
 //    SKAnimals *animal = [SKAnimals spriteNodeWithImageNamed:@"animal.png"];
 //    animal.strenght = arc4random()%10;
@@ -386,7 +398,7 @@
             [self addChild:new];
             self.tree++;
             NSLog(@"%d arvore", self.tree);
-                }
+        }
     }
     
     for (int i = 0; i < self.animalArray.count; i++) {
