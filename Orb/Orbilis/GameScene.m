@@ -60,13 +60,11 @@
     self.sceneryArray = [[NSMutableArray alloc]init];
     // cria e define posicao dos elementos da tela
     
-    //    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 50, 300, 120)];
-    //    label.backgroundColor = [UIColor yellowColor];
-    //    [self.view addSubview:label];
-    //    UILabel *label2 = [[UILabel alloc]initWithFrame:CGRectMake(60, 220, 200, 40)];
-    //    label2.backgroundColor = [UIColor redColor];
-    //    [self.view addSubview:label2];
-    //
+//        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 400, self.frame.size.width, 200)];
+//        label.backgroundColor = [UIColor yellowColor];
+//        [self.view addSubview:label];
+//    
+    
     [self drawWolrd];
     
     
@@ -123,6 +121,12 @@
     
     [self addChild:self.island];
     
+    self.sun = [SKSpriteNode spriteNodeWithImageNamed:@"Sol.png"];
+    self.sun.position = CGPointMake(80, self.frame.size.height - 80);
+    
+    
+    [self addChild:self.sun];
+    
 }
 
 - (void)handlePanFrom:(UIPanGestureRecognizer *)recognizer {
@@ -153,7 +157,7 @@
             [temp removeFromParent];
         }
         else if ([(UISwipeGestureRecognizer*)recognizer direction] == UISwipeGestureRecognizerDirectionRight ){
-            SKSpriteNode *nuvem = [SKSpriteNode spriteNodeWithImageNamed:@"nuvem"];
+            SKSpriteNode *nuvem = [SKSpriteNode spriteNodeWithImageNamed:@"Nuvem1"];
             [self.sceneryArray addObject:nuvem];
             [self addChild:nuvem];
             int a = arc4random()%50;
@@ -232,6 +236,22 @@
     
     // cria os menu
     
+    // menu da agua
+    
+    CGRect rectAgua = CGRectMake(0,0,self.frame.size.width,180);
+    if (CGRectContainsPoint(rectAgua, positionInScene)){
+    
+        SKAnimals *smallFish = [SKAnimals createAnimalofType:Animal_Water_Herbivore];
+        SKAnimals *bigFish = [SKAnimals createAnimalofType:Animal_Water_Predator];
+        smallFish.position = CGPointMake(positionInScene.x + 30, positionInScene.y);
+        bigFish.position = CGPointMake(positionInScene.x - 30, positionInScene.y);
+        [self.menuArray addObject:smallFish];
+        [self.menuArray addObject:bigFish];
+        [self addChild:smallFish];
+        [self addChild:bigFish];
+        self.isMenu = true;
+    
+    }
     //menu da terra
     
     CGRect rect = CGRectMake(40, 260, 240, 120);
@@ -240,47 +260,40 @@
         SKAnimals *herb = [SKAnimals createAnimalofType:Animal_Herbivore];
         SKAnimals *carn = [SKAnimals createAnimalofType:Animal_Carnivore];
         SKAnimals *bigCarn = [SKAnimals createAnimalofType:Animal_Predator];
-        SKVegetables *factory = [SKVegetables createVegetableOfType:Vegetable_Tree];
+        SKVegetables *tree = [SKVegetables createVegetableOfType:Vegetable_Tree];
+        SKVegetables *grass = [SKVegetables createVegetableOfType:Vegetable_Grass];
         carn.size = CGSizeMake(herb.frame.size.width, herb.frame.size.height);
         bigCarn.size = CGSizeMake(herb.frame.size.width, herb.frame.size.height);
         herb.position = CGPointMake(positionInScene.x, positionInScene.y + 30);
         carn.position = CGPointMake(positionInScene.x, positionInScene.y - 30);
         bigCarn.position = CGPointMake(positionInScene.x + 30, positionInScene.y);
-        factory.position = CGPointMake(positionInScene.x - 30, positionInScene.y);
-        factory.growthCounter = 7;
-        factory.isNew = false;
+        grass.position = CGPointMake(positionInScene.x + 30, positionInScene.y + 30);
+        herb.isChild = NO;
+        carn.isChild = NO;
+        bigCarn.isChild = NO;
+        tree.position = CGPointMake(positionInScene.x - 30, positionInScene.y);
+        tree.growthCounter = 7;
+        tree.isNew = false;
+        grass.isNew = false;
         [self.menuArray addObject:herb];
         [self.menuArray addObject:carn];
         [self.menuArray addObject:bigCarn];
-        [self.menuArray addObject:factory];
+        [self.menuArray addObject:tree];
+        [self.menuArray addObject:grass];
         [self addChild:herb];
         [self addChild:carn];
         [self addChild:bigCarn];
-        [self addChild:factory];
+        [self addChild:tree];
+        [self addChild:grass];
         self.isMenu = true;
         
         
         
     }
     self.lastTouch = positionInScene;
-    //    SKSpriteNode *nuvem  = [SKSpriteNode spriteNodeWithImageNamed:@"nuvem.png"];
-    //    SKAnimals *animal = [SKAnimals spriteNodeWithImageNamed:@"animal.png"];
-    //    animal.strenght = arc4random()%10;
-    //    nuvem.position = CGPointMake(positionInScene.x, positionInScene.y + 20);
-    //    animal.position = CGPointMake(positionInScene.x, positionInScene.y - 20);
-    //    [self.menuArray addObject:nuvem];
-    //    [self.menuArray addObject:animal];
-    //    [self addChild:animal];
-    //    [self addChild:nuvem];
-    //    self.isMenu = true;
     
 }
 
--(void)sunResize{
-    
-    self.sun.size = CGSizeMake(self.sun.frame.size.width * 1.5f, self.sun.frame.size.height * 1.5f);
-    
-}
 //-(void)makeItRain{
 //    NSMutableArray *array = [[NSMutableArray alloc]init];
 //    for (int i = 0; i < 100; i++ ){
@@ -344,7 +357,7 @@
             
             //controla crescimento
             
-            if (temp.growthTime == 3 ){
+            if (temp.growthTime == 5 && temp.vegetableType == Vegetable_Tree) {
                 if (temp.growthCounter < 7){
                     SKAction *scale = [SKAction scaleBy:1.2f duration:0.2];
                     [temp runAction:scale];
@@ -357,7 +370,7 @@
             
             // controla numero de folhas
             
-            if (temp.leavesCounter == 14){
+            if (temp.leavesCounter == 14 && temp.vegetableType == Vegetable_Tree){
                 
                 temp.leaves++;
                 temp.leavesCounter = 0;
@@ -369,10 +382,11 @@
             
             //cria mudas
             
-            int check = arc4random()%300;
+            int check = arc4random()%temp.multiplyRate;
             if (!check){
-                SKVegetables *new = [SKVegetables createVegetableOfType:Vegetable_Tree];
-                new.size = CGSizeMake(new.frame.size.width * 0.3f, new.frame.size.height * 0.3f);
+                SKVegetables *new = [SKVegetables createVegetableOfType:temp.vegetableType];
+                if (temp.vegetableType == Vegetable_Tree)
+                    new.size = CGSizeMake(new.frame.size.width * 0.3f, new.frame.size.height * 0.3f);
                 int a = arc4random()%50;
                 int b = arc4random()%50;
                 int c = arc4random()%2;
@@ -381,11 +395,16 @@
                     a = -a;
                 if (!d)
                     b = -b;
-                new.position = CGPointMake(temp.position.x + a, temp.position.y + b);
-                [self.vegetableArray addObject:new];
-                [self addChild:new];
-                self.tree++;
+                CGRect rect = CGRectMake(40, 260, 240, 120);
+                CGRect rect2 = CGRectMake(60, 220, 200, 40);
+                CGPoint point = CGPointMake(temp.position.x + a, temp.position.y + b);
+                if (CGRectContainsPoint(rect, point)||CGRectContainsPoint(rect2, point)){
+                    new.position = point;
+                    [self.vegetableArray addObject:new];
+                    [self addChild:new];
+                    self.tree++;
                 NSLog(@"%d arvore", self.tree);
+                }
             }
         }
         
@@ -404,13 +423,18 @@
                 b = -b;
             a = a/10;
             b = b/10;
-            SKAction *move = [SKAction moveTo: CGPointMake(temp.position.x + a, temp.position.y + b) duration:1.0f];
+            CGPoint point = CGPointMake(temp.position.x + a, temp.position.y + b);
+            SKAction *move = [SKAction moveTo: point duration:1.0f];
             CGRect rect = CGRectMake(40, 260, 240, 120);
             CGRect rect2 = CGRectMake(60, 220, 200, 40);
-            if (CGRectContainsPoint(rect, CGPointMake(temp.position.x + a, temp.position.y + b) )||CGRectContainsPoint(rect2, CGPointMake(temp.position.x + a, temp.position.y + b)))
+            if (CGRectContainsPoint(rect, point)||CGRectContainsPoint(rect2, point))
                 [temp runAction:move];
-            
-            //        temp.position = CGPointMake(temp.position.x + a, temp.position.y + b);
+            CGRect rectAgua = CGRectMake(0,0,self.frame.size.width,180);
+            if (temp.animalType == Animal_Water_Predator || temp.animalType == Animal_Water_Herbivore){
+                NSLog(@"HERE");
+                if (CGRectContainsPoint(rectAgua, point))
+                    [temp runAction:move];
+            }
             
             //checagem de temperatura
             
@@ -431,26 +455,36 @@
                 [self.animalArray removeObject:temp];
                 
             }
-            //multiplicacao
             
+            //crescimento
+            if (temp.isChild){
+                SKAction *scale = [SKAction scaleBy:1.09f duration:0.3];
+                [temp runAction:scale];
+                if (temp.growth == 15)
+                    temp.isChild = NO;
+                temp.growth++;
+            }
+            //multiplicacao
+            if (!temp.isChild)
             if (temp.energy >= temp.multiplyLimit){
                 SKAnimals *animal = [SKAnimals createAnimalofType:temp.animalType];
                 animal.position = CGPointMake(temp.frame.origin.x + 10, temp.frame.origin.y + 30);
-                animal.size = CGSizeMake(temp.frame.size.width, temp.frame.size.height);
+                animal.size = CGSizeMake(temp.frame.size.width * 0.25f, temp.frame.size.height * 0.25f);
                 [self addChild:animal];
                 [self.animalArray addObject:animal];
-                temp.energy = temp.energy/3;
+                temp.energy = temp.energy/4;
             }
             
             //checa o contato com plantas
             
             if (temp.animalType == Animal_Herbivore){
-                
+
                 for (int k = 0; k < self.vegetableArray.count; k++){
                     SKVegetables *temp2 = self.vegetableArray[k];
                     Boolean viewsOverlap = CGRectIntersectsRect(temp.frame, temp2.frame);
                     
                     if (viewsOverlap){
+                        if (temp2.vegetableType == Vegetable_Tree){
                         if (temp2.leaves != 0 && temp2.growthCounter == 7){
                             SKAction *shrinkTree = [SKAction scaleTo:0.95f duration:0.5];
                             SKAction *shrinkNewTree = [SKAction scaleTo:3.0f duration:0.5];
@@ -462,6 +496,18 @@
                             temp2.leaves--;
                             temp.energy += temp2.energyValue;
                         }
+                        }
+                        else{
+                            temp2.leaves--;
+                            temp.energy += temp2.energyValue;
+                            if (temp2.leaves == 0){
+                            SKAction *shrink = [SKAction scaleTo:0.0f duration:0.5f];
+                            SKAction *remove = [SKAction removeFromParent];
+                            SKAction *sequence = [SKAction sequence:@[shrink,remove]];
+                            [temp2 runAction:sequence];
+                            }
+                        
+                        }
                     }
                 }
             }
@@ -472,9 +518,11 @@
             }
             
             //checa o contato dos animais
-            
+            if (!temp.isChild)
             for (int j = 0; j< self.animalArray.count; j++){
                 SKAnimals *temp2 =self.animalArray[j];
+                if (temp2.isChild)
+                    continue;
                 if (j == i)
                     continue;
                 if (temp.animalType == temp2.animalType)

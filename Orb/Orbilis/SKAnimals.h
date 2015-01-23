@@ -15,6 +15,8 @@ typedef enum SKAnimalType {
     Animal_Herbivore = 0,
     Animal_Carnivore  = 1,
     Animal_Predator  = 2,
+    Animal_Water_Herbivore = 3,
+    Animal_Water_Predator = 4
     
 } AnimalType;
 
@@ -37,5 +39,9 @@ typedef enum SKAnimalType {
 @property int multiplyLimit;
 
 @property int nextMeal;
+
+@property int growth;
+
+@property BOOL isChild;
 
 @end

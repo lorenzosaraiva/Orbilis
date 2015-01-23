@@ -40,6 +40,8 @@
 
 @property int tree;
 
+@property int herbivores;
+
 @property BOOL isMenu;
 
 @end

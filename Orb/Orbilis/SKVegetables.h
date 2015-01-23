@@ -40,6 +40,8 @@ typedef enum SKVegetableType {
 
 @property int growthTime;
 
+@property int multiplyRate;
+
 @property BOOL isNew;
 
 
