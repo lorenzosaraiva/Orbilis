@@ -16,35 +16,6 @@
 -(void)didMoveToView:(SKView *)view {
     
     
-    // inicializando acelererometro
-    /*
-     motionManager = [[CMMotionManager alloc] init];
-     if ([motionManager isAccelerometerAvailable] == YES) {
-     [motionManager startAccelerometerUpdatesToQueue:[[NSOperationQueue alloc] init]
-     withHandler:^(CMAccelerometerData *data, NSError *error)
-     {
-     float destX, destY;
-     float currentX = monkey.position.x;
-     float currentY = monkey.position.y;
-     BOOL shouldMove = NO;
-     
-     if(data.acceleration.y < -0.25) { // tilting the device to the right
-     destX = currentX + (data.acceleration.y * kPlayerSpeed);
-     destY = currentY;
-     shouldMove = YES;
-     } else if (data.acceleration.y > 0.25) { // tilting the device to the left
-     destX = currentX + (data.acceleration.y * kPlayerSpeed);
-     destY = currentY;
-     shouldMove = YES;
-     }
-     if(shouldMove) {
-     SKAction *action = [SKAction moveTo:CGPointMake(destX, destY) duration:1];
-     [monkey runAction:action];
-     }
-     }];
-     }
-     */
-    
     
     
     // inicia e alloca as coisas iniciais
@@ -54,11 +25,12 @@
     self.timeSinceLast = 0;
     self.global = 0;
     self.tree = 0;
+    self.pollution = 0;
     self.animalArray = [[NSMutableArray alloc]init];
     self.menuArray = [[NSMutableArray alloc]init];
     self.vegetableArray = [[NSMutableArray alloc]init];
     self.sceneryArray = [[NSMutableArray alloc]init];
-    // cria e define posicao dos elementos da tela
+
     
 //        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 400, self.frame.size.width, 200)];
 //        label.backgroundColor = [UIColor yellowColor];
@@ -70,8 +42,13 @@
     
     // configura os gesture recognizer
     
+    // pinch para controlar o sol
+    UIPinchGestureRecognizer *pinchGesture  = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(resizeSun:)];
+    [self.view addGestureRecognizer:pinchGesture];
+    
+    // swipe para acrescentar e retirar nuvens
+    
     UISwipeGestureRecognizer *swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
-    swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
     UISwipeGestureRecognizer *swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
     swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
     swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
@@ -81,10 +58,12 @@
     // mostra o termometro
     
     self.temperatureLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 50, 0, 50, 50)];
-    self.temperatureLabel.text = [NSString stringWithFormat:@"%.f",self.temperature];
+    self.temperatureLabel.text = [NSString stringWithFormat:@"%.f",self.sun.frame.size.height/5];
     [self.view addSubview:self.temperatureLabel];
     
 }
+
+// desenha e posiciona os elementos da tela
 
 - (void)drawWolrd {
     
@@ -123,11 +102,42 @@
     
     self.sun = [SKSpriteNode spriteNodeWithImageNamed:@"Sol.png"];
     self.sun.position = CGPointMake(80, self.frame.size.height - 80);
+
     
     
     [self addChild:self.sun];
     
 }
+
+-(void)resizeSun:(UIPinchGestureRecognizer*)recognizer{
+
+    CGPoint touchLocation = [recognizer locationInView:recognizer.view];
+    
+    touchLocation = [self convertPointFromView:touchLocation];
+    
+    if ([self.sun containsPoint:touchLocation]){
+        if (recognizer.scale > 1){
+            if (self.sun.size.height * 1.07f < 250){
+                self.sun.size = CGSizeMake(self.sun.size.width * 1.07f, self.sun.size.height * 1.07f);
+                self.temperature = self.sun.frame.size.height/5 - 0.5f * [self.sceneryArray count];
+    
+            }
+           
+        }
+        else{
+            if (self.sun.size.height * 0.96f > 50){
+                
+                self.sun.size = CGSizeMake(self.sun.size.width * 0.96f, self.sun.size.height * 0.96f);
+                self.temperature = self.sun.frame.size.height/5 - 0.5f * [self.sceneryArray count];
+            }
+        
+        }
+        self.temperatureLabel.text = [NSString stringWithFormat:@"%.f",self.temperature];
+    }
+
+}
+
+// reconhece o swipe gesture recognizer
 
 - (void)handlePanFrom:(UIPanGestureRecognizer *)recognizer {
     
@@ -135,25 +145,14 @@
     
     touchLocation = [self convertPointFromView:touchLocation];
     
-    if ([self.sun containsPoint:touchLocation]){
-        if ([(UISwipeGestureRecognizer*)recognizer direction] == UISwipeGestureRecognizerDirectionLeft){
-            self.sun.size = CGSizeMake(self.sun.frame.size.width * 0.8f, self.sun.frame.size.height * 0.8f);
-            self.temperature--;
-        }
-        else if ([(UISwipeGestureRecognizer*)recognizer direction] == UISwipeGestureRecognizerDirectionRight ){
-            self.sun.size = CGSizeMake(self.sun.frame.size.width * 1.2f, self.sun.frame.size.height * 1.2f);
-            self.temperature++;
-        }
-        self.temperatureLabel.text = [NSString stringWithFormat:@"%.f",self.temperature];
-    }
-    
     CGRect cloudArea = CGRectMake(0, 400, self.scene.frame.size.width, 300);
     
     if (CGRectContainsPoint(cloudArea, touchLocation)){
         
-        if ([(UISwipeGestureRecognizer*)recognizer direction] == UISwipeGestureRecognizerDirectionLeft){
+        if ([(UISwipeGestureRecognizer*)recognizer direction] == UISwipeGestureRecognizerDirectionLeft && [self.sceneryArray count] > 0){
             SKSpriteNode * temp = self.sceneryArray[0];
             [self.sceneryArray removeObjectAtIndex:0];
+            self.temperature = self.temperature + 0.5f;
             [temp removeFromParent];
         }
         else if ([(UISwipeGestureRecognizer*)recognizer direction] == UISwipeGestureRecognizerDirectionRight ){
@@ -169,21 +168,19 @@
             if (!d)
                 b = -b;
             nuvem.position = CGPointMake(touchLocation.x + a, touchLocation.y + b);
+            self.temperature = self.temperature - 0.5f;
         }
+        self.temperatureLabel.text = [NSString stringWithFormat:@"%.f",self.temperature];
         
     }
 }
+
+//administra os toques
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
     UITouch *touch = [touches anyObject];
     CGPoint positionInScene = [touch locationInNode:self];
-    // controla o sol
-    
-    if ([self.sun containsPoint:positionInScene]){
-        //        [self sunResize];
-        return;
-    }
     
     // adiciona o elemento correto do pop-up menu
     
@@ -212,6 +209,22 @@
                 return;
                 
             }
+        }
+        else {
+            SKSpriteNode *temp = self.menuArray[i];
+            if ([temp containsPoint:positionInScene]){
+                [self.menuArray removeObject:temp];
+                [self removeChildrenInArray:self.menuArray];
+                [self.menuArray removeAllObjects];
+                [self.pollutionArray addObject:temp];
+                temp.position = CGPointMake(self.lastTouch.x, self.lastTouch.y);
+                self.isMenu = false;
+                return;
+                
+            }
+        
+        
+        
         }
     }
     
@@ -262,12 +275,15 @@
         SKAnimals *bigCarn = [SKAnimals createAnimalofType:Animal_Predator];
         SKVegetables *tree = [SKVegetables createVegetableOfType:Vegetable_Tree];
         SKVegetables *grass = [SKVegetables createVegetableOfType:Vegetable_Grass];
+        SKSpriteNode *factory = [SKSpriteNode spriteNodeWithImageNamed:@"industria.png"];
+        factory.size = CGSizeMake(factory.frame.size.width * 0.8f, factory.frame.size.height * 0.8f);
         carn.size = CGSizeMake(herb.frame.size.width, herb.frame.size.height);
         bigCarn.size = CGSizeMake(herb.frame.size.width, herb.frame.size.height);
         herb.position = CGPointMake(positionInScene.x, positionInScene.y + 30);
         carn.position = CGPointMake(positionInScene.x, positionInScene.y - 30);
         bigCarn.position = CGPointMake(positionInScene.x + 30, positionInScene.y);
         grass.position = CGPointMake(positionInScene.x + 30, positionInScene.y + 30);
+        factory.position = CGPointMake(positionInScene.x - 30, positionInScene.y - 30);
         herb.isChild = NO;
         carn.isChild = NO;
         bigCarn.isChild = NO;
@@ -280,11 +296,13 @@
         [self.menuArray addObject:bigCarn];
         [self.menuArray addObject:tree];
         [self.menuArray addObject:grass];
+        [self.menuArray addObject:factory];
         [self addChild:herb];
         [self addChild:carn];
         [self addChild:bigCarn];
         [self addChild:tree];
         [self addChild:grass];
+        [self addChild:factory];
         self.isMenu = true;
         
         
@@ -338,6 +356,13 @@
         NSLog(@"%d segundos", self.global);
         self.global++;
         
+        // poluicao
+        
+        self.pollution = self.pollution + self.pollutionArray.count/5;
+        if (self.pollution > 100)
+            self.pollution = 100;
+       
+        
         // iteracao pelos vegetais
         for (int i = 0; i < self.vegetableArray.count; i++){
             
@@ -362,6 +387,7 @@
                     SKAction *scale = [SKAction scaleBy:1.2f duration:0.2];
                     [temp runAction:scale];
                     temp.growthCounter++;
+                    temp.poisonLevel = self.pollution/10;
                     
                 }
                 temp.growthTime = 0;
@@ -403,6 +429,8 @@
                     [self.vegetableArray addObject:new];
                     [self addChild:new];
                     self.tree++;
+                    if (new.vegetableType == Vegetable_Grass)
+                        new.poisonLevel = self.pollution/10;
                 NSLog(@"%d arvore", self.tree);
                 }
             }
@@ -431,16 +459,15 @@
                 [temp runAction:move];
             CGRect rectAgua = CGRectMake(0,0,self.frame.size.width,180);
             if (temp.animalType == Animal_Water_Predator || temp.animalType == Animal_Water_Herbivore){
-                NSLog(@"HERE");
                 if (CGRectContainsPoint(rectAgua, point))
                     [temp runAction:move];
             }
             
             //checagem de temperatura
             
-            if (self.temperature > 33){
-                int a = arc4random()%(int)self.temperature;
-                if (a > 32){
+            if (self.temperature > 35 || self.temperature < 15){
+                int a = arc4random()%20;
+                if (!a){
                     [self.animalArray removeObject:temp];
                     [temp removeFromParent];
                 }
@@ -518,9 +545,9 @@
             }
             
             //checa o contato dos animais
-            if (!temp.isChild)
+            if (temp.animalType == Animal_Carnivore || temp.animalType == Animal_Predator)
             for (int j = 0; j< self.animalArray.count; j++){
-                SKAnimals *temp2 =self.animalArray[j];
+                SKAnimals *temp2 = self.animalArray[j];
                 if (temp2.isChild)
                     continue;
                 if (j == i)
@@ -538,7 +565,7 @@
                             temp.energy += temp2.energyValue;
                             [temp2 runAction:sequence];
                             [self.animalArray removeObject:temp2];
-                            temp.nextMeal = 15;
+                            temp.nextMeal = 8;
                             break;
                         }
                     }
@@ -548,7 +575,7 @@
                             temp2.energy += temp.energyValue;
                             [temp runAction:sequence];
                             [self.animalArray removeObject:temp];
-                            temp2.nextMeal = 15;
+                            temp2.nextMeal = 8;
                             break;
                         }
                     }

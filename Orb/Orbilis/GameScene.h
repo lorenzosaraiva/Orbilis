@@ -26,6 +26,8 @@
 
 @property (strong, nonatomic) NSMutableArray *menuArray;
 
+@property (strong, nonatomic) NSMutableArray *pollutionArray;
+
 @property (strong, nonatomic) UILabel *temperatureLabel;
 
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
@@ -35,6 +37,14 @@
 @property (nonatomic) CGPoint lastTouch;
 
 @property float temperature;
+
+@property float waterPollution;
+
+@property float airPollution;
+
+@property float earthPollution;
+
+@property float pollution;
 
 @property int global;
 

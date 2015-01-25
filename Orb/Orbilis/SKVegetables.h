@@ -42,6 +42,8 @@ typedef enum SKVegetableType {
 
 @property int multiplyRate;
 
+@property int poisonLevel;
+
 @property BOOL isNew;
 
 

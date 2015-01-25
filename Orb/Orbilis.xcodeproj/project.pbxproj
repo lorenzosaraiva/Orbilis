@@ -47,7 +47,7 @@
 		0A99D7CE1A71975A00A21379 /* Barril2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A99D7B51A71975A00A21379 /* Barril2.png */; };
 		0A99D7CF1A71975A00A21379 /* Barril_mar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A99D7B61A71975A00A21379 /* Barril_mar.png */; };
 		0A99D7D01A71975A00A21379 /* Barril_mar1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A99D7B71A71975A00A21379 /* Barril_mar1.png */; };
-		0A99D7D11A71975A00A21379 /* Indústria.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A99D7B81A71975A00A21379 /* Indústria.png */; };
+		0A99D7D11A71975A00A21379 /* industria.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A99D7B81A71975A00A21379 /* industria.png */; };
 		0A99D7D21A71975A00A21379 /* Petróleo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A99D7B91A71975A00A21379 /* Petróleo.png */; };
 		0A99D7D31A71975A00A21379 /* Petróleo2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A99D7BA1A71975A00A21379 /* Petróleo2.png */; };
 		518634131A6B3346000B6BDF /* Cage.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634011A6B3346000B6BDF /* Cage.png */; };
@@ -130,7 +130,7 @@
 		0A99D7B51A71975A00A21379 /* Barril2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Barril2.png; sourceTree = "<group>"; };
 		0A99D7B61A71975A00A21379 /* Barril_mar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Barril_mar.png; sourceTree = "<group>"; };
 		0A99D7B71A71975A00A21379 /* Barril_mar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Barril_mar1.png; sourceTree = "<group>"; };
-		0A99D7B81A71975A00A21379 /* Indústria.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Indústria.png"; sourceTree = "<group>"; };
+		0A99D7B81A71975A00A21379 /* industria.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = industria.png; sourceTree = "<group>"; };
 		0A99D7B91A71975A00A21379 /* Petróleo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Petróleo.png"; sourceTree = "<group>"; };
 		0A99D7BA1A71975A00A21379 /* Petróleo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Petróleo2.png"; sourceTree = "<group>"; };
 		518634011A6B3346000B6BDF /* Cage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cage.png; sourceTree = "<group>"; };
@@ -344,7 +344,7 @@
 				0A99D7B51A71975A00A21379 /* Barril2.png */,
 				0A99D7B61A71975A00A21379 /* Barril_mar.png */,
 				0A99D7B71A71975A00A21379 /* Barril_mar1.png */,
-				0A99D7B81A71975A00A21379 /* Indústria.png */,
+				0A99D7B81A71975A00A21379 /* industria.png */,
 				0A99D7B91A71975A00A21379 /* Petróleo.png */,
 				0A99D7BA1A71975A00A21379 /* Petróleo2.png */,
 			);
@@ -441,7 +441,7 @@
 				5186341E1A6B3346000B6BDF /* Sea@3x.png in Resources */,
 				518634241A6B3346000B6BDF /* Water@3x.png in Resources */,
 				0A99D7BB1A71975A00A21379 /* Pássaro1.png in Resources */,
-				0A99D7D11A71975A00A21379 /* Indústria.png in Resources */,
+				0A99D7D11A71975A00A21379 /* industria.png in Resources */,
 				0A23B1021A6971D6000C78A4 /* sun.jpg in Resources */,
 				0A99D7C11A71975A00A21379 /* Peixe5.png in Resources */,
 				0A99D7BD1A71975A00A21379 /* Peixe1.png in Resources */,

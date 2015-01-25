@@ -39,13 +39,14 @@
         new = [SKVegetables spriteNodeWithImageNamed:@"arvore3.png"];
         new.energyValue = 5;
         new.energy = 30;
-        new.leaves = 5;
+        new.leaves = 10;
         new.multiplyRate = 100;
         new.vegetableType = Vegetable_Grass;
     
     
     
     }
+    new.poisonLevel = 0;
     return new;
 
 }

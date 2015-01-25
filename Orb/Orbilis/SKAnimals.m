@@ -16,7 +16,7 @@
     if (type == Animal_Herbivore){
         temp = [SKAnimals spriteNodeWithImageNamed:@"animal.png"];
         temp.strenght = 0;
-        temp.energy = 180;
+        temp.energy = 90;
         temp.energyValue = 100;
         temp.multiplyLimit = 400;
         temp.animalType = 0;
@@ -28,7 +28,7 @@
         temp.strenght = 10;
         temp.energy = 180 * 2;
         temp.energyValue = 240;
-        temp.multiplyLimit = 1200;
+        temp.multiplyLimit = 800;
         temp.animalType = 1;
         temp.nextMeal = 10;
         temp.growth = 0;
