@@ -25,7 +25,7 @@
         }
     }
     new.energyValue = 10;
-    new.leaves = 10;
+    new.leaves = 1;
     new.energy = 720;
     new.leavesCounter = 18;
     new.growthCounter = 0;
