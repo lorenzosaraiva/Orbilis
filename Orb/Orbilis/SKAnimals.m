@@ -18,7 +18,7 @@
         temp.strenght = 0;
         temp.energy = 90;
         temp.energyValue = 100;
-        temp.multiplyLimit = 400;
+        temp.multiplyLimit = 500;
         temp.animalType = 0;
         temp.growth = 0;
         temp.isChild = YES;

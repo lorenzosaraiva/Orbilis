@@ -13,6 +13,7 @@
 @implementation GameScene
 
 
+
 -(void)didMoveToView:(SKView *)view {
     
     
@@ -26,6 +27,7 @@
     self.global = 0;
     self.tree = 0;
     self.pollution = 0;
+    self.humidity = 60;
     self.animalArray = [[NSMutableArray alloc]init];
     self.menuArray = [[NSMutableArray alloc]init];
     self.vegetableArray = [[NSMutableArray alloc]init];
@@ -153,6 +155,7 @@
             SKSpriteNode * temp = self.sceneryArray[0];
             [self.sceneryArray removeObjectAtIndex:0];
             self.temperature = self.temperature + 0.5f;
+            self.humidity = self.humidity - 1.0f;
             [temp removeFromParent];
         }
         else if ([(UISwipeGestureRecognizer*)recognizer direction] == UISwipeGestureRecognizerDirectionRight ){
@@ -168,7 +171,10 @@
             if (!d)
                 b = -b;
             nuvem.position = CGPointMake(touchLocation.x + a, touchLocation.y + b);
+            nuvem.color = [UIColor grayColor];
+            nuvem.colorBlendFactor = 0.0f;
             self.temperature = self.temperature - 0.5f;
+            self.humidity++;
         }
         self.temperatureLabel.text = [NSString stringWithFormat:@"%.f",self.temperature];
         
@@ -182,6 +188,7 @@
     UITouch *touch = [touches anyObject];
     CGPoint positionInScene = [touch locationInNode:self];
     
+
     // adiciona o elemento correto do pop-up menu
     
     for (int i = 0; i < self.menuArray.count; i++){
@@ -312,34 +319,32 @@
     
 }
 
-//-(void)makeItRain{
-//    NSMutableArray *array = [[NSMutableArray alloc]init];
-//    for (int i = 0; i < 100; i++ ){
-//        int a = arc4random()%(int)self.scene.frame.size.width;
-//        SKSpriteNode *drop = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(2, 5)];
-//        [array addObject:drop];
-//        drop.position = CGPointMake(a, self.scene.frame.size.height);
-//        [self addChild:drop];
-//
-//    }
-//    [self animateRainFromArray:array];
-//
-//}
-//
-//-(void)animateRainFromArray:(NSMutableArray*)array{
-//
-//    int b = arc4random()%10;
-//    int c = arc4random()%30;
-//    for (int i; i < array.count; i++) {
-//        SKSpriteNode *temp = array[i];
-//        SKAction *move = [SKAction moveTo:CGPointMake(temp.position.x, self.scene.frame.size.height) duration:3.0f];
-//        SKAction *remove = [SKAction removeFromParent];
-//        SKAction *sequence = [SKAction sequence:@[move,remove]];
-//        [temp runAction:sequence];
-//
-//    }
-//
-//}
+-(void)makeItRain{
+    
+    NSString * rainPath = [[NSBundle mainBundle]
+     pathForResource:@"RainParticle" ofType:@"sks"];
+    
+    SKEmitterNode *burstNode =
+    [NSKeyedUnarchiver unarchiveObjectWithFile:rainPath];
+    
+    burstNode.position = CGPointMake(50, self.frame.size.height - 100);
+    
+    burstNode.numParticlesToEmit = self.humidity * 10;
+    
+    self.humidity = 20;
+    
+    [self addChild:burstNode];
+    
+    for (int i = 0; i < self.sceneryArray.count/2; i++){
+        SKSpriteNode * tempCloud = self.sceneryArray[i];
+        SKAction * fadeAway = [SKAction fadeOutWithDuration:5.0f];
+        [tempCloud runAction:fadeAway completion:^{
+            [tempCloud removeFromParent];
+            [self.sceneryArray removeObjectAtIndex:i];
+        }];
+    
+    }
+}
 
 -(void)update:(CFTimeInterval)currentTime {
     
@@ -354,6 +359,7 @@
         self.timeSinceLast = 0;
         self.lastUpdateTimeInterval = currentTime;
         NSLog(@"%d segundos", self.global);
+        NSLog(@"%f humidade", self.humidity);
         self.global++;
         
         // poluicao
@@ -362,6 +368,25 @@
         if (self.pollution > 100)
             self.pollution = 100;
        
+        // humidade
+        
+        if (40 > self.temperature && self.temperature > 25)
+            self.humidity = self.humidity + 0.5f;
+        if (self.temperature > 45)
+            self.humidity = self.humidity - 1.0f;
+        
+        for (int i = 0; i < self.sceneryArray.count; i++){
+            SKSpriteNode * tempCloud = self.sceneryArray[i];
+            SKAction * color = [SKAction colorizeWithColorBlendFactor: self.humidity/100 duration:1.0f];
+            [tempCloud runAction:color completion:^{ tempCloud.colorBlendFactor = self.humidity/100;}];
+        
+        }
+        
+        //checa por chuva
+        
+        if (self.humidity > 70 && self.sceneryArray.count > 3){
+            [self makeItRain];
+        }
         
         // iteracao pelos vegetais
         for (int i = 0; i < self.vegetableArray.count; i++){
@@ -377,7 +402,12 @@
                 SKAction *remove = [SKAction removeFromParent];
                 SKAction *sequence = [SKAction sequence:@[shrink,remove]];
                 [temp runAction:sequence];
-                
+                if (temp.vegetableType == Vegetable_Tree)
+                    self.tree--;
+                if (temp.vegetableType == Vegetable_Grass)
+                    self.grass--;
+                NSLog(@"%d arvore", self.tree);
+                NSLog(@"%d grama", self.grass);
             }
             
             //controla crescimento
@@ -411,8 +441,10 @@
             int check = arc4random()%temp.multiplyRate;
             if (!check){
                 SKVegetables *new = [SKVegetables createVegetableOfType:temp.vegetableType];
-                if (temp.vegetableType == Vegetable_Tree)
+                if (temp.vegetableType == Vegetable_Tree){
                     new.size = CGSizeMake(new.frame.size.width * 0.3f, new.frame.size.height * 0.3f);
+                    self.tree++;
+                }
                 int a = arc4random()%50;
                 int b = arc4random()%50;
                 int c = arc4random()%2;
@@ -428,10 +460,12 @@
                     new.position = point;
                     [self.vegetableArray addObject:new];
                     [self addChild:new];
-                    self.tree++;
-                    if (new.vegetableType == Vegetable_Grass)
+                    if (new.vegetableType == Vegetable_Grass){
                         new.poisonLevel = self.pollution/10;
+                        self.grass++;
+                    }
                 NSLog(@"%d arvore", self.tree);
+                NSLog(@"%d grama", self.grass);
                 }
             }
         }
@@ -531,7 +565,10 @@
                             SKAction *shrink = [SKAction scaleTo:0.0f duration:0.5f];
                             SKAction *remove = [SKAction removeFromParent];
                             SKAction *sequence = [SKAction sequence:@[shrink,remove]];
-                            [temp2 runAction:sequence];
+                            self.grass--;
+                                [temp2 runAction:sequence completion:^{
+                                    [self.vegetableArray removeObjectAtIndex:i];
+                                }];
                             }
                         
                         }

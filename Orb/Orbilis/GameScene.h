@@ -38,6 +38,10 @@
 
 @property float temperature;
 
+@property float humidity;
+
+@property float luminosity;
+
 @property float waterPollution;
 
 @property float airPollution;
@@ -49,6 +53,8 @@
 @property int global;
 
 @property int tree;
+
+@property int grass;
 
 @property int herbivores;
 
