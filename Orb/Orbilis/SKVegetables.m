@@ -26,8 +26,8 @@
             new = [SKVegetables spriteNodeWithImageNamed:@"arvore2.png"];
             new.size = CGSizeMake(new.frame.size.width * 0.4f, new.frame.size.height * 0.4f);
         }
-        new.energyValue = 10;
-        new.leaves = 10;
+        new.energyValue = 1;
+        new.leaves = 3;
         new.energy = 720;
         new.leavesCounter = 18;
         new.growthCounter = 0;
@@ -40,8 +40,8 @@
     if (type == Vegetable_Grass){
         
         new = [SKVegetables spriteNodeWithImageNamed:@"arvore3.png"];
-        new.energyValue = 5;
-        new.energy = 30;
+        new.energyValue = 1;
+        new.energy = 60;
         new.leaves = 1;
         new.multiplyRate = 100;
         new.vegetableType = Vegetable_Grass;

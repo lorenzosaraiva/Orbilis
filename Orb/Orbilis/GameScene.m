@@ -343,18 +343,24 @@
         [self updateGlobalTimeTick: currentTime];
         [self checkAmbientStatus];
         
-        [self checkVegetablesLifespan];
-        [self checkVegetablesGrowth];
-        [self controlVegetablesLeaves];
-        [self reproduceVegetables];
+        for (int i = 0; i < self.vegetableArray.count; i++){
         
-        [self checkPlantContact];
-        [self checkAnimalContact];
-        [self moveAnimals];
-        [self checkTemperature];
-        [self updateAnimalsEnergy];
-        [self growAnimals];
+            [self checkVegetablesLifespanWithId:i];
+            [self checkVegetablsGrowthWithId:i];
+            [self controlVegetableLeavesWithId:i];
+            [self reproduceVegetableWithId:i];
+            
+        }
         
+        for (int i = 0; i < self.animalArray.count; i++){
+        
+        [self checkAnimalContactWithId:i];
+        [self moveAnimalWithId:i];
+        [self checkTemperatureFromAnimalWithId:i];
+//        [self updateAnimalsEnergy];
+        [self growAnimalWithId:i];
+        [self checkPlantContactWithId:i];
+        }
     }
    
 }
@@ -389,6 +395,8 @@
         self.humidity = self.humidity + 0.5f;
     if (self.temperature > 45)
         self.humidity = self.humidity - 1.0f;
+    if (self.humidity > 100)
+        self.humidity = 100;
     
     for (int i = 0; i < self.sceneryArray.count; i++){
         SKSpriteNode * testingCloud = self.sceneryArray[i];
@@ -403,9 +411,9 @@
 
 }
 
-- (void)reproduceVegetables {
+- (void)reproduceVegetableWithId:(int)i {
 
-    for (int i = 0; i < self.vegetableArray.count; i++){
+   
         
         SKVegetables *mainTestingVegetable = self.vegetableArray[i];
         
@@ -435,13 +443,13 @@
             NSLog(@"%d grama", self.grass);
             }
         }
-    }
+    
 
 }
 
-- (void)controlVegetablesLeaves {
+- (void)controlVegetableLeavesWithId:(int)i {
 
-    for (int i = 0; i < self.vegetableArray.count; i++){
+    
         
         SKVegetables *mainTestingVegetable = self.vegetableArray[i];
         
@@ -456,13 +464,13 @@
             
         }
         mainTestingVegetable.leavesCounter++;
-    }
+    
 
 }
 
-- (void)checkVegetablesGrowth {
+- (void)checkVegetablsGrowthWithId:(int)i {
 
-    for (int i = 0; i < self.vegetableArray.count; i++){
+   
         
         SKVegetables *mainTestingVegetable = self.vegetableArray[i];
         
@@ -479,13 +487,13 @@
             mainTestingVegetable.growthTime = 0;
         }
         mainTestingVegetable.growthTime++;
-    }
+    
 
 }
 
-- (void)checkVegetablesLifespan {
+- (void)checkVegetablesLifespanWithId:(int)i {
 
-    for (int i = 0; i < self.vegetableArray.count; i++){
+    
         
         SKVegetables *mainTestingVegetable = self.vegetableArray[i];
         
@@ -495,6 +503,7 @@
             SKAction *remove = [SKAction removeFromParent];
             SKAction *sequence = [SKAction sequence:@[shrink,remove]];
             [mainTestingVegetable runAction:sequence];
+            [self.vegetableArray removeObject:mainTestingVegetable];
             if (mainTestingVegetable.vegetableType == Vegetable_Tree)
                 self.tree--;
             if (mainTestingVegetable.vegetableType == Vegetable_Grass)
@@ -502,13 +511,13 @@
             NSLog(@"%d arvore", self.tree);
             NSLog(@"%d grama", self.grass);
         }
-    }
+    
 
 }
 
-- (void)moveAnimals {
+- (void)moveAnimalWithId:(int)i {
 
-    for (int i = 0; i < self.animalArray.count; i++) {
+    
 
         SKAnimals *mainTestingAnimal = self.animalArray[i];
         
@@ -538,13 +547,13 @@
             mainTestingAnimal.performingStopAction = NO;
         
         }
-    }
+    
 
 }
 
-- (void)checkTemperature {
+- (void)checkTemperatureFromAnimalWithId:(int)i {
 
-    for (int i = 0; i < self.animalArray.count; i++) {
+    
 
         SKAnimals *mainTestingAnimal = self.animalArray[i];
 
@@ -555,12 +564,12 @@
                 [mainTestingAnimal removeFromParent];
             }
         }
-    }
+    
 
 }
 
 - (void)updateAnimalsEnergy {
-//    
+    
 //    for (int i = 0; i < self.animalArray.count; i++) {
 //
 //        SKAnimals *mainTestingAnimal = self.animalArray[i];
@@ -574,20 +583,24 @@
 
 }
 
-- (void)growAnimals {
+- (void)growAnimalWithId:(int)i {
 
-    for (int i = 0; i < self.animalArray.count; i++) {
+    
 
         SKAnimals *mainTestingAnimal = self.animalArray[i];
-        
-        if (mainTestingAnimal.isChild){
-            SKAction *scale = [SKAction scaleBy:1.09f duration:0.3];
-            [mainTestingAnimal runAction:scale];
-            if (mainTestingAnimal.growth == 15)
-                mainTestingAnimal.isChild = NO;
-            mainTestingAnimal.growth++;
+        mainTestingAnimal.age++;
+        if (mainTestingAnimal.age >= mainTestingAnimal.ageLimit){
+            [self.animalArray removeObject:mainTestingAnimal];
+            [mainTestingAnimal removeFromParent];
         }
-    }
+//        if (mainTestingAnimal.isChild){
+//            SKAction *scale = [SKAction scaleBy:1.09f duration:0.3];
+//            [mainTestingAnimal runAction:scale];
+//            if (mainTestingAnimal.growth == 15)
+//                mainTestingAnimal.isChild = NO;
+//            mainTestingAnimal.growth++;
+//        }
+    
 
 }
 
@@ -619,20 +632,19 @@
     
 }
 
-- (void)checkPlantContact {
+- (void)checkPlantContactWithId:(int)i {
 
-    for (int i = 0; i < self.animalArray.count; i++) {
+    
 
         SKAnimals *mainTestingAnimal = self.animalArray[i];
         
         if (mainTestingAnimal.animalType == Animal_Herbivore) {
-
+            
             for (int k = 0; k < self.vegetableArray.count; k++) {
 
                 SKVegetables *testingPlant = self.vegetableArray[k];
                 
                 if (CGRectIntersectsRect(mainTestingAnimal.frame, testingPlant.frame)) {
-
                     if (testingPlant.vegetableType == Vegetable_Tree) {
                         if (testingPlant.leaves != 0 && testingPlant.growthCounter == 7) {
 
@@ -646,49 +658,55 @@
                             else {
                                 [testingPlant runAction:shrinkTree];
                             }
-                          
                             testingPlant.leaves--;
                             mainTestingAnimal.energy += testingPlant.energyValue;
                         }
                     }
                     
-                    else {
-
+                    else if (testingPlant.vegetableType == Vegetable_Grass){
+                        NSLog(@"1");
                         testingPlant.leaves--;
+                        NSLog(@"2");
+                        NSLog(@"energia do bugado: %d", mainTestingAnimal.energy);
                         mainTestingAnimal.energy += testingPlant.energyValue;
-
+                        NSLog(@"energia do bugado: %d", mainTestingAnimal.energy);
+                        NSLog(@"3");
                         if (testingPlant.leaves <= 0) {
-
+                            NSLog(@"4");
                             [testingPlant removeFromParent];
-                            
-                            SKAction *shrink = [SKAction scaleTo:0.0f duration:0.5f];
+                            NSLog(@"5");
+                            SKAction *shrink = [SKAction scaleTo:0.0f duration:1.0f];
+                            NSLog(@"6");
                             SKAction *remove = [SKAction removeFromParent];
+                            NSLog(@"7");
                             SKAction *sequence = [SKAction sequence:@[shrink,remove]];
+                            NSLog(@"8");
                             self.grass--;
+                            NSLog(@"9");
 
                                 [testingPlant runAction:sequence completion:
                                     ^{
                                         [self.vegetableArray removeObjectAtIndex:k];
                                     }];
+                            NSLog(@"10");
                         }
                     
                     }
                 }
             }
-
         } else {
 
             if (mainTestingAnimal.nextMeal > 0) {
                 mainTestingAnimal.nextMeal--;
             }
         }
-    }
+    [self reproduceAnimal:mainTestingAnimal];
 
 }
 
-- (void)checkAnimalContact {
+- (void)checkAnimalContactWithId:(int)i {
 
-    for (int i = 0; i < self.animalArray.count; i++) {
+
         for (int j = 0; j < self.animalArray.count; j++) {
 
             SKAnimals *mainTestingAnimal = self.animalArray[i];
@@ -709,7 +727,7 @@
                     
                 }
             }
-        }
+        
     }
 //
 //        if (mainTestingAnimal.animalType == Animal_Carnivore || mainTestingAnimal.animalType == Animal_Predator)
@@ -757,20 +775,6 @@
 float getRandomNum(float minimum, float maximum) {
     return arc4random_uniform((maximum - minimum) + 1.0) + minimum;
 }
-//-(void)didBeginContact:(SKPhysicsContact *)contact{
-//    
-//    SKSpriteNode *firstNode, *secondNode;
-//    
-//    firstNode = (SKSpriteNode *)contact.bodyA.node;
-//    secondNode = (SKSpriteNode *) contact.bodyB.node;
-//    
-//    if ((contact.bodyA.categoryBitMask == animalCategory)
-//        && (contact.bodyB.categoryBitMask == animalCategory))
-//    {
-//            NSLog(@"aaaaaaaaaaaanimal collision!!!!");
-//        firstNode.color = [UIColor redColor];
-//    }
-//    
-//}
+
 
 @end
