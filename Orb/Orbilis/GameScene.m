@@ -351,8 +351,8 @@
             [self reproduceVegetableWithId:i];
             
         }
-        
-        for (int i = 0; i < self.animalArray.count; i++){
+        int animalQuantity = self.animalArray.count;
+        for (int i = 0; i < animalQuantity; i++){
         
         [self checkAnimalContactWithId:i];
         [self moveAnimalWithId:i];
@@ -635,7 +635,7 @@
 - (void)checkPlantContactWithId:(int)i {
 
     
-
+    NSLog(@"chamda");
         SKAnimals *mainTestingAnimal = self.animalArray[i];
         
         if (mainTestingAnimal.animalType == Animal_Herbivore) {
@@ -662,33 +662,22 @@
                             mainTestingAnimal.energy += testingPlant.energyValue;
                         }
                     }
-                    
                     else if (testingPlant.vegetableType == Vegetable_Grass){
-                        NSLog(@"1");
+        
                         testingPlant.leaves--;
-                        NSLog(@"2");
-                        NSLog(@"energia do bugado: %d", mainTestingAnimal.energy);
                         mainTestingAnimal.energy += testingPlant.energyValue;
-                        NSLog(@"energia do bugado: %d", mainTestingAnimal.energy);
-                        NSLog(@"3");
                         if (testingPlant.leaves <= 0) {
-                            NSLog(@"4");
-                            [testingPlant removeFromParent];
-                            NSLog(@"5");
+                            
                             SKAction *shrink = [SKAction scaleTo:0.0f duration:1.0f];
-                            NSLog(@"6");
                             SKAction *remove = [SKAction removeFromParent];
-                            NSLog(@"7");
                             SKAction *sequence = [SKAction sequence:@[shrink,remove]];
-                            NSLog(@"8");
                             self.grass--;
-                            NSLog(@"9");
+                           
 
                                 [testingPlant runAction:sequence completion:
                                     ^{
-                                        [self.vegetableArray removeObjectAtIndex:k];
+                                        [self.vegetableArray removeObject:testingPlant];
                                     }];
-                            NSLog(@"10");
                         }
                     
                     }
@@ -712,7 +701,7 @@
             SKAnimals *mainTestingAnimal = self.animalArray[i];
             SKAnimals *secondaryTestingAnimal = self.animalArray[j];
             
-            if (CGRectIntersectsRect(mainTestingAnimal.frame, secondaryTestingAnimal.frame)&&(i!=j)&&mainTestingAnimal.animalType!=Animal_Herbivore) {
+            if (CGRectIntersectsRect(mainTestingAnimal.frame, secondaryTestingAnimal.frame)&&(i!=j)&&mainTestingAnimal.animalType!=Animal_Herbivore&&mainTestingAnimal.nextMeal == 0) {
                 
                 SKAction *eatAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
                 
@@ -720,6 +709,7 @@
                     
                     mainTestingAnimal.energy += secondaryTestingAnimal.energyValue;
                     mainTestingAnimal.performingStopAction = YES;
+                    mainTestingAnimal.nextMeal = 10;
                     secondaryTestingAnimal.performingStopAction = YES;
                     [secondaryTestingAnimal runAction:eatAnimal];
                     [self.animalArray removeObject:secondaryTestingAnimal];
