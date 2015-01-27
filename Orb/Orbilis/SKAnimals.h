@@ -25,23 +25,18 @@ typedef enum SKAnimalType {
 @property AnimalType animalType;
 
 @property int strenght;
-
 @property int energy;
-
 @property int defense;
-
 @property int idealTemp;
-
 @property int idealHumidity;
-
 @property int energyValue;
-
 @property int multiplyLimit;
-
 @property int nextMeal;
-
 @property int growth;
+@property int ageLimit;
+@property int age;
 
 @property BOOL isChild;
+@property BOOL performingStopAction;
 
 @end

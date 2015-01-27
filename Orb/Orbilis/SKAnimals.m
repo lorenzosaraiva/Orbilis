@@ -12,39 +12,38 @@
 @implementation SKAnimals
 
 +(SKAnimals*)createAnimalofType:(AnimalType)type{
-    SKAnimals * temp;
+   
+    SKAnimals *temp;
+    
     if (type == Animal_Herbivore){
-        temp = [SKAnimals spriteNodeWithImageNamed:@"animal.png"];
-        temp.strenght = 0;
-        temp.energy = 90;
-        temp.energyValue = 100;
-        temp.multiplyLimit = 500;
+        temp = [SKAnimals spriteNodeWithImageNamed:@"GroundOne.png"];
+        temp.energy = 0;
+        temp.energyValue = 1;
+        temp.multiplyLimit = 1;
         temp.animalType = 0;
-        temp.growth = 0;
-        temp.isChild = YES;
+        temp.age = 0;
+        temp.ageLimit = 15;
     }
     if (type == Animal_Carnivore){
-        temp = [SKAnimals spriteNodeWithImageNamed:@"donkey.png"];
-        temp.strenght = 10;
-        temp.energy = 180 * 2;
-        temp.energyValue = 240;
-        temp.multiplyLimit = 800;
+        temp = [SKAnimals spriteNodeWithImageNamed:@"GroundTwo.png"];
+        temp.energy = 0;
+        temp.energyValue = 1;
+        temp.multiplyLimit = 1;
         temp.animalType = 1;
         temp.nextMeal = 10;
-        temp.growth = 0;
-        temp.isChild = YES;
+        temp.age = 0;
+        temp.ageLimit = 15;
     }
     if (type == Animal_Predator){
-        temp = [SKAnimals spriteNodeWithImageNamed:@"croco.png"];
-        temp.strenght = 100;
-        temp.energy = 180 * 2;
-        temp.multiplyLimit = 1200;
+        temp = [SKAnimals spriteNodeWithImageNamed:@"GroundThree.png"];
+        temp.energy = 0;
+        temp.multiplyLimit = 1;
         temp.animalType = 2;
         temp.nextMeal = 15;
-        temp.growth = 0;
-        temp.isChild = YES;
-    
+        temp.age = 0;
+        temp.ageLimit = 15;
     }
+    
     if (type == Animal_Water_Herbivore){
         int a = arc4random()%2;
         if (a)
@@ -71,6 +70,8 @@
         temp.strenght = 10;
     
     }
+    
+    temp.performingStopAction = NO;
     temp.zPosition = 0.5f;
     return temp;
 }

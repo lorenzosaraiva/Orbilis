@@ -177,7 +177,6 @@
     UITouch *touch = [touches anyObject];
     CGPoint positionInScene = [touch locationInNode:self];
     
-
     // adiciona o elemento correto do pop-up menu
     
     for (int i = 0; i < self.menuArray.count; i++){
@@ -218,9 +217,6 @@
                 return;
                 
             }
-        
-        
-        
         }
     }
     
@@ -274,8 +270,9 @@
         SKVegetables *grass = [SKVegetables createVegetableOfType:Vegetable_Grass];
         SKSpriteNode *factory = [SKSpriteNode spriteNodeWithImageNamed:@"industria.png"];
         factory.size = CGSizeMake(factory.frame.size.width * 0.8f, factory.frame.size.height * 0.8f);
-        carn.size = CGSizeMake(herb.frame.size.width, herb.frame.size.height);
-        bigCarn.size = CGSizeMake(herb.frame.size.width, herb.frame.size.height);
+        carn.size = CGSizeMake(20, 20);
+        herb.size = CGSizeMake(20, 20);
+        bigCarn.size = CGSizeMake(20, 20);
         herb.position = CGPointMake(positionInScene.x, positionInScene.y + 30);
         carn.position = CGPointMake(positionInScene.x, positionInScene.y - 30);
         bigCarn.position = CGPointMake(positionInScene.x + 30, positionInScene.y);
@@ -350,15 +347,14 @@
         [self checkVegetablesGrowth];
         [self controlVegetablesLeaves];
         [self reproduceVegetables];
-
+        
+        [self checkPlantContact];
+        [self checkAnimalContact];
         [self moveAnimals];
         [self checkTemperature];
         [self updateAnimalsEnergy];
         [self growAnimals];
-        [self reproduceAnimals];
-        [self checkPlantContact];
-        [self checkAnimalContact];
-
+        
     }
    
 }
@@ -381,6 +377,32 @@
 
 }
 
+- (void)checkAmbientStatus {
+
+    //Poluicao
+    self.pollution = self.pollution + self.pollutionArray.count/5;
+    if (self.pollution > 100)
+        self.pollution = 100;
+    
+    //Umidade
+    if (40 > self.temperature && self.temperature > 25)
+        self.humidity = self.humidity + 0.5f;
+    if (self.temperature > 45)
+        self.humidity = self.humidity - 1.0f;
+    
+    for (int i = 0; i < self.sceneryArray.count; i++){
+        SKSpriteNode * testingCloud = self.sceneryArray[i];
+        SKAction * color = [SKAction colorizeWithColorBlendFactor: self.humidity/100 duration:1.0f];
+        [testingCloud runAction:color completion:^{ testingCloud.colorBlendFactor = self.humidity/100;}];
+    }
+    
+    //Chuva
+    if (self.humidity > 70 && self.sceneryArray.count > 3){
+        [self makeItRain];
+    }
+
+}
+
 - (void)reproduceVegetables {
 
     for (int i = 0; i < self.vegetableArray.count; i++){
@@ -388,7 +410,7 @@
         SKVegetables *mainTestingVegetable = self.vegetableArray[i];
         
         int check = arc4random()%mainTestingVegetable.multiplyRate;
-        
+
         if (!check) {
             SKVegetables *new = [SKVegetables createVegetableOfType:mainTestingVegetable.vegetableType];
             if (mainTestingVegetable.vegetableType == Vegetable_Tree) {
@@ -490,50 +512,32 @@
 
         SKAnimals *mainTestingAnimal = self.animalArray[i];
         
-        float xMovement = getRandomNum(0,80) - 40;
-        float yMovement = getRandomNum(0,80) - 40;
+        if(mainTestingAnimal.performingStopAction==NO) {
+        
+            float xMovement = getRandomNum(0,80) - 40;
+            float yMovement = getRandomNum(0,80) - 40;
 
-        CGPoint point = CGPointMake(mainTestingAnimal.position.x + xMovement, mainTestingAnimal.position.y + yMovement);
-        SKAction *move = [SKAction moveTo:point duration:1.0f];
-        
-        //Retangulos que definem a ilha
-        CGRect islandRectOne = CGRectMake(40, 260, 240, 120);
-        CGRect islandRectTwo = CGRectMake(60, 220, 200, 40);
-        
-        if (CGRectContainsPoint(islandRectOne, point)||CGRectContainsPoint(islandRectTwo, point))
-            [mainTestingAnimal runAction:move];
-         
-        CGRect rectAgua = CGRectMake(0,0,self.frame.size.width,180);
-        if (mainTestingAnimal.animalType == Animal_Water_Predator || mainTestingAnimal.animalType == Animal_Water_Herbivore){
-            if (CGRectContainsPoint(rectAgua, point))
+            CGPoint point = CGPointMake(mainTestingAnimal.position.x + xMovement, mainTestingAnimal.position.y + yMovement);
+            SKAction *move = [SKAction moveTo:point duration:1.0f];
+            
+            //Retangulos que definem a ilha
+            CGRect islandRectOne = CGRectMake(40, 260, 240, 120);
+            CGRect islandRectTwo = CGRectMake(60, 220, 200, 40);
+            
+            if (CGRectContainsPoint(islandRectOne, point)||CGRectContainsPoint(islandRectTwo, point))
                 [mainTestingAnimal runAction:move];
+             
+            CGRect rectAgua = CGRectMake(0,0,self.frame.size.width,180);
+            if (mainTestingAnimal.animalType == Animal_Water_Predator || mainTestingAnimal.animalType == Animal_Water_Herbivore){
+                if (CGRectContainsPoint(rectAgua, point))
+                    [mainTestingAnimal runAction:move];
+            }
+            
+        } else {
+            
+            mainTestingAnimal.performingStopAction = NO;
+        
         }
-    }
-
-}
-
-- (void)checkAmbientStatus {
-
-    //Poluicao
-    self.pollution = self.pollution + self.pollutionArray.count/5;
-    if (self.pollution > 100)
-        self.pollution = 100;
-    
-    //Umidade
-    if (40 > self.temperature && self.temperature > 25)
-        self.humidity = self.humidity + 0.5f;
-    if (self.temperature > 45)
-        self.humidity = self.humidity - 1.0f;
-    
-    for (int i = 0; i < self.sceneryArray.count; i++){
-        SKSpriteNode * testingCloud = self.sceneryArray[i];
-        SKAction * color = [SKAction colorizeWithColorBlendFactor: self.humidity/100 duration:1.0f];
-        [testingCloud runAction:color completion:^{ testingCloud.colorBlendFactor = self.humidity/100;}];
-    }
-    
-    //Chuva
-    if (self.humidity > 70 && self.sceneryArray.count > 3){
-        [self makeItRain];
     }
 
 }
@@ -556,17 +560,17 @@
 }
 
 - (void)updateAnimalsEnergy {
-    
-    for (int i = 0; i < self.animalArray.count; i++) {
-
-        SKAnimals *mainTestingAnimal = self.animalArray[i];
-        
-        mainTestingAnimal.energy--;
-        if (mainTestingAnimal.energy <= 0){
-            [mainTestingAnimal removeFromParent];
-            [self.animalArray removeObject:mainTestingAnimal];
-        }
-    }
+//    
+//    for (int i = 0; i < self.animalArray.count; i++) {
+//
+//        SKAnimals *mainTestingAnimal = self.animalArray[i];
+//        
+//        mainTestingAnimal.energy--;
+//        if (mainTestingAnimal.energy <= 0){
+//            [mainTestingAnimal removeFromParent];
+//            [self.animalArray removeObject:mainTestingAnimal];
+//        }
+//    }
 
 }
 
@@ -587,26 +591,32 @@
 
 }
 
-- (void)reproduceAnimals {
-
-    for (int i = 0; i < self.animalArray.count; i++) {
-
-        SKAnimals *mainTestingAnimal = self.animalArray[i];
+- (void)reproduceAnimal:(SKAnimals*)mainTestingAnimal {
         
-        if (!mainTestingAnimal.isChild) {
-
-            if (mainTestingAnimal.energy >= mainTestingAnimal.multiplyLimit) {
-
-                SKAnimals *animal = [SKAnimals createAnimalofType:mainTestingAnimal.animalType];
-                animal.position = CGPointMake(mainTestingAnimal.frame.origin.x + 10, mainTestingAnimal.frame.origin.y + 30);
-                animal.size = CGSizeMake(mainTestingAnimal.frame.size.width * 0.25f, mainTestingAnimal.frame.size.height * 0.25f);
-                [self addChild:animal];
-                [self.animalArray addObject:animal];
-                mainTestingAnimal.energy = mainTestingAnimal.energy/4; //Por que (energy/4) e nao (energy/2)?
-            }
+        if (mainTestingAnimal.energy>=mainTestingAnimal.multiplyLimit) {
+        
+            SKAnimals *newAnimal = [SKAnimals createAnimalofType:mainTestingAnimal.animalType];
+            [newAnimal setSize:CGSizeMake(20, 20)];
+            [newAnimal setPosition:CGPointMake(mainTestingAnimal.position.x, mainTestingAnimal.position.y)];
+            [self.animalArray addObject:newAnimal];
+            [self addChild:newAnimal];
+            mainTestingAnimal.energy--;
+            
         }
-    }
-
+    
+    //        if (!mainTestingAnimal.isChild) {
+    //
+    //            if (mainTestingAnimal.energy >= mainTestingAnimal.multiplyLimit) {
+    //
+    //                SKAnimals *animal = [SKAnimals createAnimalofType:mainTestingAnimal.animalType];
+    //                animal.position = CGPointMake(mainTestingAnimal.frame.origin.x + 10, mainTestingAnimal.frame.origin.y + 30);
+    //                animal.size = CGSizeMake(mainTestingAnimal.frame.size.width * 0.25f, mainTestingAnimal.frame.size.height * 0.25f);
+    //                [self addChild:animal];
+    //                [self.animalArray addObject:animal];
+    //                mainTestingAnimal.energy = mainTestingAnimal.energy/4; //Por que (energy/4) e nao (energy/2)?
+    //            }
+    //        }
+    
 }
 
 - (void)checkPlantContact {
@@ -643,11 +653,13 @@
                     }
                     
                     else {
-                        
+
                         testingPlant.leaves--;
                         mainTestingAnimal.energy += testingPlant.energyValue;
 
-                        if (testingPlant.leaves == 0) {
+                        if (testingPlant.leaves <= 0) {
+
+                            [testingPlant removeFromParent];
                             
                             SKAction *shrink = [SKAction scaleTo:0.0f duration:0.5f];
                             SKAction *remove = [SKAction removeFromParent];
@@ -656,7 +668,7 @@
 
                                 [testingPlant runAction:sequence completion:
                                     ^{
-                                        [self.vegetableArray removeObjectAtIndex:i];
+                                        [self.vegetableArray removeObjectAtIndex:k];
                                     }];
                         }
                     
@@ -677,48 +689,68 @@
 - (void)checkAnimalContact {
 
     for (int i = 0; i < self.animalArray.count; i++) {
+        for (int j = 0; j < self.animalArray.count; j++) {
 
-        SKAnimals *mainTestingAnimal = self.animalArray[i];
-
-        if (mainTestingAnimal.animalType == Animal_Carnivore || mainTestingAnimal.animalType == Animal_Predator)
-        
-        for (int j = 0; j< self.animalArray.count; j++){
-            
+            SKAnimals *mainTestingAnimal = self.animalArray[i];
             SKAnimals *secondaryTestingAnimal = self.animalArray[j];
             
-            if ((secondaryTestingAnimal.isChild)||(j == i)||(mainTestingAnimal.animalType == secondaryTestingAnimal.animalType)) {
-                continue;
-            }
-
-            if (CGRectIntersectsRect(mainTestingAnimal.frame, secondaryTestingAnimal.frame)) {
-
-                SKAction *shrink = [SKAction scaleTo:0 duration:1];
-                SKAction *remove = [SKAction removeFromParent];
-                SKAction *sequence = [SKAction sequence:@[shrink,remove]]; 
-
-                if ([(SKAnimals*)mainTestingAnimal strenght] > [(SKAnimals*)secondaryTestingAnimal strenght]) {
-                    if (mainTestingAnimal.nextMeal == 0) {
-                        mainTestingAnimal.energy += secondaryTestingAnimal.energyValue;
-                        [secondaryTestingAnimal runAction:sequence];
-                        [self.animalArray removeObject:secondaryTestingAnimal];
-                        mainTestingAnimal.nextMeal = 8;
-                        break;
-                    }
-                }
-
-                else {
+            if (CGRectIntersectsRect(mainTestingAnimal.frame, secondaryTestingAnimal.frame)&&(i!=j)&&mainTestingAnimal.animalType!=Animal_Herbivore) {
+                
+                SKAction *eatAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
+                
+                if ((mainTestingAnimal.animalType==Animal_Carnivore&&secondaryTestingAnimal.animalType==Animal_Herbivore)||(mainTestingAnimal.animalType==Animal_Predator&&secondaryTestingAnimal.animalType!=Animal_Predator)) {
                     
-                    if (secondaryTestingAnimal.nextMeal == 0) {
-                        secondaryTestingAnimal.energy += mainTestingAnimal.energyValue;
-                        [mainTestingAnimal runAction:sequence];
-                        [self.animalArray removeObject:mainTestingAnimal];
-                        secondaryTestingAnimal.nextMeal = 8;
-                        break;
-                    }
-                }  
+                    mainTestingAnimal.energy += secondaryTestingAnimal.energyValue;
+                    mainTestingAnimal.performingStopAction = YES;
+                    secondaryTestingAnimal.performingStopAction = YES;
+                    [secondaryTestingAnimal runAction:eatAnimal];
+                    [self.animalArray removeObject:secondaryTestingAnimal];
+                    [self reproduceAnimal:mainTestingAnimal];
+                    
+                }
             }
         }
     }
+//
+//        if (mainTestingAnimal.animalType == Animal_Carnivore || mainTestingAnimal.animalType == Animal_Predator)
+//        
+//        for (int j = 0; j< self.animalArray.count; j++){
+//            
+//            SKAnimals *secondaryTestingAnimal = self.animalArray[j];
+//            
+//            if ((secondaryTestingAnimal.isChild)||(j == i)||(mainTestingAnimal.animalType == secondaryTestingAnimal.animalType)) {
+//                continue;
+//            }
+//
+//            if (CGRectIntersectsRect(mainTestingAnimal.frame, secondaryTestingAnimal.frame)) {
+//
+//                SKAction *shrink = [SKAction scaleTo:0 duration:1];
+//                SKAction *remove = [SKAction removeFromParent];
+//                SKAction *sequence = [SKAction sequence:@[shrink,remove]]; 
+//
+//                if ([(SKAnimals*)mainTestingAnimal strenght] > [(SKAnimals*)secondaryTestingAnimal strenght]) {
+//                    if (mainTestingAnimal.nextMeal == 0) {
+//                        mainTestingAnimal.energy += secondaryTestingAnimal.energyValue;
+//                        [secondaryTestingAnimal runAction:sequence];
+//                        [self.animalArray removeObject:secondaryTestingAnimal];
+//                        mainTestingAnimal.nextMeal = 8;
+//                        break;
+//                    }
+//                }
+//
+//                else {
+//                    
+//                    if (secondaryTestingAnimal.nextMeal == 0) {
+//                        secondaryTestingAnimal.energy += mainTestingAnimal.energyValue;
+//                        [mainTestingAnimal runAction:sequence];
+//                        [self.animalArray removeObject:mainTestingAnimal];
+//                        secondaryTestingAnimal.nextMeal = 8;
+//                        break;
+//                    }
+//                }  
+//            }
+//        }
+    
 
 }
 
