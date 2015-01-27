@@ -183,10 +183,10 @@
         if ([[self.menuArray objectAtIndex:i] isKindOfClass: [SKAnimals class]]){
             SKAnimals *temp = self.menuArray[i];
             if ([temp containsPoint:positionInScene]){
+                [self.animalArray addObject:temp];
                 [self.menuArray removeObject:temp];
                 [self removeChildrenInArray:self.menuArray];
                 [self.menuArray removeAllObjects];
-                [self.animalArray addObject:temp];
                 temp.position = CGPointMake(self.lastTouch.x, self.lastTouch.y);
                 self.isMenu = false;
                 return;
@@ -328,7 +328,7 @@
         SKAction * fadeAway = [SKAction fadeOutWithDuration:5.0f];
         [tempCloud runAction:fadeAway completion:^{
             [tempCloud removeFromParent];
-            [self.sceneryArray removeObjectAtIndex:i];
+            [self.sceneryArray removeObject:tempCloud];
         }];
     
     }
@@ -351,15 +351,19 @@
             [self reproduceVegetableWithId:i];
             
         }
-        int animalQuantity = self.animalArray.count;
-        for (int i = 0; i < animalQuantity; i++){
+        for (int i = 0; i < self.animalArray.count; i++){
+        NSLog(@"animais: %d", self.animalArray.count);
         
-        [self checkAnimalContactWithId:i];
         [self moveAnimalWithId:i];
+        [self checkPlantContactWithId:i];
+        if (i < self.animalArray.count)
+        [self checkAnimalContactWithId:i];
+        if (i < self.animalArray.count)
         [self checkTemperatureFromAnimalWithId:i];
 //        [self updateAnimalsEnergy];
+        if (i < self.animalArray.count)
         [self growAnimalWithId:i];
-        [self checkPlantContactWithId:i];
+        
         }
     }
    
@@ -556,12 +560,13 @@
     
 
         SKAnimals *mainTestingAnimal = self.animalArray[i];
-
+    
         if (self.temperature > 35 || self.temperature < 15){
             int removeChance = getRandomNum(0,20);
             if (!removeChance) {
-                [self.animalArray removeObject:mainTestingAnimal];
+                
                 [mainTestingAnimal removeFromParent];
+                [self.animalArray removeObjectAtIndex:i];
             }
         }
     
@@ -638,7 +643,7 @@
     NSLog(@"chamda");
         SKAnimals *mainTestingAnimal = self.animalArray[i];
         
-        if (mainTestingAnimal.animalType == Animal_Herbivore) {
+        if (mainTestingAnimal.animalType == Animal_Herbivore && mainTestingAnimal.nextMeal == 0) {
             
             for (int k = 0; k < self.vegetableArray.count; k++) {
 
