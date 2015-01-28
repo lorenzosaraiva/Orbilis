@@ -33,6 +33,7 @@
     
     [self drawWolrd];
     
+    
     // configura os gesture recognizer
     
     // pinch para controlar o sol
@@ -97,6 +98,8 @@
     self.sun.position = CGPointMake(80, self.frame.size.height - 80);
 
     [self addChild:self.sun];
+    
+
     
 }
 
@@ -258,11 +261,8 @@
     
     }
     //menu da terra
-    
-    CGRect rect = CGRectMake(40, 260, 240, 120);
-    CGRect rect2 = CGRectMake(60, 220, 200, 40);
 
-    if (CGRectContainsPoint(rect, positionInScene )||CGRectContainsPoint(rect2, positionInScene)){
+    if ([self pointInIsland:positionInScene]){
         SKAnimals *herb = [SKAnimals createAnimalofType:Animal_Herbivore];
         SKAnimals *carn = [SKAnimals createAnimalofType:Animal_Carnivore];
         SKAnimals *bigCarn = [SKAnimals createAnimalofType:Animal_Predator];
@@ -298,9 +298,6 @@
         [self addChild:grass];
         [self addChild:factory];
         self.isMenu = true;
-        
-        
-        
     }
 
     self.lastTouch = positionInScene;
@@ -533,11 +530,7 @@
             CGPoint point = CGPointMake(mainTestingAnimal.position.x + xMovement, mainTestingAnimal.position.y + yMovement);
             SKAction *move = [SKAction moveTo:point duration:1.0f];
             
-            //Retangulos que definem a ilha
-            CGRect islandRectOne = CGRectMake(40, 260, 240, 120);
-            CGRect islandRectTwo = CGRectMake(60, 220, 200, 40);
-            
-            if (CGRectContainsPoint(islandRectOne, point)||CGRectContainsPoint(islandRectTwo, point))
+            if ([self pointInIsland:point])
                 [mainTestingAnimal runAction:move];
              
             CGRect rectAgua = CGRectMake(0,0,self.frame.size.width,180);
@@ -765,6 +758,38 @@
 //        }
     
 
+}
+
+-(BOOL)pointInIsland:(CGPoint)point {
+    
+    float prop1 = 0.60;
+    float prop2 = 0.10;
+    float prop3 = 0.01;
+    float prop4 = -0.05;
+    
+    float prop5 = 0.40;
+    float prop6 = 0.08;
+    float prop7 = 0.01;
+    float prop8 = 0.025;
+    
+    float x1 = ((self.frame.size.width-self.frame.size.width*prop1)/2) + (self.frame.size.width*prop3);
+    float y1 = ((self.frame.size.height-self.frame.size.height*prop2)/2) + (self.frame.size.height*prop4);
+    float width1 = self.frame.size.width*prop1;
+    float height1 = self.frame.size.height*prop2;
+    
+    float x2 = ((self.frame.size.width-self.frame.size.width*prop5)/2) + (self.frame.size.width*prop7);
+    float y2 = ((self.frame.size.height-self.frame.size.height*prop6)/2) + (self.frame.size.height*prop8);
+    float width2 = self.frame.size.width*prop5;
+    float height2 = self.frame.size.height*prop6;
+    
+    CGRect rect = CGRectMake(x1, y1, width1, height1);
+    CGRect rect2 = CGRectMake(x2, y2, width2, height2);
+
+    if(CGRectContainsPoint(rect, point )||CGRectContainsPoint(rect2, point)) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 float getRandomNum(float minimum, float maximum) {
