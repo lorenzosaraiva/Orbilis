@@ -55,6 +55,10 @@
 		510043241A77CF7700B3F3B9 /* GroundTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5100431B1A77CF7700B3F3B9 /* GroundTwo.png */; };
 		510043251A77CF7700B3F3B9 /* GroundTwo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5100431C1A77CF7700B3F3B9 /* GroundTwo@2x.png */; };
 		510043261A77CF7700B3F3B9 /* GroundTwo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5100431D1A77CF7700B3F3B9 /* GroundTwo@3x.png */; };
+		5100432A1A79222600B3F3B9 /* MiniTree.png in Resources */ = {isa = PBXBuildFile; fileRef = 510043271A79222600B3F3B9 /* MiniTree.png */; };
+		5100432B1A79222600B3F3B9 /* MiniTree@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 510043281A79222600B3F3B9 /* MiniTree@2x.png */; };
+		5100432C1A79222600B3F3B9 /* MiniTree@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 510043291A79222600B3F3B9 /* MiniTree@3x.png */; };
+		51770FE01A792EC500FD8922 /* GameSceneOld.m in Sources */ = {isa = PBXBuildFile; fileRef = 51770FDF1A792EC500FD8922 /* GameSceneOld.m */; };
 		518634131A6B3346000B6BDF /* Cage.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634011A6B3346000B6BDF /* Cage.png */; };
 		518634141A6B3346000B6BDF /* Cage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634021A6B3346000B6BDF /* Cage@2x.png */; };
 		518634151A6B3346000B6BDF /* Cage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634031A6B3346000B6BDF /* Cage@3x.png */; };
@@ -143,6 +147,11 @@
 		5100431B1A77CF7700B3F3B9 /* GroundTwo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GroundTwo.png; sourceTree = "<group>"; };
 		5100431C1A77CF7700B3F3B9 /* GroundTwo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GroundTwo@2x.png"; sourceTree = "<group>"; };
 		5100431D1A77CF7700B3F3B9 /* GroundTwo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GroundTwo@3x.png"; sourceTree = "<group>"; };
+		510043271A79222600B3F3B9 /* MiniTree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MiniTree.png; sourceTree = "<group>"; };
+		510043281A79222600B3F3B9 /* MiniTree@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MiniTree@2x.png"; sourceTree = "<group>"; };
+		510043291A79222600B3F3B9 /* MiniTree@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MiniTree@3x.png"; sourceTree = "<group>"; };
+		51770FDE1A792EC500FD8922 /* GameSceneOld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSceneOld.h; sourceTree = "<group>"; };
+		51770FDF1A792EC500FD8922 /* GameSceneOld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSceneOld.m; sourceTree = "<group>"; };
 		518634011A6B3346000B6BDF /* Cage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cage.png; sourceTree = "<group>"; };
 		518634021A6B3346000B6BDF /* Cage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cage@2x.png"; sourceTree = "<group>"; };
 		518634031A6B3346000B6BDF /* Cage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cage@3x.png"; sourceTree = "<group>"; };
@@ -208,6 +217,8 @@
 				0A23B0D41A697121000C78A4 /* AppDelegate.m */,
 				0A23B0D61A697121000C78A4 /* GameScene.h */,
 				0A23B0D71A697121000C78A4 /* GameScene.m */,
+				51770FDE1A792EC500FD8922 /* GameSceneOld.h */,
+				51770FDF1A792EC500FD8922 /* GameSceneOld.m */,
 				0A23B0DB1A697121000C78A4 /* GameViewController.h */,
 				0A23B0DC1A697121000C78A4 /* GameViewController.m */,
 				0A23B0DE1A697121000C78A4 /* Main.storyboard */,
@@ -268,6 +279,9 @@
 		0A55A8F01A6974C60028EEA3 /* OrbImages */ = {
 			isa = PBXGroup;
 			children = (
+				510043271A79222600B3F3B9 /* MiniTree.png */,
+				510043281A79222600B3F3B9 /* MiniTree@2x.png */,
+				510043291A79222600B3F3B9 /* MiniTree@3x.png */,
 				510043151A77CF7700B3F3B9 /* GroundOne.png */,
 				510043161A77CF7700B3F3B9 /* GroundOne@2x.png */,
 				510043171A77CF7700B3F3B9 /* GroundOne@3x.png */,
@@ -447,6 +461,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5100432B1A79222600B3F3B9 /* MiniTree@2x.png in Resources */,
 				510043241A77CF7700B3F3B9 /* GroundTwo.png in Resources */,
 				0A99D7CC1A71975A00A21379 /* arvore3.png in Resources */,
 				518634231A6B3346000B6BDF /* Water@2x.png in Resources */,
@@ -463,6 +478,7 @@
 				0A507B0A1A76A4DD003C0808 /* RainParticle.sks in Resources */,
 				518634171A6B3346000B6BDF /* Island@2x.png in Resources */,
 				0A23B0E51A697121000C78A4 /* LaunchScreen.xib in Resources */,
+				5100432A1A79222600B3F3B9 /* MiniTree.png in Resources */,
 				5186341F1A6B3346000B6BDF /* Sky.png in Resources */,
 				0A99D7D01A71975A00A21379 /* Barril_mar1.png in Resources */,
 				0A55A91E1A6996860028EEA3 /* tree.png in Resources */,
@@ -483,6 +499,7 @@
 				0A99D7CE1A71975A00A21379 /* Barril2.png in Resources */,
 				518634151A6B3346000B6BDF /* Cage@3x.png in Resources */,
 				0A99D7CB1A71975A00A21379 /* arvore2.png in Resources */,
+				5100432C1A79222600B3F3B9 /* MiniTree@3x.png in Resources */,
 				518634221A6B3346000B6BDF /* Water.png in Resources */,
 				510043261A77CF7700B3F3B9 /* GroundTwo@3x.png in Resources */,
 				518634201A6B3346000B6BDF /* Sky@2x.png in Resources */,
@@ -525,6 +542,7 @@
 			files = (
 				0A23B0DD1A697121000C78A4 /* GameViewController.m in Sources */,
 				0A23B0D51A697121000C78A4 /* AppDelegate.m in Sources */,
+				51770FE01A792EC500FD8922 /* GameSceneOld.m in Sources */,
 				0A23B0FC1A697197000C78A4 /* SKAnimals.m in Sources */,
 				0A23B0D81A697121000C78A4 /* GameScene.m in Sources */,
 				0A23B0D21A697121000C78A4 /* main.m in Sources */,

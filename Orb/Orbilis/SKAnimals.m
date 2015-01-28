@@ -21,9 +21,9 @@
         temp.energyValue = 1;
         temp.multiplyLimit = 1;
         temp.animalType = 0;
-        temp.nextMeal = 1;
+        temp.nextMeal = 10;
         temp.age = 0;
-        temp.ageLimit = 10;
+        temp.ageLimit = 180;
     }
     if (type == Animal_Carnivore){
         temp = [SKAnimals spriteNodeWithImageNamed:@"GroundTwo.png"];
@@ -40,9 +40,9 @@
         temp.energy = 0;
         temp.multiplyLimit = 1;
         temp.animalType = 2;
-        temp.nextMeal = 15;
+        temp.nextMeal = 5;
         temp.age = 0;
-        temp.ageLimit = 180;
+        temp.ageLimit = 20;
     }
     
     if (type == Animal_Water_Herbivore){

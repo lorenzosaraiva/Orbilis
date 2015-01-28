@@ -39,11 +39,11 @@
     
     if (type == Vegetable_Grass){
         
-        new = [SKVegetables spriteNodeWithImageNamed:@"arvore3.png"];
+        new = [SKVegetables spriteNodeWithImageNamed:@"MiniTree.png"];
         new.energyValue = 1;
         new.energy = 60;
         new.leaves = 1;
-        new.multiplyRate = 100;
+        new.multiplyRate = 40;
         new.vegetableType = Vegetable_Grass;
 
     }
