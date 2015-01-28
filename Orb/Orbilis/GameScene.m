@@ -66,6 +66,18 @@
     self.lightOrangeSky.size = CGSizeMake(self.lightOrangeSky.frame.size.width*prop, self.lightOrangeSky.frame.size.height*prop);
     self.lightOrangeSky.alpha = 0.0f;
     [self addChild:self.lightOrangeSky];
+    
+    self.lightOrangeSky = [SKSpriteNode spriteNodeWithImageNamed:@"SkyLightOrange.png"];
+    self.lightOrangeSky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    self.lightOrangeSky.size = CGSizeMake(self.lightOrangeSky.frame.size.width*prop, self.lightOrangeSky.frame.size.height*prop);
+    self.lightOrangeSky.alpha = 0.0f;
+    [self addChild:self.lightOrangeSky];
+    
+    self.lightBlueSky = [SKSpriteNode spriteNodeWithImageNamed:@"SkyLightBlue.png"];
+    self.lightBlueSky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    self.lightBlueSky.size = CGSizeMake(self.lightBlueSky.frame.size.width*prop, self.lightBlueSky.frame.size.height*prop);
+    self.lightBlueSky.alpha = 0.0f;
+    [self addChild:self.lightBlueSky];
 
     SKSpriteNode *water = [SKSpriteNode spriteNodeWithImageNamed:@"Water.png"];
     water.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
@@ -131,24 +143,34 @@
     [self.sky removeAllActions];
     [self.orangeSky removeAllActions];
     [self.lightOrangeSky removeAllActions];
+    [self.lightBlueSky removeAllActions];
     if (self.temperature > 40){
         [self.orangeSky runAction:fadeIn];
         [self.sky runAction:fadeOut];
         [self.lightOrangeSky runAction:fadeOut];
+        [self.lightBlueSky runAction:fadeOut];
     }
     if (self.temperature > 30 && self.temperature < 40){
         [self.orangeSky runAction:fadeOut];
         [self.lightOrangeSky runAction:fadeIn];
         [self.sky runAction:fadeOut];
+        [self.lightBlueSky runAction:fadeOut];
     
     }
-    if (self.temperature < 30){
+    if (self.temperature < 30 && self.temperature > 15){
         [self.orangeSky runAction:fadeOut];
         [self.lightOrangeSky runAction:fadeOut];
         [self.sky runAction:fadeIn];
+        [self.lightBlueSky runAction:fadeOut];
         
     }
-   
+    if (self.temperature < 15){
+        [self.orangeSky runAction:fadeOut];
+        [self.lightOrangeSky runAction:fadeOut];
+        [self.sky runAction:fadeOut];
+        [self.lightBlueSky runAction:fadeIn];
+    
+    }
 }
 
 - (void)handlePanFrom:(UIPanGestureRecognizer *)recognizer {
