@@ -21,6 +21,8 @@
 		0A55A91C1A69828E0028EEA3 /* factory.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A91B1A69828E0028EEA3 /* factory.jpg */; };
 		0A55A91E1A6996860028EEA3 /* tree.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A91D1A6996860028EEA3 /* tree.png */; };
 		0A55A9211A6997150028EEA3 /* SKVegetables.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A55A9201A6997150028EEA3 /* SKVegetables.m */; };
+		0A5762721A79953800C20B3D /* SkyOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A5762711A79953800C20B3D /* SkyOrange.png */; };
+		0A5762741A799E1B00C20B3D /* SkyLightOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A5762731A799E1B00C20B3D /* SkyLightOrange.png */; };
 		0A99D7BB1A71975A00A21379 /* Pássaro1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A99D79F1A71975A00A21379 /* Pássaro1.png */; };
 		0A99D7BC1A71975A00A21379 /* Pássaro2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A99D7A01A71975A00A21379 /* Pássaro2.png */; };
 		0A99D7BD1A71975A00A21379 /* Peixe1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A99D7A11A71975A00A21379 /* Peixe1.png */; };
@@ -113,6 +115,8 @@
 		0A55A91D1A6996860028EEA3 /* tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree.png; sourceTree = "<group>"; };
 		0A55A91F1A6997150028EEA3 /* SKVegetables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKVegetables.h; sourceTree = "<group>"; };
 		0A55A9201A6997150028EEA3 /* SKVegetables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKVegetables.m; sourceTree = "<group>"; };
+		0A5762711A79953800C20B3D /* SkyOrange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SkyOrange.png; sourceTree = "<group>"; };
+		0A5762731A799E1B00C20B3D /* SkyLightOrange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SkyLightOrange.png; sourceTree = "<group>"; };
 		0A99D79F1A71975A00A21379 /* Pássaro1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pássaro1.png"; sourceTree = "<group>"; };
 		0A99D7A01A71975A00A21379 /* Pássaro2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pássaro2.png"; sourceTree = "<group>"; };
 		0A99D7A11A71975A00A21379 /* Peixe1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Peixe1.png; sourceTree = "<group>"; };
@@ -279,6 +283,7 @@
 		0A55A8F01A6974C60028EEA3 /* OrbImages */ = {
 			isa = PBXGroup;
 			children = (
+				0A5762711A79953800C20B3D /* SkyOrange.png */,
 				510043271A79222600B3F3B9 /* MiniTree.png */,
 				510043281A79222600B3F3B9 /* MiniTree@2x.png */,
 				510043291A79222600B3F3B9 /* MiniTree@3x.png */,
@@ -297,6 +302,7 @@
 				518634031A6B3346000B6BDF /* Cage@3x.png */,
 				518634041A6B3346000B6BDF /* Island.png */,
 				518634051A6B3346000B6BDF /* Island@2x.png */,
+				0A5762731A799E1B00C20B3D /* SkyLightOrange.png */,
 				518634061A6B3346000B6BDF /* Island@3x.png */,
 				518634071A6B3346000B6BDF /* Sand.png */,
 				518634081A6B3346000B6BDF /* Sand@2x.png */,
@@ -476,6 +482,8 @@
 				0A99D7C51A71975A00A21379 /* Nuvem3.png in Resources */,
 				518634131A6B3346000B6BDF /* Cage.png in Resources */,
 				0A507B0A1A76A4DD003C0808 /* RainParticle.sks in Resources */,
+				0A5762721A79953800C20B3D /* SkyOrange.png in Resources */,
+				0A5762741A799E1B00C20B3D /* SkyLightOrange.png in Resources */,
 				518634171A6B3346000B6BDF /* Island@2x.png in Resources */,
 				0A23B0E51A697121000C78A4 /* LaunchScreen.xib in Resources */,
 				5100432A1A79222600B3F3B9 /* MiniTree.png in Resources */,

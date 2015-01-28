@@ -15,6 +15,9 @@
 @property (strong, nonatomic) SKSpriteNode *sun;
 @property (strong, nonatomic) SKSpriteNode *island;
 @property (strong, nonatomic) SKSpriteNode *sand;
+@property (strong, nonatomic) SKSpriteNode *sky;
+@property (strong, nonatomic) SKSpriteNode *orangeSky;
+@property (strong, nonatomic) SKSpriteNode *lightOrangeSky;
 @property (strong, nonatomic) NSMutableArray *animalArray;
 @property (strong, nonatomic) NSMutableArray *sceneryArray;
 @property (strong, nonatomic) NSMutableArray *vegetableArray;
@@ -38,5 +41,6 @@
 @property int herbivores;
 
 @property BOOL isMenu;
+@property BOOL clickedOnMenu;
 
 @end
