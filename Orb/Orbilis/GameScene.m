@@ -205,6 +205,7 @@
             nuvem.position = CGPointMake(touchLocation.x + a, touchLocation.y + b);
             nuvem.color = [UIColor grayColor];
             nuvem.colorBlendFactor = 0.0f;
+            nuvem.zPosition = 0.2f;
             self.temperature = self.temperature - 0.5f;
             self.humidity++;
         }
