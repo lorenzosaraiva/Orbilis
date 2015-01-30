@@ -24,6 +24,8 @@
 		0A5762721A79953800C20B3D /* SkyOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A5762711A79953800C20B3D /* SkyOrange.png */; };
 		0A5762741A799E1B00C20B3D /* SkyLightOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A5762731A799E1B00C20B3D /* SkyLightOrange.png */; };
 		0A5762761A79A23C00C20B3D /* SkyLightBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A5762751A79A23C00C20B3D /* SkyLightBlue.png */; };
+		0A5762781A7BE89700C20B3D /* SnowParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0A5762771A7BE89700C20B3D /* SnowParticle.sks */; };
+		0A57627A1A7C1F9300C20B3D /* SmokeParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0A5762791A7C1F9300C20B3D /* SmokeParticle.sks */; };
 		0A99D7BB1A71975A00A21379 /* Pássaro1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A99D79F1A71975A00A21379 /* Pássaro1.png */; };
 		0A99D7BC1A71975A00A21379 /* Pássaro2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A99D7A01A71975A00A21379 /* Pássaro2.png */; };
 		0A99D7BD1A71975A00A21379 /* Peixe1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A99D7A11A71975A00A21379 /* Peixe1.png */; };
@@ -119,6 +121,8 @@
 		0A5762711A79953800C20B3D /* SkyOrange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SkyOrange.png; sourceTree = "<group>"; };
 		0A5762731A799E1B00C20B3D /* SkyLightOrange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SkyLightOrange.png; sourceTree = "<group>"; };
 		0A5762751A79A23C00C20B3D /* SkyLightBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SkyLightBlue.png; sourceTree = "<group>"; };
+		0A5762771A7BE89700C20B3D /* SnowParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SnowParticle.sks; sourceTree = "<group>"; };
+		0A5762791A7C1F9300C20B3D /* SmokeParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SmokeParticle.sks; sourceTree = "<group>"; };
 		0A99D79F1A71975A00A21379 /* Pássaro1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pássaro1.png"; sourceTree = "<group>"; };
 		0A99D7A01A71975A00A21379 /* Pássaro2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pássaro2.png"; sourceTree = "<group>"; };
 		0A99D7A11A71975A00A21379 /* Peixe1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Peixe1.png; sourceTree = "<group>"; };
@@ -231,7 +235,6 @@
 				0A23B0E11A697121000C78A4 /* Images.xcassets */,
 				0A23B0E31A697121000C78A4 /* LaunchScreen.xib */,
 				0A23B0CF1A697121000C78A4 /* Supporting Files */,
-				0A507B081A76A4DD003C0808 /* RainParticle.sks */,
 			);
 			path = Orbilis;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 		0A23B0FE1A6971C0000C78A4 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				0A57627B1A7C222C00C20B3D /* Animations */,
 				0A99D79D1A71975A00A21379 /* Imagens */,
 				0A55A8F01A6974C60028EEA3 /* OrbImages */,
 			);
@@ -323,6 +327,16 @@
 				0A55A91D1A6996860028EEA3 /* tree.png */,
 			);
 			path = OrbImages;
+			sourceTree = "<group>";
+		};
+		0A57627B1A7C222C00C20B3D /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				0A5762791A7C1F9300C20B3D /* SmokeParticle.sks */,
+				0A5762771A7BE89700C20B3D /* SnowParticle.sks */,
+				0A507B081A76A4DD003C0808 /* RainParticle.sks */,
+			);
+			name = Animations;
 			sourceTree = "<group>";
 		};
 		0A99D79D1A71975A00A21379 /* Imagens */ = {
@@ -478,6 +492,7 @@
 				518634161A6B3346000B6BDF /* Island.png in Resources */,
 				5186341E1A6B3346000B6BDF /* Sea@3x.png in Resources */,
 				518634241A6B3346000B6BDF /* Water@3x.png in Resources */,
+				0A57627A1A7C1F9300C20B3D /* SmokeParticle.sks in Resources */,
 				0A99D7BB1A71975A00A21379 /* Pássaro1.png in Resources */,
 				0A99D7D11A71975A00A21379 /* industria.png in Resources */,
 				0A99D7C11A71975A00A21379 /* Peixe5.png in Resources */,
@@ -492,6 +507,7 @@
 				0A23B0E51A697121000C78A4 /* LaunchScreen.xib in Resources */,
 				5100432A1A79222600B3F3B9 /* MiniTree.png in Resources */,
 				5186341F1A6B3346000B6BDF /* Sky.png in Resources */,
+				0A5762781A7BE89700C20B3D /* SnowParticle.sks in Resources */,
 				0A99D7D01A71975A00A21379 /* Barril_mar1.png in Resources */,
 				0A55A91E1A6996860028EEA3 /* tree.png in Resources */,
 				510043221A77CF7700B3F3B9 /* GroundThree@2x.png in Resources */,

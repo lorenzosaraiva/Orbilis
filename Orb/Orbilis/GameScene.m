@@ -21,7 +21,7 @@
     self.global = 0;
     self.tree = 0;
     self.pollution = 0;
-    self.humidity = 60;
+    self.humidity = 75;
     self.animalArray = [[NSMutableArray alloc] init];
     self.menuArray = [[NSMutableArray alloc] init];
     self.vegetableArray = [[NSMutableArray alloc] init];
@@ -173,6 +173,50 @@
     }
 }
 
+-(void)makeItRain{
+    
+    
+    NSString * rainPath = [[NSBundle mainBundle]
+                           pathForResource:@"RainParticle" ofType:@"sks"];
+    
+    NSString * snowPath = [[NSBundle mainBundle]
+                           pathForResource:@"SnowParticle" ofType:@"sks"];
+    
+    for (int i = 0; i < self.sceneryArray.count; i++){
+        SKSpriteNode * tempCloud = self.sceneryArray[i];
+        
+        SKEmitterNode *burstNode;
+        
+        if (self.temperature > 15)
+            burstNode = [NSKeyedUnarchiver unarchiveObjectWithFile:rainPath];
+        else
+            burstNode = [NSKeyedUnarchiver unarchiveObjectWithFile:snowPath];
+        
+        burstNode.zPosition = -0.1f;
+        
+        
+        
+        burstNode.position = CGPointMake(0 , 0);
+        
+        burstNode.numParticlesToEmit = self.humidity;
+        
+        [tempCloud addChild:burstNode];
+    }
+    
+    
+
+    for (int i = 0; i < self.sceneryArray.count; i++){
+        SKSpriteNode * tempCloud = self.sceneryArray[i];
+        SKAction * fadeAway = [SKAction fadeOutWithDuration:5.0f];
+        [tempCloud runAction:fadeAway completion:^{
+            [tempCloud removeFromParent];
+            [self.sceneryArray removeObject:tempCloud];
+        }];
+        
+    }
+    self.humidity = 75;
+}
+
 - (void)handlePanFrom:(UIPanGestureRecognizer *)recognizer {
     
     CGPoint touchLocation = [recognizer locationInView:recognizer.view];
@@ -206,6 +250,8 @@
             nuvem.color = [UIColor grayColor];
             nuvem.colorBlendFactor = 0.0f;
             nuvem.zPosition = 0.2f;
+            NSLog(@"nuvem %f", nuvem.position.y);
+            
             self.temperature = self.temperature - 0.5f;
             self.humidity++;
         }
@@ -281,7 +327,8 @@
 }
 
 - (void)checkAmbientStatus {
-
+        if (self.humidity > 75)
+            [self makeItRain];
 }
 
 - (void)reproduceVegetableWithId:(int)i {
@@ -477,16 +524,19 @@
         SKAnimals *menuAnimalTwo = [SKAnimals createAnimalofType:Animal_Carnivore];
         SKAnimals *menuAnimalThree = [SKAnimals createAnimalofType:Animal_Predator];
         SKVegetables *menuTreeOne = [SKVegetables createVegetableOfType:Vegetable_Grass];
-
+        SKSpriteNode *menuFacotry = [SKSpriteNode spriteNodeWithImageNamed:@"industria.png"];
+        
         menuAnimalTwo.size = CGSizeMake(20, 20);
         menuAnimalOne.size = CGSizeMake(20, 20);
         menuAnimalThree.size = CGSizeMake(20, 20);
         menuTreeOne.size = CGSizeMake(25, 35);
+        menuFacotry.size = CGSizeMake(30, 30);
 
         menuAnimalOne.position = CGPointMake(positionInScene.x, positionInScene.y + 30);
         menuAnimalTwo.position = CGPointMake(positionInScene.x, positionInScene.y - 30);
         menuAnimalThree.position = CGPointMake(positionInScene.x + 30, positionInScene.y);
         menuTreeOne.position = CGPointMake(positionInScene.x - 30, positionInScene.y);
+        menuFacotry.position = CGPointMake(positionInScene.x + 30, positionInScene.y + 30);
 
         menuAnimalOne.isChild = NO;
         menuAnimalTwo.isChild = NO;
@@ -497,11 +547,13 @@
         [self.menuArray addObject:menuAnimalTwo];
         [self.menuArray addObject:menuAnimalThree];
         [self.menuArray addObject:menuTreeOne];
+        [self.menuArray addObject:menuFacotry];
 
         [self addChild:menuAnimalOne];
         [self addChild:menuAnimalTwo];
         [self addChild:menuAnimalThree];
         [self addChild:menuTreeOne];
+        [self addChild:menuFacotry];
         
         self.isMenu = true;
         
@@ -540,7 +592,44 @@
                 
             }
         }
+        else{
+            SKSpriteNode *temp = self.menuArray[i];
+            if ([temp containsPoint:positionInScene]){
+                [self.menuArray removeObject:temp];
+                [self removeChildrenInArray:self.menuArray];
+                [self.menuArray removeAllObjects];
+                [self.pollutionArray addObject:temp];
+                temp.position = CGPointMake(self.lastTouch.x, self.lastTouch.y);
+                self.isMenu = false;
+                self.clickedOnMenu = true;
+                [self addSmokeOnFacotry:temp];
+                
+               
+
+                return;
+                
+            }
+
+        }
     }
+}
+
+-(void)addSmokeOnFacotry:(SKSpriteNode*)factory{
+
+    NSString * smokePath = [[NSBundle mainBundle]
+                            pathForResource:@"SmokeParticle" ofType:@"sks"];
+    
+    SKEmitterNode *burstNode;
+    
+    burstNode = [NSKeyedUnarchiver unarchiveObjectWithFile:smokePath];
+    
+    
+    burstNode.position = CGPointMake(-factory.frame.size.width/2 , factory.frame.size.height/2);
+    
+    burstNode.numParticlesToEmit = 1000;
+    
+    [factory addChild:burstNode];
+
 }
 
 -(void)checkForAnimalClick:(CGPoint)positionInScene {
