@@ -42,7 +42,7 @@
         temp.animalType = 2;
         temp.nextMeal = 5;
         temp.age = 0;
-        temp.ageLimit = 20;
+        temp.ageLimit = 180;
     }
     
     if (type == Animal_Water_Herbivore){

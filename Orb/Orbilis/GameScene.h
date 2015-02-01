@@ -19,6 +19,7 @@
 @property (strong, nonatomic) SKSpriteNode *orangeSky;
 @property (strong, nonatomic) SKSpriteNode *lightOrangeSky;
 @property (strong, nonatomic) SKSpriteNode *lightBlueSky;
+@property (strong, nonatomic) SKSpriteNode *currentSky;
 @property (strong, nonatomic) NSMutableArray *animalArray;
 @property (strong, nonatomic) NSMutableArray *sceneryArray;
 @property (strong, nonatomic) NSMutableArray *vegetableArray;

@@ -18,6 +18,7 @@
     self.clickedOnMenu = false;
     self.temperature = 27;
     self.timeSinceLast = 0;
+    self.earthPollution = 0;
     self.global = 0;
     self.tree = 0;
     self.pollution = 0;
@@ -26,6 +27,7 @@
     self.menuArray = [[NSMutableArray alloc] init];
     self.vegetableArray = [[NSMutableArray alloc] init];
     self.sceneryArray = [[NSMutableArray alloc] init];
+    self.pollutionArray = [[NSMutableArray alloc] init];
     
     [self drawWolrd];
     
@@ -53,6 +55,7 @@
     self.sky = [SKSpriteNode spriteNodeWithImageNamed:@"Sky.png"];
     self.sky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     self.sky.size = CGSizeMake(self.sky.frame.size.width*prop, self.sky.frame.size.height*prop);
+    self.currentSky = self.sky;
     [self addChild:self.sky];
     
     self.orangeSky = [SKSpriteNode spriteNodeWithImageNamed:@"SkyOrange.png"];
@@ -149,12 +152,14 @@
         [self.sky runAction:fadeOut];
         [self.lightOrangeSky runAction:fadeOut];
         [self.lightBlueSky runAction:fadeOut];
+        self.currentSky = self.orangeSky;
     }
     if (self.temperature > 30 && self.temperature < 40){
         [self.orangeSky runAction:fadeOut];
         [self.lightOrangeSky runAction:fadeIn];
         [self.sky runAction:fadeOut];
         [self.lightBlueSky runAction:fadeOut];
+        self.currentSky = self.lightOrangeSky;
     
     }
     if (self.temperature < 30 && self.temperature > 15){
@@ -162,6 +167,7 @@
         [self.lightOrangeSky runAction:fadeOut];
         [self.sky runAction:fadeIn];
         [self.lightBlueSky runAction:fadeOut];
+        self.currentSky = self.sky;
         
     }
     if (self.temperature < 15){
@@ -169,6 +175,7 @@
         [self.lightOrangeSky runAction:fadeOut];
         [self.sky runAction:fadeOut];
         [self.lightBlueSky runAction:fadeIn];
+        self.currentSky = self.lightBlueSky;
     
     }
 }
@@ -323,12 +330,16 @@
 
     NSLog(@"%d segundos", self.global);
     NSLog(@"%f humidade", self.humidity);
+    NSLog(@"%f poluicao", self.earthPollution);
 
 }
 
 - (void)checkAmbientStatus {
-        if (self.humidity > 75)
-            [self makeItRain];
+    
+    if (self.humidity > 75)
+        [self makeItRain];
+    
+    [self updatePolution];
 }
 
 - (void)reproduceVegetableWithId:(int)i {
@@ -351,10 +362,7 @@
             new.position = point;
             [self.vegetableArray addObject:new];
             [self addChild:new];
-            if (new.vegetableType == Vegetable_Grass){
-                new.poisonLevel = self.pollution/10;
-                self.grass++;
-            }
+            new.poisonLevel = self.pollution/10;
         }
     }
 }
@@ -411,7 +419,7 @@
         CGPoint point = CGPointMake(mainTestingAnimal.position.x + xMovement, mainTestingAnimal.position.y + yMovement);
         SKAction *move = [SKAction moveTo:point duration:1.0f];
         
-        if ([self pointInIsland:point])
+        if ([self pointInIsland:point] && ![mainTestingAnimal hasActions])
             [mainTestingAnimal runAction:move];
          
         CGRect rectAgua = CGRectMake(0,0,self.frame.size.width,180);
@@ -481,7 +489,14 @@
                 self.grass--;
                 
                 [testingPlant runAction:sequence];
-                [self.vegetableArray removeObject:testingPlant];                  
+                [self.vegetableArray removeObject:testingPlant];
+                
+                if (testingPlant.poisonLevel > 7){
+                    SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
+                    [mainTestingAnimal runAction:killAnimal];
+                    [self.animalArray removeObject:mainTestingAnimal];
+                    return;
+                }
             }
         }
     }
@@ -500,7 +515,8 @@
             
             SKAction *eatAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
             
-            if ((mainTestingAnimal.animalType==Animal_Carnivore&&secondaryTestingAnimal.animalType==Animal_Herbivore)||(mainTestingAnimal.animalType==Animal_Predator&&secondaryTestingAnimal.animalType!=Animal_Predator)) {
+            if ((mainTestingAnimal.animalType==Animal_Carnivore&&secondaryTestingAnimal.animalType==Animal_Herbivore)||(mainTestingAnimal.animalType==Animal_Predator&&secondaryTestingAnimal.animalType==Animal_Carnivore)) {
+                
                 
                 mainTestingAnimal.energy += secondaryTestingAnimal.energyValue;
                 mainTestingAnimal.nextMeal = 10;
@@ -510,10 +526,25 @@
 
                 [secondaryTestingAnimal runAction:eatAnimal];
                 [self.animalArray removeObject:secondaryTestingAnimal];
-                [self reproduceAnimal:mainTestingAnimal];  
+                [self reproduceAnimal:mainTestingAnimal];
+                
             }
         }   
     }
+}
+
+-(void)updatePolution{
+    NSLog(@"%d count das factory", self.pollutionArray.count);
+    for (int i = 0; i < self.pollutionArray.count; i++){
+        self.earthPollution++;
+    }
+    self.earthPollution--;
+    if (self.earthPollution > 100)
+        self.earthPollution = 100;
+    if (self.earthPollution < 0)
+        self.earthPollution = 0;
+    SKAction *colorSky = [SKAction colorizeWithColor:[UIColor grayColor] colorBlendFactor:self.earthPollution/100 duration:1.0f];
+    [self.currentSky runAction:colorSky];
 }
 
 -(void)checkForOpenLandMenu:(CGPoint)positionInScene {
@@ -581,6 +612,7 @@
         else if ([[self.menuArray objectAtIndex:i] isKindOfClass:[SKVegetables class]]){
             SKVegetables *temp = self.menuArray[i];
             if ([temp containsPoint:positionInScene]){
+                temp.poisonLevel = self.earthPollution/10;
                 [self.menuArray removeObject:temp];
                 [self removeChildrenInArray:self.menuArray];
                 [self.menuArray removeAllObjects];
