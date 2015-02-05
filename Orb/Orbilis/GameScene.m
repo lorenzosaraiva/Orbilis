@@ -25,7 +25,7 @@
     self.tree = 0;
     self.pollution = 0;
     self.waterPollution = 0;
-    self.humidity = 75;
+    self.humidity = 50;
     self.animalArray = [[NSMutableArray alloc] init];
     self.menuArray = [[NSMutableArray alloc] init];
     self.vegetableArray = [[NSMutableArray alloc] init];
@@ -45,6 +45,20 @@
     [self.view addGestureRecognizer:swipeRightRecognizer];
     [self.view addGestureRecognizer:swipeLeftRecognizer];
     
+    
+//     CONTROLE DA LUMINOSIDADE (incompleto)
+//    self.light = [SKSpriteNode spriteNodeWithColor:[UIColor whiteColor] size:self.view.frame.size];
+//    self.light.alpha = 0.0f;
+//    self.light.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+//    self.light.zPosition = 1.0f;
+//    [self addChild:self.light];
+//    
+//    self.dark = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size:self.view.frame.size];
+//    self.dark.alpha = 0.0f;
+//    self.dark.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+//    self.dark.zPosition = 1.0f;
+//    [self addChild:self.dark];
+
 }
 
 - (void)drawWolrd {
@@ -202,8 +216,10 @@
         
         SKEmitterNode *burstNode;
         
-        if (self.temperature > 15)
+        if (self.temperature > 15){
             burstNode = [NSKeyedUnarchiver unarchiveObjectWithFile:rainPath];
+            [self growLeavesInAllTrees];
+        }
         else
             burstNode = [NSKeyedUnarchiver unarchiveObjectWithFile:snowPath];
         
@@ -220,8 +236,8 @@
     }
     
     
-
-    for (int i = 0; i < self.sceneryArray.count; i++){
+    int remainingClouds =  arc4random()%3;
+    for (int i = 0; i < self.sceneryArray.count - remainingClouds; i++){
         SKSpriteNode * tempCloud = self.sceneryArray[i];
         SKAction * fadeAway = [SKAction fadeOutWithDuration:5.0f];
         [tempCloud runAction:fadeAway completion:^{
@@ -230,9 +246,24 @@
         }];
         
     }
-    self.humidity = 75;
+    
+    
+    
+    self.humidity = 0;
+    
     if (self.earthPollution > 75)
         [self acidRain];
+    
+    
+}
+
+-(void)growLeavesInAllTrees{
+    for (int i = 0; i < self.vegetableArray.count; i++){
+        SKVegetables *tree = self.vegetableArray[i];
+        if (tree.vegetableType == Vegetable_Tree)
+            tree.leavesCounter = tree.leavesGrowth;
+        
+    }
 }
 
 -(void)acidRain{
@@ -292,7 +323,18 @@
     
     UITouch *touch = [touches anyObject];
     CGPoint positionInScene = [touch locationInNode:self];
-    
+
+//    TESTE DE LUMINOSIDADE
+//    if (self.lightDark){
+//    [self.light runAction:[SKAction fadeAlphaTo:0.3f duration:3.0f]];
+//        self.lightDark = false;
+//        self.dark.alpha = 0.0f;
+//    }
+//    else{
+//        [self.dark runAction:[SKAction fadeAlphaTo:0.3f duration:3.0f]];
+//        self.lightDark = true;
+//        self.light.alpha = 0.0f;
+//    }
     
     [self checkForMenuClick:positionInScene];
     [self checkForAnimalClick:positionInScene];
@@ -318,7 +360,7 @@
         for (int i = 0; i < self.vegetableArray.count; i++){
         
             [self checkVegetablesLifespanWithId:i];
-            [self checkVegetablsGrowthWithId:i];
+            [self checkVegetablesGrowthWithId:i];
             [self controlVegetableLeavesWithId:i];
             [self reproduceVegetableWithId:i];
 
@@ -326,8 +368,9 @@
         
         for (int i = 0; i < self.animalArray.count; i++){
         
-        
+        if (i < self.animalArray.count)
         [self moveAnimalWithId:i];
+        if (i < self.animalArray.count)
         [self checkPlantContactWithId:i];
         if (i < self.animalArray.count)
         [self checkAnimalContactWithId:i];
@@ -361,10 +404,10 @@
 
 - (void)checkAmbientStatus {
     
-    if (self.humidity > 75)
+    if (self.humidity > 75 && self.sceneryArray.count > 3)
         [self makeItRain];
-    
     [self updatePollution];
+    [self updateHumidity];
 }
 
 - (void)reproduceVegetableWithId:(int)i {
@@ -381,13 +424,30 @@
         }
         int vegetableX = getRandomNum(0,100) - 50;
         int vegetableY = getRandomNum(0,100) - 50;
-
+   
         CGPoint point = CGPointMake(mainTestingVegetable.position.x + vegetableX, mainTestingVegetable.position.y + vegetableY);
         if ([self pointInIsland:point]){
             new.position = point;
             [self.vegetableArray addObject:new];
             [self addChild:new];
             new.poisonLevel = self.pollution/10;
+        }
+    } else {
+        int grassSpawn = arc4random()%60;
+        if (!grassSpawn){
+            SKVegetables *new = [SKVegetables createVegetableOfType:Vegetable_Grass];
+            
+            int vegetableX = getRandomNum(0,100) - 50;
+            int vegetableY = getRandomNum(0,100) - 50;
+            
+            CGPoint point = CGPointMake(mainTestingVegetable.position.x + vegetableX, mainTestingVegetable.position.y + vegetableY);
+            if ([self pointInIsland:point]){
+                new.position = point;
+                [self.vegetableArray addObject:new];
+                [self addChild:new];
+                new.poisonLevel = self.pollution/10;
+            }
+
         }
     }
 }
@@ -398,11 +458,11 @@
     
     // controla numero de folhas
     
-    if (mainTestingVegetable.leavesCounter == 14 && mainTestingVegetable.vegetableType == Vegetable_Tree){
+    if (mainTestingVegetable.leavesCounter == mainTestingVegetable.leavesGrowth && mainTestingVegetable.vegetableType == Vegetable_Tree && mainTestingVegetable.leaves < 1){
         
         mainTestingVegetable.leaves++;
         mainTestingVegetable.leavesCounter = 0;
-        SKAction *grow = [SKAction scaleBy:1.05 duration:0.5f];
+        SKAction *grow = [SKAction scaleBy:1.03 duration:0.5f];
         [mainTestingVegetable runAction:grow];
         
     }
@@ -410,13 +470,13 @@
     
 }
 
-- (void)checkVegetablsGrowthWithId:(int)i {
+- (void)checkVegetablesGrowthWithId:(int)i {
         
     SKVegetables *mainTestingVegetable = self.vegetableArray[i];
     
-    if (mainTestingVegetable.growthTime == 5 && mainTestingVegetable.vegetableType == Vegetable_Tree) {
+    if (mainTestingVegetable.growthTime == 5 && mainTestingVegetable.vegetableType == Vegetable_Tree && mainTestingVegetable.isNew) {
         if (mainTestingVegetable.growthCounter < 7){
-            SKAction *scale = [SKAction scaleBy:1.2f duration:0.2];
+            SKAction *scale = [SKAction scaleBy:1.1f duration:0.2];
             [mainTestingVegetable runAction:scale];
             mainTestingVegetable.growthCounter++;
             mainTestingVegetable.poisonLevel = self.pollution/10;
@@ -444,6 +504,7 @@
         CGPoint point = CGPointMake(mainTestingAnimal.position.x + xMovement, mainTestingAnimal.position.y + yMovement);
         SKAction *move = [SKAction moveTo:point duration:1.0f];
         
+        
         if ([self pointInIsland:point] && ![mainTestingAnimal hasActions])
             [mainTestingAnimal runAction:move];
          
@@ -467,7 +528,7 @@
 - (void)updateAnimalEnergyWithId:(int)i {
     
     SKAnimals *mainTestingAnimal = self.animalArray[i];
-    mainTestingAnimal.energy -= 0.001f;
+    mainTestingAnimal.energy -= 0.01f;
     if (mainTestingAnimal.energy <= 0){
         SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
         [mainTestingAnimal runAction:killAnimal];
@@ -492,7 +553,7 @@
         
     if (mainTestingAnimal.energy>=mainTestingAnimal.multiplyLimit) {
     
-        mainTestingAnimal.energy--;
+        mainTestingAnimal.energy = 0.5f;
 
         SKAnimals *newAnimal = [SKAnimals createAnimalofType:mainTestingAnimal.animalType];
         newAnimal.size = CGSizeMake(20, 20);
@@ -514,14 +575,26 @@
                 
             if (CGRectIntersectsRect(mainTestingAnimal.frame, testingPlant.frame)) {
         
-                mainTestingAnimal.energy += testingPlant.energyValue;
-                            
-                SKAction *sequence = [SKAction sequence:@[[SKAction scaleTo:0.0f duration:1.0f],[SKAction removeFromParent]]];
-                mainTestingAnimal.nextMeal = 10;
-                self.grass--;
                 
+                
+                SKAction *sequence = [SKAction sequence:@[[SKAction scaleTo:0.0f duration:1.0f],[SKAction removeFromParent]]];
+                
+                
+                
+                if (testingPlant.vegetableType == Vegetable_Grass){
+                    
                 [testingPlant runAction:sequence];
                 [self.vegetableArray removeObject:testingPlant];
+                mainTestingAnimal.energy += testingPlant.energyValue;
+                mainTestingAnimal.nextMeal = 8;
+                    
+                } else if (testingPlant.vegetableType == Vegetable_Tree && testingPlant.leaves > 0) {
+                
+                    testingPlant.leaves--;
+                    mainTestingAnimal.energy += testingPlant.energyValue;
+                    mainTestingAnimal.nextMeal = 8;
+                    
+                }
                 
                 if (testingPlant.poisonLevel > 7){
                     SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
@@ -537,10 +610,11 @@
 }
 
 - (void)checkAnimalContactWithId:(int)i {
+    
+    SKAnimals *mainTestingAnimal = self.animalArray[i];
 
     for (int j = 0; j < self.animalArray.count; j++) {
-
-        SKAnimals *mainTestingAnimal = self.animalArray[i];
+        
         SKAnimals *secondaryTestingAnimal = self.animalArray[j];
         
         if (CGRectIntersectsRect(mainTestingAnimal.frame, secondaryTestingAnimal.frame)&&(i!=j)&&mainTestingAnimal.animalType!=Animal_Herbivore&&mainTestingAnimal.nextMeal == 0) {
@@ -551,8 +625,11 @@
                 
                 
                 mainTestingAnimal.energy += secondaryTestingAnimal.energyValue;
-                mainTestingAnimal.nextMeal = 10;
-
+                if (mainTestingAnimal.animalType == Animal_Carnivore)
+                    mainTestingAnimal.nextMeal = 10;
+                if (mainTestingAnimal.animalType == Animal_Predator)
+                    mainTestingAnimal.nextMeal = 12;
+                    
                 mainTestingAnimal.performingStopAction = YES;
                 secondaryTestingAnimal.performingStopAction = YES;
 
@@ -592,6 +669,26 @@
     [self.water runAction:colorSea];
 }
 
+-(void)updateHumidity{
+    
+        if (40 > self.temperature && self.temperature > 25)
+            self.humidity = self.humidity + 0.5f;
+        if (self.temperature > 45)
+            self.humidity = self.humidity - 1.0f;
+        if (self.humidity > 100)
+            self.humidity = 100;
+        if (self.humidity < 0)
+            self.humidity = 0;
+    
+        for (int i = 0; i < self.sceneryArray.count; i++){
+            SKSpriteNode * testingCloud = self.sceneryArray[i];
+            SKAction * color = [SKAction colorizeWithColorBlendFactor: self.humidity/100 duration:1.0f];
+            [testingCloud runAction:color completion:^{ testingCloud.colorBlendFactor = self.humidity/100;}];
+        }
+
+
+}
+
 -(void)checkForOpenLandMenu:(CGPoint)positionInScene {
 
     if ([self pointInIsland:positionInScene]) {
@@ -600,35 +697,41 @@
         SKAnimals *menuAnimalTwo = [SKAnimals createAnimalofType:Animal_Carnivore];
         SKAnimals *menuAnimalThree = [SKAnimals createAnimalofType:Animal_Predator];
         SKVegetables *menuTreeOne = [SKVegetables createVegetableOfType:Vegetable_Grass];
+        SKVegetables *menuTreeTwo = [SKVegetables createVegetableOfType:Vegetable_Tree];
         SKSpriteNode *menuFacotry = [SKSpriteNode spriteNodeWithImageNamed:@"industria.png"];
         
         menuAnimalTwo.size = CGSizeMake(20, 20);
         menuAnimalOne.size = CGSizeMake(20, 20);
         menuAnimalThree.size = CGSizeMake(20, 20);
         menuTreeOne.size = CGSizeMake(25, 35);
+        menuTreeTwo.size = CGSizeMake(30, 45);
         menuFacotry.size = CGSizeMake(30, 30);
 
         menuAnimalOne.position = CGPointMake(positionInScene.x, positionInScene.y + 30);
         menuAnimalTwo.position = CGPointMake(positionInScene.x, positionInScene.y - 30);
         menuAnimalThree.position = CGPointMake(positionInScene.x + 30, positionInScene.y);
         menuTreeOne.position = CGPointMake(positionInScene.x - 30, positionInScene.y);
+        menuTreeTwo.position = CGPointMake(positionInScene.x - 30, positionInScene.y - 50);
         menuFacotry.position = CGPointMake(positionInScene.x + 30, positionInScene.y + 30);
 
         menuAnimalOne.isChild = NO;
         menuAnimalTwo.isChild = NO;
         menuAnimalThree.isChild = NO;
         menuTreeOne.isNew = false;
+        menuTreeTwo.isNew = false;
 
         [self.menuArray addObject:menuAnimalOne];
         [self.menuArray addObject:menuAnimalTwo];
         [self.menuArray addObject:menuAnimalThree];
         [self.menuArray addObject:menuTreeOne];
+        [self.menuArray addObject:menuTreeTwo];
         [self.menuArray addObject:menuFacotry];
 
         [self addChild:menuAnimalOne];
         [self addChild:menuAnimalTwo];
         [self addChild:menuAnimalThree];
         [self addChild:menuTreeOne];
+        [self addChild:menuTreeTwo];
         [self addChild:menuFacotry];
         
         self.isMenu = true;
@@ -638,7 +741,7 @@
 
 -(void)checkForWaterMenu:(CGPoint)positionInScene{
     
-    CGRect rectAgua = CGRectMake(0,0,self.frame.size.width,180);
+    CGRect rectAgua = CGRectMake(0,50,self.frame.size.width,130);
     
     if (CGRectContainsPoint(rectAgua, positionInScene)){
         
@@ -710,9 +813,9 @@
                 temp.position = CGPointMake(self.lastTouch.x, self.lastTouch.y);
                 self.isMenu = false;
                 self.clickedOnMenu = true;
-                CGRect rectAgua = CGRectMake(0,0,self.frame.size.width,180);
+                CGRect rectAgua = CGRectMake(0,50,self.frame.size.width,130);
                 if (CGRectContainsPoint(rectAgua, temp.position)){
-                    SKAction *animateBarrel = [SKAction moveToY:0 duration:3.0f];
+                    SKAction *animateBarrel = [SKAction moveToY:50 duration:3.0f];
                     [temp runAction:animateBarrel];
                     [self.waterPollutionArray addObject:temp];
                 }

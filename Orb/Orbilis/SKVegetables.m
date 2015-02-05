@@ -27,10 +27,11 @@
             new.size = CGSizeMake(new.frame.size.width * 0.4f, new.frame.size.height * 0.4f);
         }
         new.energyValue = 1;
-        new.leaves = 3;
+        new.leaves = 1;
         new.energy = 720;
         new.leavesCounter = 18;
         new.growthCounter = 0;
+        new.leavesGrowth = 5;
         new.growthTime = 0;
         new.isNew = true;
         new.multiplyRate = 400;

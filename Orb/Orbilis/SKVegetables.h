@@ -32,7 +32,8 @@ typedef enum SKVegetableType {
 @property int energy;
 
 @property int leavesCounter;
-//numero de folhas
+
+@property int leavesGrowth;
 
 @property int leaves;
 

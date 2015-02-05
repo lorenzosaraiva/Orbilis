@@ -12,6 +12,10 @@
 
 @interface GameScene : SKScene <UIGestureRecognizerDelegate, SKPhysicsContactDelegate>
 
+@property (strong, nonatomic) SKSpriteNode *light;
+@property (strong, nonatomic) SKSpriteNode *dark;
+@property BOOL lightDark;
+
 @property (strong, nonatomic) SKSpriteNode *sun;
 @property (strong, nonatomic) SKSpriteNode *island;
 @property (strong, nonatomic) SKSpriteNode *sand;
@@ -36,12 +40,14 @@
 
 
 @property float temperature;
+@property float pollution;
 @property float humidity;
+
 @property float luminosity;
 @property float waterPollution;
 @property float airPollution;
 @property float earthPollution;
-@property float pollution;
+
 @property int global;
 @property int tree;
 @property int grass;
