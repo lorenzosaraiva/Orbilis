@@ -25,7 +25,7 @@ typedef enum SKAnimalType {
 @property AnimalType animalType;
 
 @property int strenght;
-@property int energy;
+@property float energy;
 @property int defense;
 @property int idealTemp;
 @property int idealHumidity;

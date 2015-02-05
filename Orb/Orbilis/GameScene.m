@@ -12,6 +12,8 @@
 
 -(void)didMoveToView:(SKView *)view {
     
+    self.backgroundColor = [UIColor colorWithRed:204/255.0 green:229/255.0 blue:180/255.0 alpha:1];
+
     // inicia e alloca as coisas iniciais
     
     self.isMenu = false;
@@ -22,12 +24,14 @@
     self.global = 0;
     self.tree = 0;
     self.pollution = 0;
+    self.waterPollution = 0;
     self.humidity = 75;
     self.animalArray = [[NSMutableArray alloc] init];
     self.menuArray = [[NSMutableArray alloc] init];
     self.vegetableArray = [[NSMutableArray alloc] init];
     self.sceneryArray = [[NSMutableArray alloc] init];
     self.pollutionArray = [[NSMutableArray alloc] init];
+    self.waterPollutionArray = [[NSMutableArray alloc]init];
     
     [self drawWolrd];
     
@@ -47,10 +51,12 @@
     
     float prop = 0.55;
     
-    SKSpriteNode *cage = [SKSpriteNode spriteNodeWithImageNamed:@"Cage.png"];
-    cage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    cage.size = CGSizeMake(cage.frame.size.width*prop, cage.frame.size.height*prop);
-    [self addChild:cage];
+    
+    
+    self.cage = [SKSpriteNode spriteNodeWithImageNamed:@"Cage.png"];
+    self.cage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    self.cage.size = CGSizeMake(self.cage.frame.size.width*prop, self.cage.frame.size.height*prop);
+    [self addChild:self.cage];
     
     self.sky = [SKSpriteNode spriteNodeWithImageNamed:@"Sky.png"];
     self.sky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
@@ -82,15 +88,15 @@
     self.lightBlueSky.alpha = 0.0f;
     [self addChild:self.lightBlueSky];
 
-    SKSpriteNode *water = [SKSpriteNode spriteNodeWithImageNamed:@"Water.png"];
-    water.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    water.size = CGSizeMake(water.frame.size.width*prop, water.frame.size.height*prop);
-    [self addChild:water];
+    self.water = [SKSpriteNode spriteNodeWithImageNamed:@"Water.png"];
+    self.water.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    self.water.size = CGSizeMake(self.water.frame.size.width*prop, self.water.frame.size.height*prop);
+    [self addChild:self.water];
     
-    SKSpriteNode *sea = [SKSpriteNode spriteNodeWithImageNamed:@"Sea.png"];
-    sea.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    sea.size = CGSizeMake(sea.frame.size.width*prop, sea.frame.size.height*prop);
-    [self addChild:sea];
+    self.sea = [SKSpriteNode spriteNodeWithImageNamed:@"Sea.png"];
+    self.sea.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    self.sea.size = CGSizeMake(self.sea.frame.size.width*prop, self.sea.frame.size.height*prop);
+    [self addChild:self.sea];
     
     SKSpriteNode *sand = [SKSpriteNode spriteNodeWithImageNamed:@"Sand.png"];
     sand.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
@@ -180,6 +186,8 @@
     }
 }
 
+
+
 -(void)makeItRain{
     
     
@@ -208,6 +216,7 @@
         burstNode.numParticlesToEmit = self.humidity;
         
         [tempCloud addChild:burstNode];
+        
     }
     
     
@@ -222,6 +231,18 @@
         
     }
     self.humidity = 75;
+    if (self.earthPollution > 75)
+        [self acidRain];
+}
+
+-(void)acidRain{
+
+    for (int i = 0; i < self.vegetableArray.count/2; i++){
+        SKVegetables *vegetableToDie = self.vegetableArray[i];
+        SKAction *sequence = [SKAction sequence:@[[SKAction scaleTo:0.0f duration:1.0f],[SKAction removeFromParent]]];
+        [self.vegetableArray removeObject:vegetableToDie];
+        [vegetableToDie runAction:sequence];
+    }
 }
 
 - (void)handlePanFrom:(UIPanGestureRecognizer *)recognizer {
@@ -276,8 +297,10 @@
     [self checkForMenuClick:positionInScene];
     [self checkForAnimalClick:positionInScene];
     [self checkForClickOutsideMenu:positionInScene];
-    if (!self.clickedOnMenu)
-    [self checkForOpenLandMenu:positionInScene];
+    if (!self.clickedOnMenu){
+        [self checkForOpenLandMenu:positionInScene];
+        [self checkForWaterMenu:positionInScene];
+    }
     
 
     self.lastTouch = positionInScene; 
@@ -302,7 +325,7 @@
         }
         
         for (int i = 0; i < self.animalArray.count; i++){
-        NSLog(@"animais: %lu", (unsigned long)self.animalArray.count);
+        
         
         [self moveAnimalWithId:i];
         [self checkPlantContactWithId:i];
@@ -310,6 +333,8 @@
         [self checkAnimalContactWithId:i];
         if (i < self.animalArray.count)
         [self growAnimalWithId:i];
+        if (i < self.animalArray.count)
+        [self updateAnimalEnergyWithId:i];
         
         }
     }
@@ -339,7 +364,7 @@
     if (self.humidity > 75)
         [self makeItRain];
     
-    [self updatePolution];
+    [self updatePollution];
 }
 
 - (void)reproduceVegetableWithId:(int)i {
@@ -439,8 +464,15 @@
 
 }
 
-- (void)updateAnimalsEnergy {
+- (void)updateAnimalEnergyWithId:(int)i {
     
+    SKAnimals *mainTestingAnimal = self.animalArray[i];
+    mainTestingAnimal.energy -= 0.001f;
+    if (mainTestingAnimal.energy <= 0){
+        SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
+        [mainTestingAnimal runAction:killAnimal];
+        [self.animalArray removeObject:mainTestingAnimal];
+    }
 }
 
 - (void)growAnimalWithId:(int)i {
@@ -533,8 +565,8 @@
     }
 }
 
--(void)updatePolution{
-    NSLog(@"%d count das factory", self.pollutionArray.count);
+-(void)updatePollution{
+   
     for (int i = 0; i < self.pollutionArray.count; i++){
         self.earthPollution++;
     }
@@ -545,6 +577,19 @@
         self.earthPollution = 0;
     SKAction *colorSky = [SKAction colorizeWithColor:[UIColor grayColor] colorBlendFactor:self.earthPollution/100 duration:1.0f];
     [self.currentSky runAction:colorSky];
+    [self.island runAction:colorSky];
+    
+    for (int i = 0; i < self.waterPollutionArray.count; i++){
+        self.waterPollution++;
+    }
+    self.waterPollution--;
+    if (self.waterPollution > 100)
+        self.waterPollution = 100;
+    if (self.waterPollution < 0)
+        self.waterPollution = 0;
+    SKAction *colorSea = [SKAction colorizeWithColor:[UIColor grayColor] colorBlendFactor:self.waterPollution/100 duration:1.0f];
+    [self.sea runAction:colorSea];
+    [self.water runAction:colorSea];
 }
 
 -(void)checkForOpenLandMenu:(CGPoint)positionInScene {
@@ -591,6 +636,37 @@
     }
 }
 
+-(void)checkForWaterMenu:(CGPoint)positionInScene{
+    
+    CGRect rectAgua = CGRectMake(0,0,self.frame.size.width,180);
+    
+    if (CGRectContainsPoint(rectAgua, positionInScene)){
+        
+                SKAnimals *smallFish = [SKAnimals createAnimalofType:Animal_Water_Herbivore];
+                SKAnimals *bigFish = [SKAnimals createAnimalofType:Animal_Water_Predator];
+                SKSpriteNode *barrel = [SKSpriteNode spriteNodeWithImageNamed:@"Barril1.png"];
+        
+                barrel.size = CGSizeMake(barrel.size.width * 0.5f, barrel.size.height * 0.5f);
+        
+                smallFish.position = CGPointMake(positionInScene.x + 30, positionInScene.y);
+                bigFish.position = CGPointMake(positionInScene.x - 30, positionInScene.y);
+                barrel.position = CGPointMake(positionInScene.x, positionInScene.y + 30);
+        
+                [self.menuArray addObject:smallFish];
+                [self.menuArray addObject:bigFish];
+                [self.menuArray addObject:barrel];
+        
+                [self addChild:smallFish];
+                [self addChild:bigFish];
+                [self addChild:barrel];
+                self.isMenu = true;
+        
+                
+            }
+
+
+}
+
 -(void)checkForMenuClick:(CGPoint)positionInScene {
     
     if (self.menuArray.count == 0)
@@ -630,13 +706,21 @@
                 [self.menuArray removeObject:temp];
                 [self removeChildrenInArray:self.menuArray];
                 [self.menuArray removeAllObjects];
-                [self.pollutionArray addObject:temp];
+                
                 temp.position = CGPointMake(self.lastTouch.x, self.lastTouch.y);
                 self.isMenu = false;
                 self.clickedOnMenu = true;
-                [self addSmokeOnFacotry:temp];
-                
-               
+                CGRect rectAgua = CGRectMake(0,0,self.frame.size.width,180);
+                if (CGRectContainsPoint(rectAgua, temp.position)){
+                    SKAction *animateBarrel = [SKAction moveToY:0 duration:3.0f];
+                    [temp runAction:animateBarrel];
+                    [self.waterPollutionArray addObject:temp];
+                }
+                else{
+                    
+                    [self addSmokeOnFacotry:temp];
+                    [self.pollutionArray addObject:temp];
+                }
 
                 return;
                 
@@ -645,6 +729,7 @@
         }
     }
 }
+
 
 -(void)addSmokeOnFacotry:(SKSpriteNode*)factory{
 

@@ -55,6 +55,8 @@
         temp.size = CGSizeMake(temp.frame.size.width * 0.5f, temp.frame.size.height * 0.5f);
         temp.energy = 180;
         temp.multiplyLimit = 300;
+        temp.age = 0;
+        temp.ageLimit = 60;
         temp.strenght = 1;
         temp.energyValue = 50;
     }
@@ -67,6 +69,8 @@
         temp.animalType = Animal_Water_Predator;
         temp.size = CGSizeMake(temp.frame.size.width * 0.5f, temp.frame.size.height * 0.5f);
         temp.energy = 180;
+        temp.age = 0;
+        temp.ageLimit = 180;
         temp.multiplyLimit = 300;
         temp.strenght = 10;
     

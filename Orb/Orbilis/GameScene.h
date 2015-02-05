@@ -15,6 +15,9 @@
 @property (strong, nonatomic) SKSpriteNode *sun;
 @property (strong, nonatomic) SKSpriteNode *island;
 @property (strong, nonatomic) SKSpriteNode *sand;
+@property (strong, nonatomic) SKSpriteNode *sea;
+@property (strong, nonatomic) SKSpriteNode *water;
+@property (strong, nonatomic) SKSpriteNode *cage;
 @property (strong, nonatomic) SKSpriteNode *sky;
 @property (strong, nonatomic) SKSpriteNode *orangeSky;
 @property (strong, nonatomic) SKSpriteNode *lightOrangeSky;
@@ -25,6 +28,7 @@
 @property (strong, nonatomic) NSMutableArray *vegetableArray;
 @property (strong, nonatomic) NSMutableArray *menuArray;
 @property (strong, nonatomic) NSMutableArray *pollutionArray;
+@property (strong, nonatomic) NSMutableArray *waterPollutionArray;
 @property (strong, nonatomic) UILabel *temperatureLabel;
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
 @property (nonatomic) NSTimeInterval timeSinceLast;
