@@ -1,14 +1,13 @@
 //
-//  GameViewController.m
-//  GameTest
+//  SecondViewController.m
+//  Orbilis
 //
-//  Created by Lorenzo Saraiva on 12/11/14.
-//  Copyright (c) 2014 Lorenzo Saraiva. All rights reserved.
+//  Created by Joao Nassar Galante Guedes on 28/01/15.
+//  Copyright (c) 2015 BEPID-PucRJ. All rights reserved.
 //
 
-#import "GameViewController.h"
-#import "GameScene.h"
 #import "SecondViewController.h"
+#import "GameScene.h"
 
 @implementation SKScene (Unarchive)
 
@@ -23,31 +22,32 @@
 //    [arch setClass:self forClassName:@"SKScene"];
 //    SKScene *scene = [arch decodeObjectForKey:NSKeyedArchiveRootObjectKey];
 //    [arch finishDecoding];
-//    
+//
 //    return scene;
 //}
 
 @end
 
-@implementation GameViewController
+@implementation SecondViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    int variavel = 40;
-    // Configure the view.
-    SKView *skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
-    /* Sprite Kit applies additional optimizations to improve rendering performance */
-    skView.ignoresSiblingOrder = YES;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    float width = screenRect.size.width;
+    float height = screenRect.size.height;
     
-    // Create and configure the scene.
-    GameScene *scene = [GameScene sceneWithSize:skView.bounds.size];
+    UIImageView *background = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    background.image = [UIImage imageNamed:@"FirstScreen.png"];
+    [self.view addSubview:background];
     
-    // Present the scene.
-    [skView presentScene:scene];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    SecondViewController *view = [[SecondViewController alloc] init];
+    [self presentViewController:view animated:true completion:nil];
 }
 
 - (BOOL)shouldAutorotate
@@ -73,6 +73,5 @@
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
-
 
 @end
