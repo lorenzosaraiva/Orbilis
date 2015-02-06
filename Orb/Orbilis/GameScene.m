@@ -90,11 +90,6 @@
     self.lightOrangeSky.alpha = 0.0f;
     [self addChild:self.lightOrangeSky];
     
-    self.lightOrangeSky = [SKSpriteNode spriteNodeWithImageNamed:@"SkyLightOrange.png"];
-    self.lightOrangeSky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    self.lightOrangeSky.size = CGSizeMake(self.lightOrangeSky.frame.size.width*prop, self.lightOrangeSky.frame.size.height*prop);
-    self.lightOrangeSky.alpha = 0.0f;
-    [self addChild:self.lightOrangeSky];
     
     self.lightBlueSky = [SKSpriteNode spriteNodeWithImageNamed:@"SkyLightBlue.png"];
     self.lightBlueSky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
@@ -363,6 +358,7 @@
             [self checkVegetablesGrowthWithId:i];
             [self controlVegetableLeavesWithId:i];
             [self reproduceVegetableWithId:i];
+            [self temperatureEffectOnPlantWithId:i];
 
         }
         
@@ -378,6 +374,8 @@
         [self growAnimalWithId:i];
         if (i < self.animalArray.count)
         [self updateAnimalEnergyWithId:i];
+        if (i < self.animalArray.count)
+        [self temperatureEffectOnAnimalWithId:i];
         
         }
     }
@@ -433,7 +431,7 @@
             new.poisonLevel = self.pollution/10;
         }
     } else {
-        int grassSpawn = arc4random()%60;
+        int grassSpawn = arc4random()%100;
         if (!grassSpawn){
             SKVegetables *new = [SKVegetables createVegetableOfType:Vegetable_Grass];
             
@@ -535,6 +533,24 @@
         [self.animalArray removeObject:mainTestingAnimal];
     }
 }
+- (void)temperatureEffectOnPlantWithId:(int)i{
+            //frio impede crescimento
+            //calor demais mata
+}
+- (void)temperatureEffectOnAnimalWithId:(int)i {
+
+    
+    SKAnimals *mainTestingAnimal = self.animalArray[i];
+    if (self.temperature > 42){
+        int alive = arc4random()%100;
+        if (!alive){
+            SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
+            [mainTestingAnimal runAction:killAnimal];
+            [self.animalArray removeObject:mainTestingAnimal];
+        }
+    }
+}
+
 
 - (void)growAnimalWithId:(int)i {
 
