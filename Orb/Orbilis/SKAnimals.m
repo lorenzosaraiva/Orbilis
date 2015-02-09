@@ -29,7 +29,7 @@
         temp = [SKAnimals spriteNodeWithImageNamed:@"GroundTwo.png"];
         temp.energy = 0.3;
         temp.energyValue = 1;
-        temp.multiplyLimit = 3;
+        temp.multiplyLimit = 4;
         temp.animalType = 1;
         temp.nextMeal = 10;
         temp.age = 0;
@@ -38,7 +38,7 @@
     if (type == Animal_Predator){
         temp = [SKAnimals spriteNodeWithImageNamed:@"GroundThree.png"];
         temp.energy = 0.5;
-        temp.multiplyLimit = 4;
+        temp.multiplyLimit = 6;
         temp.animalType = 2;
         temp.nextMeal = 10;
         temp.age = 0;

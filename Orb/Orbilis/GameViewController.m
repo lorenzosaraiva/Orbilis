@@ -8,7 +8,7 @@
 
 #import "GameViewController.h"
 #import "GameScene.h"
-#import "SecondViewController.h"
+//#import "SecondViewController.h"
 
 @implementation SKScene (Unarchive)
 
@@ -35,7 +35,7 @@
 {
     [super viewDidLoad];
     
-    int variavel = 40;
+
     // Configure the view.
     SKView *skView = (SKView *)self.view;
     skView.showsFPS = YES;

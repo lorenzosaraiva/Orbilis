@@ -16,6 +16,7 @@
 @property (strong, nonatomic) SKSpriteNode *dark;
 @property BOOL lightDark;
 
+@property (strong, nonatomic) SKShapeNode *shape;
 @property (strong, nonatomic) SKSpriteNode *sun;
 @property (strong, nonatomic) SKSpriteNode *island;
 @property (strong, nonatomic) SKSpriteNode *sand;
