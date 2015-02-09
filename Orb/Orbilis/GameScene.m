@@ -18,6 +18,9 @@
     
     self.isMenu = false;
     self.clickedOnMenu = false;
+    self.isNight = false;
+    self.secondsToNight = 30;
+    self.nightDuration = 15;
     self.temperature = 27;
     self.timeSinceLast = 0;
     self.earthPollution = 0;
@@ -38,6 +41,9 @@
     UIPinchGestureRecognizer *pinchGesture  = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(resizeSun:)];
     [self.view addGestureRecognizer:pinchGesture];
     
+    UILongPressGestureRecognizer *holdGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleHoldGesture:)];
+    [self.view addGestureRecognizer:holdGesture];
+    
     UISwipeGestureRecognizer *swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
     UISwipeGestureRecognizer *swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
     swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -53,11 +59,11 @@
 //    self.light.zPosition = 1.0f;
 //    [self addChild:self.light];
 //    
-//    self.dark = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size:self.view.frame.size];
-//    self.dark.alpha = 0.0f;
-//    self.dark.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-//    self.dark.zPosition = 1.0f;
-//    [self addChild:self.dark];
+    self.dark = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size:self.view.frame.size];
+    self.dark.alpha = 0.0f;
+    self.dark.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    self.dark.zPosition = 1.0f;
+    [self addChild:self.dark];
 
 }
 
@@ -65,7 +71,7 @@
     
     [self drawPath];
     
-    float prop = (self.frame.size.width/700);
+    float prop = 0.55f;
     
     self.cage = [SKSpriteNode spriteNodeWithImageNamed:@"Cage.png"];
     self.cage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
@@ -95,34 +101,58 @@
     self.lightBlueSky.size = CGSizeMake(self.lightBlueSky.frame.size.width*prop, self.lightBlueSky.frame.size.height*prop);
     self.lightBlueSky.alpha = 0.0f;
     [self addChild:self.lightBlueSky];
-
+    
+    self.nightSky = [SKSpriteNode spriteNodeWithImageNamed:@"SkyDarkBlue.png"];
+    self.nightSky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+100);
+    self.nightSky.size = CGSizeMake(self.nightSky.frame.size.width*prop, self.nightSky.frame.size.height*prop);
+    self.nightSky.alpha = 0.0f;
+    [self addChild:self.nightSky];
+    
     self.water = [SKSpriteNode spriteNodeWithImageNamed:@"Water.png"];
     self.water.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     self.water.size = CGSizeMake(self.water.frame.size.width*prop, self.water.frame.size.height*prop);
+    self.water.zPosition = 0.12f;
     [self addChild:self.water];
     
     self.sea = [SKSpriteNode spriteNodeWithImageNamed:@"Sea.png"];
     self.sea.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     self.sea.size = CGSizeMake(self.sea.frame.size.width*prop, self.sea.frame.size.height*prop);
+    self.sea.zPosition = 0.11f;
     [self addChild:self.sea];
     
     SKSpriteNode *sand = [SKSpriteNode spriteNodeWithImageNamed:@"Sand.png"];
     sand.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     sand.size = CGSizeMake(sand.frame.size.width*prop, sand.frame.size.height*prop);
+    sand.zPosition = 0.13f;
     [self addChild:sand];
     
     self.island = [SKSpriteNode spriteNodeWithImageNamed:@"Island.png"];
     self.island.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     self.island.size = CGSizeMake(self.island.frame.size.width*prop, self.island.frame.size.height*prop);
-    
+    self.island.zPosition = 0.2f;
     
     [self addChild:self.island];
     
     self.sun = [SKSpriteNode spriteNodeWithImageNamed:@"Sol.png"];
     self.sun.position = CGPointMake(90, self.frame.size.height - 120);
     self.sun.zPosition = 0.1f;
-
+    
     [self addChild:self.sun];
+    
+    self.moon = [SKSpriteNode spriteNodeWithImageNamed:@"Lua.png"];
+    self.moon.position = CGPointMake(self.frame.size.width - 90, self.frame.size.height - 120);
+    self.moon.zPosition = 0.1f;
+    self.moon.alpha = 0.0f;
+    
+    [self addChild:self.moon];
+    
+    self.dark = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size:self.view.frame.size];
+    self.dark.alpha = 0.0f;
+    self.dark.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    self.dark.zPosition = 1.0f;
+    [self addChild:self.dark];
+    
+    
 }
 
 -(void)drawPath{
@@ -144,6 +174,7 @@
     CGPathAddLineToPoint(path, nil, 25, 240);
     
     self.islandShape = [SKShapeNode shapeNodeWithPath:path];
+    self.islandShape.alpha = 0.0f;
     [self addChild:self.islandShape];
 }
 
@@ -173,6 +204,19 @@
         self.temperatureLabel.text = [NSString stringWithFormat:@"%.f",self.temperature];
         [self colorSky];
     }
+}
+
+-(void)handleHoldGesture:(UILongPressGestureRecognizer *)recognizer {
+    
+    CGPoint positionInScene = [recognizer locationInView:self.view];
+    positionInScene = [self convertPointFromView:positionInScene];
+    
+    //[self checkForMenuClick:positionInScene];
+    if (!self.clickedOnMenu&&!self.isMenu){
+        [self checkForOpenLandMenu:positionInScene];
+    }
+    
+    
 }
 
 -(void)colorSky{
@@ -347,7 +391,7 @@
 //        self.dark.alpha = 0.0f;
 //    }
 //    else{
-//        [self.dark runAction:[SKAction fadeAlphaTo:0.3f duration:3.0f]];
+//
 //        self.lightDark = true;
 //        self.light.alpha = 0.0f;
 //    }
@@ -356,8 +400,8 @@
     [self checkForAnimalClick:positionInScene];
     [self checkForClickOutsideMenu:positionInScene];
     if (!self.clickedOnMenu){
-        [self checkForOpenLandMenu:positionInScene];
-        [self checkForWaterMenu:positionInScene];
+//        [self checkForOpenLandMenu:positionInScene];
+//        [self checkForWaterMenu:positionInScene];
     }
     
 
@@ -372,7 +416,6 @@
         NSLog(@"temperatura: %f", self.temperature);
         [self updateGlobalTimeTick: currentTime];
         [self checkAmbientStatus];
-        
         for (int i = 0; i < self.vegetableArray.count; i++){
         
             [self checkVegetablesLifespanWithId:i];
@@ -429,6 +472,7 @@
         [self makeItRain];
     [self updatePollution];
     [self updateHumidity];
+    [self updateNight];
 }
 
 - (void)reproduceVegetableWithId:(int)i {
@@ -527,7 +571,7 @@
         if ([self.islandShape containsPoint:point] && ![mainTestingAnimal hasActions])
             [mainTestingAnimal runAction:move];
          
-        CGRect rectAgua = CGRectMake(0,50,self.frame.size.width,130);
+        CGRect rectAgua = CGRectMake(0,50,self.frame.size.width,100);
         if (mainTestingAnimal.animalType == Animal_Water_Predator || mainTestingAnimal.animalType == Animal_Water_Herbivore){
             if (CGRectContainsPoint(rectAgua, point))
                 [mainTestingAnimal runAction:move];
@@ -547,11 +591,11 @@
 - (void)updateAnimalEnergyWithId:(int)i {
     
     SKAnimals *mainTestingAnimal = self.animalArray[i];
-    mainTestingAnimal.energy -= 0.01f;
+    mainTestingAnimal.energy -= 0.02f;
     if (mainTestingAnimal.energy <= 0){
         SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
         [mainTestingAnimal runAction:killAnimal completion:^{[self.animalArray removeObject:mainTestingAnimal];}];
-        [self.garbage addObject:mainTestingAnimal];
+
         
     }
 }
@@ -580,7 +624,7 @@
             SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
           
              [mainTestingAnimal runAction:killAnimal completion:^{[self.animalArray removeObject:mainTestingAnimal];}];
-            [self.garbage addObject:mainTestingAnimal];
+        
         }
     }
 }
@@ -597,7 +641,7 @@
         SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
         [mainTestingAnimal runAction:killAnimal];
         [self.animalArray removeObject:mainTestingAnimal];
-        [self.garbage addObject:mainTestingAnimal];
+    
         
     }
 }
@@ -678,9 +722,9 @@
                 
                 mainTestingAnimal.energy += secondaryTestingAnimal.energyValue;
                 if (mainTestingAnimal.animalType == Animal_Carnivore)
-                    mainTestingAnimal.nextMeal = 6;
+                    mainTestingAnimal.nextMeal = 5;
                 if (mainTestingAnimal.animalType == Animal_Predator)
-                    mainTestingAnimal.nextMeal = 6;
+                    mainTestingAnimal.nextMeal = 5;
                     
                 mainTestingAnimal.performingStopAction = YES;
                 secondaryTestingAnimal.performingStopAction = YES;
@@ -691,6 +735,53 @@
     }
 }
 
+-(void)updateNight{
+    
+    if (!self.isNight){
+        self.secondsToNight--;
+        if (self.secondsToNight == 0){
+            self.isNight = true;
+            self.secondsToNight = 40;
+            [self duskOrDawn:self.isNight];
+        }
+    } else {
+        self.nightDuration--;
+        if (self.nightDuration == 0){
+            self.isNight = false;
+            self.nightDuration = 20;
+            [self duskOrDawn:self.isNight];
+        }
+    }
+}
+-(void)duskOrDawn:(BOOL)isNight{
+   
+    SKAction *fadeIn = [SKAction fadeInWithDuration:5.0f];
+    SKAction *fadeOut = [SKAction fadeOutWithDuration:5.0f];
+    if (isNight){
+        [self.currentSky runAction:fadeOut];
+        [self.nightSky runAction:fadeIn];
+        self.temperature -= 5;
+        SKAction *sunDown = [SKAction moveByX:0 y:-250 duration:5.0f];
+        [self.sun runAction:sunDown];
+        [self.moon runAction:fadeIn];
+        self.lastSky = self.currentSky;
+        self.currentSky = self.nightSky;
+        [self.dark runAction:[SKAction fadeAlphaTo:0.3f duration:5.0f]];
+        
+    }
+    else    {
+        [self.nightSky runAction:fadeOut];
+        [self.lastSky runAction:fadeIn];
+        self.temperature+=5;
+        SKAction *sunUp = [SKAction moveByX:0 y:250 duration:5.0f];
+        [self.sun runAction:sunUp];
+        [self.moon runAction:fadeOut];
+        [self.dark runAction:[SKAction fadeAlphaTo:0.0f duration:5.0f]];
+        
+        self.currentSky = self.lastSky;
+        self.lastSky = self.nightSky;
+    }
+}
 -(void)updatePollution{
    
     for (int i = 0; i < self.pollutionArray.count; i++){
@@ -740,34 +831,15 @@
 
 -(void)checkForOpenLandMenu:(CGPoint)positionInScene {
 
-    if ([self pointInIsland:positionInScene]) {
+    if ([self.islandShape containsPoint:positionInScene]) {
+       
         
-        SKAnimals *menuAnimalOne = [SKAnimals createAnimalofType:Animal_Herbivore];
-        SKAnimals *menuAnimalTwo = [SKAnimals createAnimalofType:Animal_Carnivore];
-        SKAnimals *menuAnimalThree = [SKAnimals createAnimalofType:Animal_Predator];
-        SKVegetables *menuTreeOne = [SKVegetables createVegetableOfType:Vegetable_Grass];
-        SKVegetables *menuTreeTwo = [SKVegetables createVegetableOfType:Vegetable_Tree];
-        SKSpriteNode *menuFacotry = [SKSpriteNode spriteNodeWithImageNamed:@"industria.png"];
-        
-        menuAnimalTwo.size = CGSizeMake(20, 20);
-        menuAnimalOne.size = CGSizeMake(20, 20);
-        menuAnimalThree.size = CGSizeMake(20, 20);
-        menuTreeOne.size = CGSizeMake(25, 35);
-        menuTreeTwo.size = CGSizeMake(30, 45);
-        menuFacotry.size = CGSizeMake(30, 30);
-
-        menuAnimalOne.position = CGPointMake(positionInScene.x, positionInScene.y + 30);
-        menuAnimalTwo.position = CGPointMake(positionInScene.x, positionInScene.y - 30);
-        menuAnimalThree.position = CGPointMake(positionInScene.x + 30, positionInScene.y);
-        menuTreeOne.position = CGPointMake(positionInScene.x - 30, positionInScene.y);
-        menuTreeTwo.position = CGPointMake(positionInScene.x - 30, positionInScene.y - 50);
-        menuFacotry.position = CGPointMake(positionInScene.x + 30, positionInScene.y + 30);
-
-        menuAnimalOne.isChild = NO;
-        menuAnimalTwo.isChild = NO;
-        menuAnimalThree.isChild = NO;
-        menuTreeOne.isNew = false;
-        menuTreeTwo.isNew = false;
+        SKMenuElement *menuAnimalOne = [SKMenuElement createMenuElementOfType:0 InPosition:positionInScene];
+        SKMenuElement *menuAnimalTwo = [SKMenuElement createMenuElementOfType:1 InPosition:positionInScene];
+        SKMenuElement *menuAnimalThree = [SKMenuElement createMenuElementOfType:2 InPosition:positionInScene];
+        SKMenuElement *menuTreeOne = [SKMenuElement createMenuElementOfType:3 InPosition:positionInScene];
+        SKMenuElement *menuTreeTwo = [SKMenuElement createMenuElementOfType:4 InPosition:positionInScene];
+        SKMenuElement *menuFacotry = [SKMenuElement createMenuElementOfType:5 InPosition:positionInScene];
 
         [self.menuArray addObject:menuAnimalOne];
         [self.menuArray addObject:menuAnimalTwo];
@@ -775,7 +847,7 @@
         [self.menuArray addObject:menuTreeOne];
         [self.menuArray addObject:menuTreeTwo];
         [self.menuArray addObject:menuFacotry];
-
+        
         [self addChild:menuAnimalOne];
         [self addChild:menuAnimalTwo];
         [self addChild:menuAnimalThree];
@@ -823,29 +895,46 @@
     
     if (self.menuArray.count == 0)
         self.clickedOnMenu = false;
+    SKMenuElement *testingElement;
     for (int i = 0; i < self.menuArray.count; i++){
-        if ([[self.menuArray objectAtIndex:i] isKindOfClass: [SKAnimals class]]){
-            SKAnimals *temp = self.menuArray[i];
-            if ([temp containsPoint:positionInScene]){
+        testingElement = [self.menuArray objectAtIndex:i];
+        if (testingElement.elementType == 0|| testingElement.elementType == 1||testingElement.elementType == 2){
+            if ([testingElement containsPoint:positionInScene]){
+                SKAnimals *temp = [SKAnimals createAnimalofType:(AnimalType)testingElement.elementType];
                 [self.animalArray addObject:temp];
-                [self.menuArray removeObject:temp];
                 [self removeChildrenInArray:self.menuArray];
                 [self.menuArray removeAllObjects];
+                temp.size = CGSizeMake(20, 20);
                 temp.position = CGPointMake(self.lastTouch.x, self.lastTouch.y);
+                [self addChild:temp];
                 self.isMenu = false;
                 self.clickedOnMenu = true;
                 return;
             }
         }
-        else if ([[self.menuArray objectAtIndex:i] isKindOfClass:[SKVegetables class]]){
-            SKVegetables *temp = self.menuArray[i];
-            if ([temp containsPoint:positionInScene]){
+        else if (testingElement.elementType == 3 || testingElement.elementType == 4){
+            if ([testingElement containsPoint:positionInScene]){
+                
+                SKVegetables *temp;
+                if (testingElement.elementType == Vegetable_Grass_Menu){
+                    temp = [SKVegetables createVegetableOfType:Vegetable_Grass];
+                    temp.size = CGSizeMake(25, 35);
+                }
+                if (testingElement.elementType == Vegetable_Tree_Menu){
+                    temp = [SKVegetables createVegetableOfType:Vegetable_Tree];
+                    temp.size = CGSizeMake(30, 45);
+                }
                 temp.poisonLevel = self.earthPollution/10;
-                [self.menuArray removeObject:temp];
+    
                 [self removeChildrenInArray:self.menuArray];
                 [self.menuArray removeAllObjects];
                 [self.vegetableArray addObject:temp];
+                
                 temp.position = CGPointMake(self.lastTouch.x, self.lastTouch.y);
+                temp.isNew = NO;
+                
+                [self addChild:temp];
+                
                 self.isMenu = false;
                 self.clickedOnMenu = true;
                 return;
@@ -853,16 +942,19 @@
             }
         }
         else{
-            SKSpriteNode *temp = self.menuArray[i];
-            if ([temp containsPoint:positionInScene]){
-                [self.menuArray removeObject:temp];
+            if ([testingElement containsPoint:positionInScene]){
+                NSLog(@"entrou");
+                SKSpriteNode *temp = [SKSpriteNode spriteNodeWithImageNamed:@"industria.png"];
+                temp.zPosition = 0.4f;
                 [self removeChildrenInArray:self.menuArray];
                 [self.menuArray removeAllObjects];
-                
                 temp.position = CGPointMake(self.lastTouch.x, self.lastTouch.y);
+                temp.size = CGSizeMake(40, 40);
+                [self addChild:temp];
+                
                 self.isMenu = false;
                 self.clickedOnMenu = true;
-                CGRect rectAgua = CGRectMake(0,50,self.frame.size.width,130);
+                CGRect rectAgua = CGRectMake(0,50,self.frame.size.width,100);
                 if (CGRectContainsPoint(rectAgua, temp.position)){
                     SKAction *animateBarrel = [SKAction moveToY:50 duration:3.0f];
                     [temp runAction:animateBarrel];

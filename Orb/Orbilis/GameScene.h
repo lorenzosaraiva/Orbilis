@@ -9,17 +9,19 @@
 #import <SpriteKit/SpriteKit.h>
 #import "SKAnimals.h"
 #import "SKVegetables.h"
+#import "SKMenuElement.h"
 
 @interface GameScene : SKScene <UIGestureRecognizerDelegate, SKPhysicsContactDelegate>
 
 @property (strong, nonatomic) SKSpriteNode *light;
 @property (strong, nonatomic) SKSpriteNode *dark;
 @property BOOL lightDark;
-@property (strong, nonatomic) NSMutableArray *garbage;
+
 
 @property (strong, nonatomic) SKShapeNode *islandShape;
 @property (strong, nonatomic) SKShapeNode *seaShape;
 @property (strong, nonatomic) SKSpriteNode *sun;
+@property (strong, nonatomic) SKSpriteNode *moon;
 @property (strong, nonatomic) SKSpriteNode *island;
 @property (strong, nonatomic) SKSpriteNode *sand;
 @property (strong, nonatomic) SKSpriteNode *sea;
@@ -29,7 +31,9 @@
 @property (strong, nonatomic) SKSpriteNode *orangeSky;
 @property (strong, nonatomic) SKSpriteNode *lightOrangeSky;
 @property (strong, nonatomic) SKSpriteNode *lightBlueSky;
+@property (strong, nonatomic) SKSpriteNode *nightSky;
 @property (strong, nonatomic) SKSpriteNode *currentSky;
+@property (strong, nonatomic) SKSpriteNode *lastSky;
 @property (strong, nonatomic) NSMutableArray *animalArray;
 @property (strong, nonatomic) NSMutableArray *sceneryArray;
 @property (strong, nonatomic) NSMutableArray *vegetableArray;
@@ -42,9 +46,12 @@
 @property (nonatomic) CGPoint lastTouch;
 
 
+
 @property float temperature;
 @property float pollution;
 @property float humidity;
+@property float secondsToNight;
+@property float nightDuration;
 
 @property float luminosity;
 @property float waterPollution;
@@ -58,5 +65,6 @@
 
 @property BOOL isMenu;
 @property BOOL clickedOnMenu;
+@property BOOL isNight;
 
 @end

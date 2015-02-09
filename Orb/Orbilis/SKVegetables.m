@@ -50,7 +50,7 @@
     }
 
     new.poisonLevel = 0;
-
+    new.zPosition = 0.4f;
     return new;
 }
 
