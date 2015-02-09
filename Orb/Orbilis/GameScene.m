@@ -740,7 +740,7 @@
 
 -(void)checkForOpenLandMenu:(CGPoint)positionInScene {
 
-    if ([self.islandShape containsPoint:positionInScene]) {
+    if ([self pointInIsland:positionInScene]) {
         
         SKAnimals *menuAnimalOne = [SKAnimals createAnimalofType:Animal_Herbivore];
         SKAnimals *menuAnimalTwo = [SKAnimals createAnimalofType:Animal_Carnivore];
@@ -926,32 +926,29 @@
 
 -(BOOL)pointInIsland:(CGPoint)point {
     
-    float prop1 = 0.60;
-    float prop2 = 0.15;
-    float prop3 = 0.01;
-    float prop4 = -0.05;
+    float width = self.frame.size.width/1.5;
+    float height = self.frame.size.height/5;
+    float x = CGRectGetMidX(self.frame);
+    float y = CGRectGetMidY(self.frame) - self.frame.size.height*0.02;
     
-    float prop5 = 0.40;
-    float prop6 = 0.08;
-    float prop7 = 0.01;
-    float prop8 = 0.025;
+    float a = width/2;
+    float b = height; //POR QUE NAO HEIGHT/2 ????
     
-    float newProp = (self.frame.size.width/700)/0.55;
+    float yMin = y - (height/2);
+    float yMax = y + (height/2);
     
-    float x1 = ((self.frame.size.width-self.frame.size.width*prop1)/2) + (self.frame.size.width*prop3);
-    float y1 = ((self.frame.size.height-self.frame.size.height*prop2)/2) + (self.frame.size.height*prop4);
-    float width1 = self.frame.size.width*prop1 * newProp;
-    float height1 = self.frame.size.height*prop2 * newProp;
+    float yInElipse = point.y - yMin;
     
-    float x2 = ((self.frame.size.width-self.frame.size.width*prop5)/2) + (self.frame.size.width*prop7);
-    float y2 = ((self.frame.size.height-self.frame.size.height*prop6)/2) + (self.frame.size.height*prop8);
-    float width2 = self.frame.size.width*prop5 * newProp;
-    float height2 = self.frame.size.height*prop6 * newProp;
+    float xInElipse = sqrtf( (a*a) * (1 - ((yInElipse*yInElipse)/(b*b))));
+    float xMax = x + xInElipse;
+    float xMin = x - xInElipse;
     
-    CGRect rect = CGRectMake(x1, y1, width1, height1);
-    CGRect rect2 = CGRectMake(x2, y2, width2, height2);
+    if((point.y>yMin && point.y<yMax)&&(point.x>xMin && point.x<xMax)) {
+        return true;
+    } else {
+        return false;
+    }
     
-    return (CGRectContainsPoint(rect, point )||CGRectContainsPoint(rect2, point));
 }
 
 float getRandomNum(float minimum, float maximum) {
