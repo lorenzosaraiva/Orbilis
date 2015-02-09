@@ -143,8 +143,8 @@
     CGPathAddLineToPoint(path, nil, 50, 200);
     CGPathAddLineToPoint(path, nil, 25, 240);
     
-    self.shape = [SKShapeNode shapeNodeWithPath:path];
-    [self addChild:self.shape];
+    self.islandShape = [SKShapeNode shapeNodeWithPath:path];
+    [self addChild:self.islandShape];
 }
 
 -(void)resizeSun:(UIPinchGestureRecognizer*)recognizer{
@@ -397,7 +397,8 @@
         [self updateAnimalEnergyWithId:i];
         if (i < self.animalArray.count)
         [self temperatureEffectOnAnimalWithId:i];
-        
+        if (i < self.animalArray.count)
+        [self reproduceAnimalWithId:i];
         }
     }
 }
@@ -418,6 +419,7 @@
     NSLog(@"%d segundos", self.global);
     NSLog(@"%f humidade", self.humidity);
     NSLog(@"%f poluicao", self.earthPollution);
+    NSLog(@"%lu animais", (unsigned long)self.animalArray.count);
 
 }
 
@@ -522,7 +524,7 @@
         SKAction *move = [SKAction moveTo:point duration:1.0f];
         
         
-        if ([self.shape containsPoint:point] && ![mainTestingAnimal hasActions])
+        if ([self.islandShape containsPoint:point] && ![mainTestingAnimal hasActions])
             [mainTestingAnimal runAction:move];
          
         CGRect rectAgua = CGRectMake(0,50,self.frame.size.width,130);
@@ -549,6 +551,7 @@
     if (mainTestingAnimal.energy <= 0){
         SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
         [mainTestingAnimal runAction:killAnimal completion:^{[self.animalArray removeObject:mainTestingAnimal];}];
+        [self.garbage addObject:mainTestingAnimal];
         
     }
 }
@@ -575,7 +578,9 @@
         int alive = arc4random()%100;
         if (!alive){
             SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
+          
              [mainTestingAnimal runAction:killAnimal completion:^{[self.animalArray removeObject:mainTestingAnimal];}];
+            [self.garbage addObject:mainTestingAnimal];
         }
     }
 }
@@ -588,14 +593,18 @@
     mainTestingAnimal.age++;
 
     if (mainTestingAnimal.age >= mainTestingAnimal.ageLimit) {
-
+        
+        SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
+        [mainTestingAnimal runAction:killAnimal];
         [self.animalArray removeObject:mainTestingAnimal];
-        [mainTestingAnimal removeFromParent];
+        [self.garbage addObject:mainTestingAnimal];
+        
     }
 }
 
-- (void)reproduceAnimal:(SKAnimals*)mainTestingAnimal {
-        
+- (void)reproduceAnimalWithId:(int)i {
+    
+    SKAnimals * mainTestingAnimal = self.animalArray[i];
     if (mainTestingAnimal.energy>=mainTestingAnimal.multiplyLimit) {
     
         mainTestingAnimal.energy = 0.5f;
@@ -631,26 +640,24 @@
                 [testingPlant runAction:sequence];
                 [self.vegetableArray removeObject:testingPlant];
                 mainTestingAnimal.energy += testingPlant.energyValue;
-                mainTestingAnimal.nextMeal = 8;
+                mainTestingAnimal.nextMeal = 3;
                     
                 } else if (testingPlant.vegetableType == Vegetable_Tree && testingPlant.leaves > 0) {
                 
                     testingPlant.leaves--;
                     mainTestingAnimal.energy += testingPlant.energyValue;
-                    mainTestingAnimal.nextMeal = 8;
+                    mainTestingAnimal.nextMeal = 3;
                     
                 }
                 
                 if (testingPlant.poisonLevel > 7){
                     SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
-                     [mainTestingAnimal runAction:killAnimal completion:^{[self.animalArray removeObject:mainTestingAnimal];}];
+                    [mainTestingAnimal runAction:killAnimal completion:^{[self.animalArray removeObject:mainTestingAnimal];}];
                     return;
                 }
             }
         }
     }
-    
-    [self reproduceAnimal:mainTestingAnimal];
 }
 
 - (void)checkAnimalContactWithId:(int)i {
@@ -665,21 +672,20 @@
             
             SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
             
+            
             if ((mainTestingAnimal.animalType==Animal_Carnivore&&secondaryTestingAnimal.animalType==Animal_Herbivore)||(mainTestingAnimal.animalType==Animal_Predator&&secondaryTestingAnimal.animalType==Animal_Carnivore)) {
                 
                 
                 mainTestingAnimal.energy += secondaryTestingAnimal.energyValue;
                 if (mainTestingAnimal.animalType == Animal_Carnivore)
-                    mainTestingAnimal.nextMeal = 10;
+                    mainTestingAnimal.nextMeal = 6;
                 if (mainTestingAnimal.animalType == Animal_Predator)
-                    mainTestingAnimal.nextMeal = 10;
+                    mainTestingAnimal.nextMeal = 6;
                     
                 mainTestingAnimal.performingStopAction = YES;
                 secondaryTestingAnimal.performingStopAction = YES;
 
                 [secondaryTestingAnimal runAction:killAnimal completion:^{[self.animalArray removeObject:secondaryTestingAnimal];}];
-                [self reproduceAnimal:mainTestingAnimal];
-                
             }
         }   
     }
@@ -734,7 +740,7 @@
 
 -(void)checkForOpenLandMenu:(CGPoint)positionInScene {
 
-    if ([self.shape containsPoint:positionInScene]) {
+    if ([self.islandShape containsPoint:positionInScene]) {
         
         SKAnimals *menuAnimalOne = [SKAnimals createAnimalofType:Animal_Herbivore];
         SKAnimals *menuAnimalTwo = [SKAnimals createAnimalofType:Animal_Carnivore];

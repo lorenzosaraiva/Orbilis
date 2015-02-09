@@ -18,31 +18,31 @@
     if (type == Animal_Herbivore){
         temp = [SKAnimals spriteNodeWithImageNamed:@"GroundOne.png"];
         temp.energy = 0.5;
-        temp.energyValue = 1;
+        temp.energyValue = 2;
         temp.multiplyLimit = 1;
         temp.animalType = 0;
-        temp.nextMeal = 8;
+        temp.nextMeal = 3;
         temp.age = 0;
-        temp.ageLimit = 180;
+        temp.ageLimit = 30;
     }
     if (type == Animal_Carnivore){
         temp = [SKAnimals spriteNodeWithImageNamed:@"GroundTwo.png"];
         temp.energy = 0.3;
         temp.energyValue = 1;
-        temp.multiplyLimit = 4;
+        temp.multiplyLimit = 5;
         temp.animalType = 1;
-        temp.nextMeal = 10;
+        temp.nextMeal = 6;
         temp.age = 0;
-        temp.ageLimit = 180;
+        temp.ageLimit = 30;
     }
     if (type == Animal_Predator){
         temp = [SKAnimals spriteNodeWithImageNamed:@"GroundThree.png"];
         temp.energy = 0.5;
-        temp.multiplyLimit = 6;
+        temp.multiplyLimit = 4;
         temp.animalType = 2;
-        temp.nextMeal = 10;
+        temp.nextMeal = 6;
         temp.age = 0;
-        temp.ageLimit = 180;
+        temp.ageLimit = 45;
     }
     
     if (type == Animal_Water_Herbivore){

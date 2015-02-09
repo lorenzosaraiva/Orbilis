@@ -15,8 +15,10 @@
 @property (strong, nonatomic) SKSpriteNode *light;
 @property (strong, nonatomic) SKSpriteNode *dark;
 @property BOOL lightDark;
+@property (strong, nonatomic) NSMutableArray *garbage;
 
-@property (strong, nonatomic) SKShapeNode *shape;
+@property (strong, nonatomic) SKShapeNode *islandShape;
+@property (strong, nonatomic) SKShapeNode *seaShape;
 @property (strong, nonatomic) SKSpriteNode *sun;
 @property (strong, nonatomic) SKSpriteNode *island;
 @property (strong, nonatomic) SKSpriteNode *sand;
