@@ -81,6 +81,10 @@
 		518634221A6B3346000B6BDF /* Water.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634101A6B3346000B6BDF /* Water.png */; };
 		518634231A6B3346000B6BDF /* Water@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634111A6B3346000B6BDF /* Water@2x.png */; };
 		518634241A6B3346000B6BDF /* Water@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634121A6B3346000B6BDF /* Water@3x.png */; };
+		51DC7B711A88FBA000359324 /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DC7B701A88FBA000359324 /* MenuScene.m */; };
+		51DC7B751A88FFFA00359324 /* FirstScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B721A88FFFA00359324 /* FirstScreen.png */; };
+		51DC7B761A88FFFA00359324 /* FirstScreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B731A88FFFA00359324 /* FirstScreen@2x.png */; };
+		51DC7B771A88FFFA00359324 /* FirstScreen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B741A88FFFA00359324 /* FirstScreen@3x.png */; };
 		6137D45E1A888B0000C13C34 /* SkyDarkBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D45D1A888B0000C13C34 /* SkyDarkBlue.png */; };
 		6137D46B1A888B7300C13C34 /* Alga_2@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D45F1A888B7300C13C34 /* Alga_2@1x.png */; };
 		6137D46C1A888B7300C13C34 /* Alga_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D4601A888B7300C13C34 /* Alga_2@2x.png */; };
@@ -191,6 +195,11 @@
 		518634101A6B3346000B6BDF /* Water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Water.png; sourceTree = "<group>"; };
 		518634111A6B3346000B6BDF /* Water@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Water@2x.png"; sourceTree = "<group>"; };
 		518634121A6B3346000B6BDF /* Water@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Water@3x.png"; sourceTree = "<group>"; };
+		51DC7B6F1A88FBA000359324 /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
+		51DC7B701A88FBA000359324 /* MenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuScene.m; sourceTree = "<group>"; };
+		51DC7B721A88FFFA00359324 /* FirstScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FirstScreen.png; sourceTree = "<group>"; };
+		51DC7B731A88FFFA00359324 /* FirstScreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FirstScreen@2x.png"; sourceTree = "<group>"; };
+		51DC7B741A88FFFA00359324 /* FirstScreen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FirstScreen@3x.png"; sourceTree = "<group>"; };
 		6137D45D1A888B0000C13C34 /* SkyDarkBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SkyDarkBlue.png; sourceTree = "<group>"; };
 		6137D45F1A888B7300C13C34 /* Alga_2@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga_2@1x.png"; sourceTree = "<group>"; };
 		6137D4601A888B7300C13C34 /* Alga_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga_2@2x.png"; sourceTree = "<group>"; };
@@ -251,6 +260,8 @@
 				0A23B0D41A697121000C78A4 /* AppDelegate.m */,
 				0A23B0D61A697121000C78A4 /* GameScene.h */,
 				0A23B0D71A697121000C78A4 /* GameScene.m */,
+				51DC7B6F1A88FBA000359324 /* MenuScene.h */,
+				51DC7B701A88FBA000359324 /* MenuScene.m */,
 				51770FDE1A792EC500FD8922 /* GameSceneOld.h */,
 				51770FDF1A792EC500FD8922 /* GameSceneOld.m */,
 				0A23B0DB1A697121000C78A4 /* GameViewController.h */,
@@ -313,6 +324,9 @@
 		0A55A8F01A6974C60028EEA3 /* OrbImages */ = {
 			isa = PBXGroup;
 			children = (
+				51DC7B721A88FFFA00359324 /* FirstScreen.png */,
+				51DC7B731A88FFFA00359324 /* FirstScreen@2x.png */,
+				51DC7B741A88FFFA00359324 /* FirstScreen@3x.png */,
 				0A5762711A79953800C20B3D /* SkyOrange.png */,
 				510043271A79222600B3F3B9 /* MiniTree.png */,
 				510043281A79222600B3F3B9 /* MiniTree@2x.png */,
@@ -544,8 +558,10 @@
 				0A5762721A79953800C20B3D /* SkyOrange.png in Resources */,
 				0A5762761A79A23C00C20B3D /* SkyLightBlue.png in Resources */,
 				0A5762741A799E1B00C20B3D /* SkyLightOrange.png in Resources */,
+				51DC7B761A88FFFA00359324 /* FirstScreen@2x.png in Resources */,
 				518634171A6B3346000B6BDF /* Island@2x.png in Resources */,
 				0A23B0E51A697121000C78A4 /* LaunchScreen.xib in Resources */,
+				51DC7B751A88FFFA00359324 /* FirstScreen.png in Resources */,
 				5100432A1A79222600B3F3B9 /* MiniTree.png in Resources */,
 				5186341F1A6B3346000B6BDF /* Sky.png in Resources */,
 				0A5762781A7BE89700C20B3D /* SnowParticle.sks in Resources */,
@@ -598,6 +614,7 @@
 				0A99D7BE1A71975A00A21379 /* Peixe2.png in Resources */,
 				5100431E1A77CF7700B3F3B9 /* GroundOne.png in Resources */,
 				5186341A1A6B3346000B6BDF /* Sand@2x.png in Resources */,
+				51DC7B771A88FFFA00359324 /* FirstScreen@3x.png in Resources */,
 				5186341B1A6B3346000B6BDF /* Sand@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -617,6 +634,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A23B0DD1A697121000C78A4 /* GameViewController.m in Sources */,
+				51DC7B711A88FBA000359324 /* MenuScene.m in Sources */,
 				0A23B0D51A697121000C78A4 /* AppDelegate.m in Sources */,
 				51770FE01A792EC500FD8922 /* GameSceneOld.m in Sources */,
 				0A23B0FC1A697197000C78A4 /* SKAnimals.m in Sources */,

@@ -64,7 +64,8 @@
 - (void)drawWolrd {
     
     [self drawPath];
-    float prop = 0.55f;
+    
+    float prop = (self.frame.size.width/700);
     
     self.cage = [SKSpriteNode spriteNodeWithImageNamed:@"Cage.png"];
     self.cage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
@@ -88,7 +89,6 @@
     self.lightOrangeSky.size = CGSizeMake(self.lightOrangeSky.frame.size.width*prop, self.lightOrangeSky.frame.size.height*prop);
     self.lightOrangeSky.alpha = 0.0f;
     [self addChild:self.lightOrangeSky];
-    
     
     self.lightBlueSky = [SKSpriteNode spriteNodeWithImageNamed:@"SkyLightBlue.png"];
     self.lightBlueSky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
