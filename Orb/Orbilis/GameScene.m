@@ -139,7 +139,7 @@
     [self addChild:self.island];
     
     self.sun = [SKSpriteNode spriteNodeWithImageNamed:@"Sol.png"];
-    self.sun.position = CGPointMake(90, self.frame.size.height - 300*prop);
+    self.sun.position = CGPointMake(90, self.frame.size.height - 120);
     self.sun.zPosition = 0.1f;
     
     [self addChild:self.sun];
