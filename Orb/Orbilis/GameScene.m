@@ -45,6 +45,10 @@
     [self.view addGestureRecognizer:swipeRightRecognizer];
     [self.view addGestureRecognizer:swipeLeftRecognizer];
     
+    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleHoldGesture:)];
+    [self.view addGestureRecognizer:longPressRecognizer];
+    
+    
     
 //     CONTROLE DA LUMINOSIDADE (incompleto)
 //    self.light = [SKSpriteNode spriteNodeWithColor:[UIColor whiteColor] size:self.view.frame.size];
@@ -62,8 +66,6 @@
 }
 
 - (void)drawWolrd {
-    
-    [self drawPath];
     
     float prop = (self.frame.size.width/700);
     
@@ -119,33 +121,33 @@
     [self addChild:self.island];
     
     self.sun = [SKSpriteNode spriteNodeWithImageNamed:@"Sol.png"];
-    self.sun.position = CGPointMake(90, self.frame.size.height - 120);
+    self.sun.position = CGPointMake(90, self.frame.size.height - 300*prop);
     self.sun.zPosition = 0.1f;
 
     [self addChild:self.sun];
 }
-
--(void)drawPath{
-
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, nil, 25, 240);
-    CGPathAddLineToPoint(path, nil, 35, 250);
-    CGPathAddLineToPoint(path, nil, 40, 270);
-    CGPathAddLineToPoint(path, nil, 50, 290);
-    CGPathAddLineToPoint(path, nil, 75, 310);
-    CGPathAddLineToPoint(path, nil, 85, 330);
-    CGPathAddLineToPoint(path, nil, 120, 347);
-    CGPathAddLineToPoint(path, nil, 175, 347);
-    CGPathAddLineToPoint(path, nil, 270, 290);
-    CGPathAddLineToPoint(path, nil, 295, 250);
-    CGPathAddLineToPoint(path, nil, 295, 220);
-    CGPathAddLineToPoint(path, nil, 260, 210);
-    CGPathAddLineToPoint(path, nil, 50, 200);
-    CGPathAddLineToPoint(path, nil, 25, 240);
-    
-    self.islandShape = [SKShapeNode shapeNodeWithPath:path];
-    [self addChild:self.islandShape];
-}
+//
+//-(void)drawPath{
+//
+//    CGMutablePathRef path = CGPathCreateMutable();
+//    CGPathMoveToPoint(path, nil, 25, 240);
+//    CGPathAddLineToPoint(path, nil, 35, 250);
+//    CGPathAddLineToPoint(path, nil, 40, 270);
+//    CGPathAddLineToPoint(path, nil, 50, 290);
+//    CGPathAddLineToPoint(path, nil, 75, 310);
+//    CGPathAddLineToPoint(path, nil, 85, 330);
+//    CGPathAddLineToPoint(path, nil, 120, 347);
+//    CGPathAddLineToPoint(path, nil, 175, 347);
+//    CGPathAddLineToPoint(path, nil, 270, 290);
+//    CGPathAddLineToPoint(path, nil, 295, 250);
+//    CGPathAddLineToPoint(path, nil, 295, 220);
+//    CGPathAddLineToPoint(path, nil, 260, 210);
+//    CGPathAddLineToPoint(path, nil, 50, 200);
+//    CGPathAddLineToPoint(path, nil, 25, 240);
+//    
+//    self.islandShape = [SKShapeNode shapeNodeWithPath:path];
+//    [self addChild:self.islandShape];
+//}
 
 -(void)resizeSun:(UIPinchGestureRecognizer*)recognizer{
 
@@ -292,6 +294,19 @@
     }
 }
 
+- (void)handleHoldGesture:(UILongPressGestureRecognizer *)recognizer {
+    
+    CGPoint positionInScene = [recognizer locationInView:self.view];
+    positionInScene = [self convertPointFromView:positionInScene];
+
+    //[self checkForMenuClick:positionInScene];
+    if (!self.clickedOnMenu&&!self.isMenu){
+        [self checkForOpenLandMenu:positionInScene];
+    }
+    
+    
+}
+
 - (void)handlePanFrom:(UIPanGestureRecognizer *)recognizer {
     
     CGPoint touchLocation = [recognizer locationInView:recognizer.view];
@@ -356,7 +371,7 @@
     [self checkForAnimalClick:positionInScene];
     [self checkForClickOutsideMenu:positionInScene];
     if (!self.clickedOnMenu){
-        [self checkForOpenLandMenu:positionInScene];
+        //[self checkForOpenLandMenu:positionInScene];
         [self checkForWaterMenu:positionInScene];
     }
     
@@ -524,7 +539,7 @@
         SKAction *move = [SKAction moveTo:point duration:1.0f];
         
         
-        if ([self.islandShape containsPoint:point] && ![mainTestingAnimal hasActions])
+        if ([self pointInIsland:point] && ![mainTestingAnimal hasActions])
             [mainTestingAnimal runAction:move];
          
         CGRect rectAgua = CGRectMake(0,50,self.frame.size.width,130);
