@@ -81,6 +81,19 @@
 		518634221A6B3346000B6BDF /* Water.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634101A6B3346000B6BDF /* Water.png */; };
 		518634231A6B3346000B6BDF /* Water@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634111A6B3346000B6BDF /* Water@2x.png */; };
 		518634241A6B3346000B6BDF /* Water@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 518634121A6B3346000B6BDF /* Water@3x.png */; };
+		6137D45E1A888B0000C13C34 /* SkyDarkBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D45D1A888B0000C13C34 /* SkyDarkBlue.png */; };
+		6137D46B1A888B7300C13C34 /* Alga_2@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D45F1A888B7300C13C34 /* Alga_2@1x.png */; };
+		6137D46C1A888B7300C13C34 /* Alga_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D4601A888B7300C13C34 /* Alga_2@2x.png */; };
+		6137D46D1A888B7300C13C34 /* Alga_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D4611A888B7300C13C34 /* Alga_2@3x.png */; };
+		6137D46E1A888B7300C13C34 /* Alga_3@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D4621A888B7300C13C34 /* Alga_3@1x.png */; };
+		6137D46F1A888B7300C13C34 /* Alga_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D4631A888B7300C13C34 /* Alga_3@2x.png */; };
+		6137D4701A888B7300C13C34 /* Alga_3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D4641A888B7300C13C34 /* Alga_3@3x.png */; };
+		6137D4711A888B7300C13C34 /* Alga_4@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D4651A888B7300C13C34 /* Alga_4@1x.png */; };
+		6137D4721A888B7300C13C34 /* Alga_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D4661A888B7300C13C34 /* Alga_4@2x.png */; };
+		6137D4731A888B7300C13C34 /* Alga_4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D4671A888B7300C13C34 /* Alga_4@3x.png */; };
+		6137D4741A888B7300C13C34 /* Alga@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D4681A888B7300C13C34 /* Alga@1x.png */; };
+		6137D4751A888B7300C13C34 /* Alga@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D4691A888B7300C13C34 /* Alga@2x.png */; };
+		6137D4761A888B7300C13C34 /* Alga@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D46A1A888B7300C13C34 /* Alga@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +191,19 @@
 		518634101A6B3346000B6BDF /* Water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Water.png; sourceTree = "<group>"; };
 		518634111A6B3346000B6BDF /* Water@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Water@2x.png"; sourceTree = "<group>"; };
 		518634121A6B3346000B6BDF /* Water@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Water@3x.png"; sourceTree = "<group>"; };
+		6137D45D1A888B0000C13C34 /* SkyDarkBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SkyDarkBlue.png; sourceTree = "<group>"; };
+		6137D45F1A888B7300C13C34 /* Alga_2@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga_2@1x.png"; sourceTree = "<group>"; };
+		6137D4601A888B7300C13C34 /* Alga_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga_2@2x.png"; sourceTree = "<group>"; };
+		6137D4611A888B7300C13C34 /* Alga_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga_2@3x.png"; sourceTree = "<group>"; };
+		6137D4621A888B7300C13C34 /* Alga_3@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga_3@1x.png"; sourceTree = "<group>"; };
+		6137D4631A888B7300C13C34 /* Alga_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga_3@2x.png"; sourceTree = "<group>"; };
+		6137D4641A888B7300C13C34 /* Alga_3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga_3@3x.png"; sourceTree = "<group>"; };
+		6137D4651A888B7300C13C34 /* Alga_4@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga_4@1x.png"; sourceTree = "<group>"; };
+		6137D4661A888B7300C13C34 /* Alga_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga_4@2x.png"; sourceTree = "<group>"; };
+		6137D4671A888B7300C13C34 /* Alga_4@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga_4@3x.png"; sourceTree = "<group>"; };
+		6137D4681A888B7300C13C34 /* Alga@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga@1x.png"; sourceTree = "<group>"; };
+		6137D4691A888B7300C13C34 /* Alga@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga@2x.png"; sourceTree = "<group>"; };
+		6137D46A1A888B7300C13C34 /* Alga@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,6 +320,7 @@
 				510043151A77CF7700B3F3B9 /* GroundOne.png */,
 				510043161A77CF7700B3F3B9 /* GroundOne@2x.png */,
 				510043171A77CF7700B3F3B9 /* GroundOne@3x.png */,
+				6137D45D1A888B0000C13C34 /* SkyDarkBlue.png */,
 				510043181A77CF7700B3F3B9 /* GroundThree.png */,
 				510043191A77CF7700B3F3B9 /* GroundThree@2x.png */,
 				5100431A1A77CF7700B3F3B9 /* GroundThree@3x.png */,
@@ -380,6 +407,18 @@
 			isa = PBXGroup;
 			children = (
 				0A99D7B01A71975A00A21379 /* arvore1.png */,
+				6137D45F1A888B7300C13C34 /* Alga_2@1x.png */,
+				6137D4601A888B7300C13C34 /* Alga_2@2x.png */,
+				6137D4611A888B7300C13C34 /* Alga_2@3x.png */,
+				6137D4621A888B7300C13C34 /* Alga_3@1x.png */,
+				6137D4631A888B7300C13C34 /* Alga_3@2x.png */,
+				6137D4641A888B7300C13C34 /* Alga_3@3x.png */,
+				6137D4651A888B7300C13C34 /* Alga_4@1x.png */,
+				6137D4661A888B7300C13C34 /* Alga_4@2x.png */,
+				6137D4671A888B7300C13C34 /* Alga_4@3x.png */,
+				6137D4681A888B7300C13C34 /* Alga@1x.png */,
+				6137D4691A888B7300C13C34 /* Alga@2x.png */,
+				6137D46A1A888B7300C13C34 /* Alga@3x.png */,
 				0A99D7B11A71975A00A21379 /* arvore2.png */,
 				0A99D7B21A71975A00A21379 /* arvore3.png */,
 			);
@@ -486,16 +525,21 @@
 				0A99D7CC1A71975A00A21379 /* arvore3.png in Resources */,
 				518634231A6B3346000B6BDF /* Water@2x.png in Resources */,
 				5186341D1A6B3346000B6BDF /* Sea@2x.png in Resources */,
+				6137D4751A888B7300C13C34 /* Alga@2x.png in Resources */,
 				518634161A6B3346000B6BDF /* Island.png in Resources */,
 				5186341E1A6B3346000B6BDF /* Sea@3x.png in Resources */,
 				518634241A6B3346000B6BDF /* Water@3x.png in Resources */,
+				6137D4721A888B7300C13C34 /* Alga_4@2x.png in Resources */,
+				6137D4741A888B7300C13C34 /* Alga@1x.png in Resources */,
 				0A57627A1A7C1F9300C20B3D /* SmokeParticle.sks in Resources */,
 				0A99D7BB1A71975A00A21379 /* Pássaro1.png in Resources */,
 				0A99D7D11A71975A00A21379 /* industria.png in Resources */,
 				0A99D7C11A71975A00A21379 /* Peixe5.png in Resources */,
 				0A99D7BD1A71975A00A21379 /* Peixe1.png in Resources */,
 				0A99D7C51A71975A00A21379 /* Nuvem3.png in Resources */,
+				6137D4731A888B7300C13C34 /* Alga_4@3x.png in Resources */,
 				518634131A6B3346000B6BDF /* Cage.png in Resources */,
+				6137D46D1A888B7300C13C34 /* Alga_2@3x.png in Resources */,
 				0A507B0A1A76A4DD003C0808 /* RainParticle.sks in Resources */,
 				0A5762721A79953800C20B3D /* SkyOrange.png in Resources */,
 				0A5762761A79A23C00C20B3D /* SkyLightBlue.png in Resources */,
@@ -505,13 +549,16 @@
 				5100432A1A79222600B3F3B9 /* MiniTree.png in Resources */,
 				5186341F1A6B3346000B6BDF /* Sky.png in Resources */,
 				0A5762781A7BE89700C20B3D /* SnowParticle.sks in Resources */,
+				6137D4761A888B7300C13C34 /* Alga@3x.png in Resources */,
 				0A99D7D01A71975A00A21379 /* Barril_mar1.png in Resources */,
 				0A55A91E1A6996860028EEA3 /* tree.png in Resources */,
 				510043221A77CF7700B3F3B9 /* GroundThree@2x.png in Resources */,
 				0A99D7CA1A71975A00A21379 /* arvore1.png in Resources */,
+				6137D45E1A888B0000C13C34 /* SkyDarkBlue.png in Resources */,
 				0A99D7C61A71975A00A21379 /* nuvem4.png in Resources */,
 				0A99D7C41A71975A00A21379 /* Nuvem2.png in Resources */,
 				0A99D7D21A71975A00A21379 /* Petróleo.png in Resources */,
+				6137D46F1A888B7300C13C34 /* Alga_3@2x.png in Resources */,
 				510043251A77CF7700B3F3B9 /* GroundTwo@2x.png in Resources */,
 				510043231A77CF7700B3F3B9 /* GroundThree@3x.png in Resources */,
 				518634191A6B3346000B6BDF /* Sand.png in Resources */,
@@ -519,6 +566,8 @@
 				518634141A6B3346000B6BDF /* Cage@2x.png in Resources */,
 				0A99D7D31A71975A00A21379 /* Petróleo2.png in Resources */,
 				5186341C1A6B3346000B6BDF /* Sea.png in Resources */,
+				6137D46B1A888B7300C13C34 /* Alga_2@1x.png in Resources */,
+				6137D46C1A888B7300C13C34 /* Alga_2@2x.png in Resources */,
 				0A99D7CF1A71975A00A21379 /* Barril_mar.png in Resources */,
 				0A23B0E21A697121000C78A4 /* Images.xcassets in Resources */,
 				0A99D7CE1A71975A00A21379 /* Barril2.png in Resources */,
@@ -530,10 +579,12 @@
 				518634201A6B3346000B6BDF /* Sky@2x.png in Resources */,
 				0A99D7BC1A71975A00A21379 /* Pássaro2.png in Resources */,
 				0A99D7C71A71975A00A21379 /* Nuvem5.png in Resources */,
+				6137D46E1A888B7300C13C34 /* Alga_3@1x.png in Resources */,
 				0A99D7C81A71975A00A21379 /* Nuvem6.png in Resources */,
 				510043211A77CF7700B3F3B9 /* GroundThree.png in Resources */,
 				0A99D7C21A71975A00A21379 /* Lua.png in Resources */,
 				510043201A77CF7700B3F3B9 /* GroundOne@3x.png in Resources */,
+				6137D4711A888B7300C13C34 /* Alga_4@1x.png in Resources */,
 				5100431F1A77CF7700B3F3B9 /* GroundOne@2x.png in Resources */,
 				0A99D7BF1A71975A00A21379 /* Peixe3.png in Resources */,
 				0A99D7C31A71975A00A21379 /* Nuvem1.png in Resources */,
@@ -541,6 +592,7 @@
 				0A99D7C91A71975A00A21379 /* Sol.png in Resources */,
 				0A99D7C01A71975A00A21379 /* Peixe4.png in Resources */,
 				0A23B0E01A697121000C78A4 /* Main.storyboard in Resources */,
+				6137D4701A888B7300C13C34 /* Alga_3@3x.png in Resources */,
 				0A99D7CD1A71975A00A21379 /* Barril1.png in Resources */,
 				518634211A6B3346000B6BDF /* Sky@3x.png in Resources */,
 				0A99D7BE1A71975A00A21379 /* Peixe2.png in Resources */,
