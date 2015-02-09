@@ -51,6 +51,10 @@
     [self.view addGestureRecognizer:swipeRightRecognizer];
     [self.view addGestureRecognizer:swipeLeftRecognizer];
     
+    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleHoldGesture:)];
+    [self.view addGestureRecognizer:longPressRecognizer];
+    
+    
     
 //     CONTROLE DA LUMINOSIDADE (incompleto)
 //    self.light = [SKSpriteNode spriteNodeWithColor:[UIColor whiteColor] size:self.view.frame.size];
@@ -69,10 +73,11 @@
 
 - (void)drawWolrd {
     
+
     [self drawPath];
     
     float prop = 0.55f;
-    
+
     self.cage = [SKSpriteNode spriteNodeWithImageNamed:@"Cage.png"];
     self.cage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     self.cage.size = CGSizeMake(self.cage.frame.size.width*prop, self.cage.frame.size.height*prop);
@@ -134,7 +139,7 @@
     [self addChild:self.island];
     
     self.sun = [SKSpriteNode spriteNodeWithImageNamed:@"Sol.png"];
-    self.sun.position = CGPointMake(90, self.frame.size.height - 120);
+    self.sun.position = CGPointMake(90, self.frame.size.height - 300*prop);
     self.sun.zPosition = 0.1f;
     
     [self addChild:self.sun];
@@ -154,6 +159,7 @@
     
     
 }
+
 
 -(void)drawPath{
 
@@ -204,19 +210,6 @@
         self.temperatureLabel.text = [NSString stringWithFormat:@"%.f",self.temperature];
         [self colorSky];
     }
-}
-
--(void)handleHoldGesture:(UILongPressGestureRecognizer *)recognizer {
-    
-    CGPoint positionInScene = [recognizer locationInView:self.view];
-    positionInScene = [self convertPointFromView:positionInScene];
-    
-    //[self checkForMenuClick:positionInScene];
-    if (!self.clickedOnMenu&&!self.isMenu){
-        [self checkForOpenLandMenu:positionInScene];
-    }
-    
-    
 }
 
 -(void)colorSky{
@@ -336,6 +329,19 @@
     }
 }
 
+- (void)handleHoldGesture:(UILongPressGestureRecognizer *)recognizer {
+    
+    CGPoint positionInScene = [recognizer locationInView:self.view];
+    positionInScene = [self convertPointFromView:positionInScene];
+
+    //[self checkForMenuClick:positionInScene];
+    if (!self.clickedOnMenu&&!self.isMenu){
+        [self checkForOpenLandMenu:positionInScene];
+    }
+    
+    
+}
+
 - (void)handlePanFrom:(UIPanGestureRecognizer *)recognizer {
     
     CGPoint touchLocation = [recognizer locationInView:recognizer.view];
@@ -400,8 +406,10 @@
     [self checkForAnimalClick:positionInScene];
     [self checkForClickOutsideMenu:positionInScene];
     if (!self.clickedOnMenu){
+
 //        [self checkForOpenLandMenu:positionInScene];
 //        [self checkForWaterMenu:positionInScene];
+
     }
     
 
@@ -568,7 +576,7 @@
         SKAction *move = [SKAction moveTo:point duration:1.0f];
         
         
-        if ([self.islandShape containsPoint:point] && ![mainTestingAnimal hasActions])
+        if ([self pointInIsland:point] && ![mainTestingAnimal hasActions])
             [mainTestingAnimal runAction:move];
          
         CGRect rectAgua = CGRectMake(0,50,self.frame.size.width,100);
