@@ -55,15 +55,13 @@
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleHoldGesture:)];
     [self.view addGestureRecognizer:longPressRecognizer];
     
-    
-    
     //     CONTROLE DA LUMINOSIDADE (incompleto)
     //    self.light = [SKSpriteNode spriteNodeWithColor:[UIColor whiteColor] size:self.view.frame.size];
     //    self.light.alpha = 0.0f;
     //    self.light.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     //    self.light.zPosition = 1.0f;
     //    [self addChild:self.light];
-    //
+
     self.dark = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size:self.view.frame.size];
     self.dark.alpha = 0.0f;
     self.dark.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
@@ -77,7 +75,7 @@
     
     [self drawPath];
     
-    float prop = 0.55f;
+    float prop = 0.52f;
     
     self.cage = [SKSpriteNode spriteNodeWithImageNamed:@"Cage.png"];
     self.cage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
@@ -212,7 +210,7 @@
             }
             
         }
-        else{
+        else {
             if (self.sun.size.height * 0.98f > 50){
                 
                 self.sun.size = CGSizeMake(self.sun.size.width * 0.98f, self.sun.size.height * 0.98f);
@@ -268,7 +266,7 @@
 
 
 
--(void)makeItRain{
+-(void)makeItRain {
     
     
     NSString * rainPath = [[NSBundle mainBundle]
@@ -323,7 +321,7 @@
     
 }
 
--(void)growLeavesInAllTrees{
+-(void)growLeavesInAllTrees {
     for (int i = 0; i < self.vegetableArray.count; i++){
         SKVegetables *tree = self.vegetableArray[i];
         if (tree.vegetableType == Vegetable_Tree)
@@ -332,7 +330,7 @@
     }
 }
 
--(void)acidRain{
+-(void)acidRain {
     
     for (int i = 0; i < self.vegetableArray.count/2; i++){
         SKVegetables *vegetableToDie = self.vegetableArray[i];
@@ -356,8 +354,6 @@
 }
 
 - (void)handlePanFrom:(UIPanGestureRecognizer *)recognizer {
-    
-    [self runAction:[SKAction playSoundFileNamed:@"TheWhip2.wav" waitForCompletion:YES]];
     
     CGPoint touchLocation = [recognizer locationInView:recognizer.view];
     
@@ -396,6 +392,7 @@
             self.humidity++;
         }
         self.temperatureLabel.text = [NSString stringWithFormat:@"%.f",self.temperature];
+        [self runAction:[SKAction playSoundFileNamed:@"TheWhip2.wav" waitForCompletion:YES]];
         
     }
 }

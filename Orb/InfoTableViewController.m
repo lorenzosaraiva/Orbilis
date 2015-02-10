@@ -35,9 +35,7 @@
     self.tableView.scrollEnabled = NO;
     [self.view addSubview:self.tableView];
     
-    UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Cage.png"]];
-    backgroundView.frame = CGRectMake(-15, -25, backgroundView.frame.size.width*0.55f, backgroundView.frame.size.height * 0.55f);
-    [self.view addSubview:backgroundView];
+
     
 
     // Do any additional setup after loading the view.
