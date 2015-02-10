@@ -33,16 +33,16 @@
         temp.animalType = 1;
         temp.nextMeal = 0;
         temp.age = 0;
-        temp.ageLimit = 40;
+        temp.ageLimit = 45;
     }
     if (type == Animal_Predator){
         temp = [SKAnimals spriteNodeWithImageNamed:@"GroundThree.png"];
-        temp.energy = 0.5;
+        temp.energy = 0.3;
         temp.multiplyLimit = 4;
         temp.animalType = 2;
-        temp.nextMeal = 6;
+        temp.nextMeal = 5;
         temp.age = 0;
-        temp.ageLimit = 45;
+        temp.ageLimit = 60;
     }
     
     if (type == Animal_Water_Herbivore){
