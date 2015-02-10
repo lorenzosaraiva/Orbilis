@@ -158,11 +158,18 @@
     self.dark.zPosition = 1.0f;
     [self addChild:self.dark];
     
-    self.infoButton = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(30, 30)];
+    self.removeButton = [SKSpriteNode spriteNodeWithImageNamed:@"ClearButton.png"];
+    self.removeButton.size = CGSizeMake(30, 30);
+    self.removeButton.position = CGPointMake(20, self.frame.size.height - 20);
+    self.removeButton.zPosition = 1.0f;
+    [self addChild:self.removeButton];
+    
+    self.infoButton = [SKSpriteNode spriteNodeWithImageNamed:@"InfoButton.png"];
+    self.infoButton.size = CGSizeMake(30, 30);
     self.infoButton.position = CGPointMake(self.frame.size.width - 20, self.frame.size.height - 20);
     self.infoButton.zPosition = 1.0f;
     [self addChild:self.infoButton];
-    
+
 }
 
 
@@ -407,19 +414,18 @@
 //        self.lightDark = true;
 //        self.light.alpha = 0.0f;
 //    }
-    [self checkForInfoClick:positionInScene];
+    [self checkForButtonClick:positionInScene];
     [self checkForMenuClick:positionInScene];
-    [self checkForAnimalClick:positionInScene];
+    
     [self checkForClickOutsideMenu:positionInScene];
     if (!self.clickedOnMenu){
-
+          [self checkForAnimalClick:positionInScene];
 //        [self checkForOpenLandMenu:positionInScene];
 //        [self checkForWaterMenu:positionInScene];
 
     }
     
 
-    self.lastTouch = positionInScene; 
 }
 
 -(void)update:(CFTimeInterval)currentTime {
@@ -460,15 +466,21 @@
     }
 }
 
-- (void)checkForInfoClick:(CGPoint)positionInScene {
+- (void)checkForButtonClick:(CGPoint)positionInScene {
     if ([self.infoButton containsPoint:positionInScene]){
        
         UIViewController *mainView = self.view.window.rootViewController;
         InfoTableViewController *infoView = [[InfoTableViewController alloc]init];
         infoView.temperature = self.temperature;
-        infoView.herbivores = self.herbivores;
+        infoView.animals = self.animalArray.count;
+        infoView.humidity = self.humidity;
+        infoView.pollution = self.earthPollution;
+        infoView.vegetables = self.vegetableArray.count;
         [mainView presentViewController:infoView animated:YES completion:nil];
-        NSLog(@"LIZE");
+       
+    }
+    if ([self.removeButton containsPoint:positionInScene]){
+        [self restartGame];
     }
 }
 
@@ -644,10 +656,10 @@
     if (mainTestingAnimal.energy <= 0){
         SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
         [mainTestingAnimal runAction:killAnimal completion:^{[self.animalArray removeObject:mainTestingAnimal];}];
-        if (mainTestingAnimal.animalType == Animal_Herbivore)
+        if (mainTestingAnimal.animalType == Animal_Herbivore){
+            
             self.herbivores--;
-
-        
+        }
     }
 }
 - (void)temperatureEffectOnPlantWithId:(int)i{
@@ -943,7 +955,7 @@
         [self addChild:menuFacotry];
         
         self.isMenu = true;
-        
+        self.lastTouch = positionInScene;
     }
 }
 

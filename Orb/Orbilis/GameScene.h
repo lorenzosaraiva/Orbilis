@@ -21,6 +21,7 @@
 
 @property (strong, nonatomic) SKShapeNode *islandShape;
 @property (strong, nonatomic) SKSpriteNode *infoButton;
+@property (strong, nonatomic) SKSpriteNode *removeButton;
 @property (strong, nonatomic) SKSpriteNode *sun;
 @property (strong, nonatomic) SKSpriteNode *moon;
 @property (strong, nonatomic) SKSpriteNode *island;

@@ -16,17 +16,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 20, 20, 20, 20)];
-    self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self prefersStatusBarHidden];
+    self.view.backgroundColor = [UIColor colorWithRed:204/255.0 green:229/255.0 blue:180/255.0 alpha:1];
+    
+    
+    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 35, 5, 30, 30)];
+    [backButton setImage:[UIImage imageNamed:@"InfoButton 2.png"] forState:UIControlStateNormal];
+    
     [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
-    backButton.backgroundColor = [UIColor blueColor];
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 50, self.view.frame.size.width, self.view.frame.size.height)];
+    
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 90, self.view.frame.size.width, self.view.frame.size.height - 175)];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.backgroundColor = [UIColor colorWithRed:204/255.0 green:229/255.0 blue:180/255.0 alpha:1];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.scrollEnabled = NO;
     [self.view addSubview:self.tableView];
+    
+    UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Cage.png"]];
+    backgroundView.frame = CGRectMake(-15, -25, backgroundView.frame.size.width*0.55f, backgroundView.frame.size.height * 0.55f);
+    [self.view addSubview:backgroundView];
+    
+
     // Do any additional setup after loading the view.
+}
+
+-(BOOL)prefersStatusBarHidden{
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,20 +65,32 @@
     
     
     UITableViewCell *cell = [[UITableViewCell alloc]init];
+    cell.backgroundColor = [UIColor colorWithRed:204/255.0 green:229/255.0 blue:180/255.0 alpha:1];
+    cell.userInteractionEnabled = NO;
     if (indexPath.row == 0){
-        cell.textLabel.text = [[NSString alloc]initWithFormat:@"%f", self.temperature];
+        cell.textLabel.text = [[NSString alloc]initWithFormat:@"Temperature : %.f °C", self.temperature];
+        cell.imageView.image = [UIImage imageNamed:@"Sol.png"];
     }
     if (indexPath.row == 1){
-        cell.textLabel.text = [[NSString alloc]initWithFormat:@"%d", self.herbivores];
+        cell.textLabel.text = [[NSString alloc]initWithFormat:@"Animals : %d", self.animals];
+        cell.imageView.image = [UIImage imageNamed:@"GroundOne.png"];
+    }
+    if (indexPath.row == 2){
+        cell.textLabel.text = [[NSString alloc]initWithFormat:@"Humidity : %.f %%", self.humidity];
+        cell.imageView.image = [UIImage imageNamed:@"nuvem4.png"];
+
+    }
+    if (indexPath.row == 3){
+        cell.textLabel.text = [[NSString alloc]initWithFormat:@"Pollution : %.f %%", self.pollution];
+        cell.imageView.image = [UIImage imageNamed:@"industria.png"];
+    }
+    if (indexPath.row == 4){
+        cell.textLabel.text = [[NSString alloc]initWithFormat:@"Vegetables : %f", self.vegetables];
+        cell.imageView.image = [UIImage imageNamed:@"arvore3.png"];
     }
 
-    return cell;
-}
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
-    return 30.0;
-    
+    return cell;
 }
 
 /*

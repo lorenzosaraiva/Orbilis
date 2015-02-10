@@ -13,6 +13,9 @@
 
 @property (strong, nonatomic) UITableView *tableView;
 @property float temperature;
-@property int herbivores;
+@property int animals;
+@property float humidity;
+@property float pollution;
+@property float vegetables;
 
 @end

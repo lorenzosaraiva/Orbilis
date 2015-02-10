@@ -17,6 +17,15 @@
 		0A23B0F11A697121000C78A4 /* OrbilisTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A23B0F01A697121000C78A4 /* OrbilisTests.m */; };
 		0A23B0FC1A697197000C78A4 /* SKAnimals.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A23B0FB1A697197000C78A4 /* SKAnimals.m */; };
 		0A4864E41A8A442400CFE0EE /* InfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4864E31A8A442400CFE0EE /* InfoTableViewController.m */; };
+		0A4864EE1A8A625200CFE0EE /* ClearButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4864E81A8A625200CFE0EE /* ClearButton.png */; };
+		0A4864EF1A8A625200CFE0EE /* ClearButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4864E91A8A625200CFE0EE /* ClearButton@2x.png */; };
+		0A4864F01A8A625200CFE0EE /* ClearButton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4864EA1A8A625200CFE0EE /* ClearButton@3x.png */; };
+		0A4864F11A8A625200CFE0EE /* InfoButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4864EB1A8A625200CFE0EE /* InfoButton.png */; };
+		0A4864F21A8A625200CFE0EE /* InfoButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4864EC1A8A625200CFE0EE /* InfoButton@2x.png */; };
+		0A4864F31A8A625200CFE0EE /* InfoButton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4864ED1A8A625200CFE0EE /* InfoButton@3x.png */; };
+		0A4864F71A8A6FE500CFE0EE /* InfoButton 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4864F41A8A6FE500CFE0EE /* InfoButton 2.png */; };
+		0A4864F81A8A6FE500CFE0EE /* InfoButton 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4864F51A8A6FE500CFE0EE /* InfoButton 2@2x.png */; };
+		0A4864F91A8A6FE500CFE0EE /* InfoButton 2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4864F61A8A6FE500CFE0EE /* InfoButton 2@3x.png */; };
 		0A507B0A1A76A4DD003C0808 /* RainParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0A507B081A76A4DD003C0808 /* RainParticle.sks */; };
 		0A507B0B1A76A4DD003C0808 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A507B091A76A4DD003C0808 /* spark.png */; };
 		0A55A91E1A6996860028EEA3 /* tree.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A91D1A6996860028EEA3 /* tree.png */; };
@@ -151,6 +160,15 @@
 		0A23B0FB1A697197000C78A4 /* SKAnimals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAnimals.m; sourceTree = "<group>"; };
 		0A4864E21A8A442400CFE0EE /* InfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoTableViewController.h; path = ../InfoTableViewController.h; sourceTree = "<group>"; };
 		0A4864E31A8A442400CFE0EE /* InfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoTableViewController.m; path = ../InfoTableViewController.m; sourceTree = "<group>"; };
+		0A4864E81A8A625200CFE0EE /* ClearButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ClearButton.png; sourceTree = "<group>"; };
+		0A4864E91A8A625200CFE0EE /* ClearButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ClearButton@2x.png"; sourceTree = "<group>"; };
+		0A4864EA1A8A625200CFE0EE /* ClearButton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ClearButton@3x.png"; sourceTree = "<group>"; };
+		0A4864EB1A8A625200CFE0EE /* InfoButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoButton.png; sourceTree = "<group>"; };
+		0A4864EC1A8A625200CFE0EE /* InfoButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InfoButton@2x.png"; sourceTree = "<group>"; };
+		0A4864ED1A8A625200CFE0EE /* InfoButton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InfoButton@3x.png"; sourceTree = "<group>"; };
+		0A4864F41A8A6FE500CFE0EE /* InfoButton 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InfoButton 2.png"; sourceTree = "<group>"; };
+		0A4864F51A8A6FE500CFE0EE /* InfoButton 2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InfoButton 2@2x.png"; sourceTree = "<group>"; };
+		0A4864F61A8A6FE500CFE0EE /* InfoButton 2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InfoButton 2@3x.png"; sourceTree = "<group>"; };
 		0A507B081A76A4DD003C0808 /* RainParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RainParticle.sks; sourceTree = "<group>"; };
 		0A507B091A76A4DD003C0808 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = ../spark.png; sourceTree = "<group>"; };
 		0A55A91D1A6996860028EEA3 /* tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree.png; sourceTree = "<group>"; };
@@ -369,6 +387,22 @@
 			name = Assets;
 			sourceTree = "<group>";
 		};
+		0A4864E71A8A625200CFE0EE /* InfoButtons */ = {
+			isa = PBXGroup;
+			children = (
+				0A4864F41A8A6FE500CFE0EE /* InfoButton 2.png */,
+				0A4864F51A8A6FE500CFE0EE /* InfoButton 2@2x.png */,
+				0A4864F61A8A6FE500CFE0EE /* InfoButton 2@3x.png */,
+				0A4864E81A8A625200CFE0EE /* ClearButton.png */,
+				0A4864E91A8A625200CFE0EE /* ClearButton@2x.png */,
+				0A4864EA1A8A625200CFE0EE /* ClearButton@3x.png */,
+				0A4864EB1A8A625200CFE0EE /* InfoButton.png */,
+				0A4864EC1A8A625200CFE0EE /* InfoButton@2x.png */,
+				0A4864ED1A8A625200CFE0EE /* InfoButton@3x.png */,
+			);
+			path = InfoButtons;
+			sourceTree = "<group>";
+		};
 		0A55A8F01A6974C60028EEA3 /* OrbImages */ = {
 			isa = PBXGroup;
 			children = (
@@ -428,6 +462,7 @@
 		0A970A0C1A89200600DED8A8 /* MenuImages */ = {
 			isa = PBXGroup;
 			children = (
+				0A4864E71A8A625200CFE0EE /* InfoButtons */,
 				0A970A0D1A89202C00DED8A8 /* LandMenu.png */,
 				0A970A0E1A89202C00DED8A8 /* MenuCarn1.png */,
 				0A970A0F1A89202C00DED8A8 /* MenuCarn1@2x.png */,
@@ -618,9 +653,11 @@
 				0A970A271A89202C00DED8A8 /* MenuGrass.png in Resources */,
 				518634231A6B3346000B6BDF /* Water@2x.png in Resources */,
 				5186341D1A6B3346000B6BDF /* Sea@2x.png in Resources */,
+				0A4864F31A8A625200CFE0EE /* InfoButton@3x.png in Resources */,
 				6137D4751A888B7300C13C34 /* Alga@2x.png in Resources */,
 				518634161A6B3346000B6BDF /* Island.png in Resources */,
 				5186341E1A6B3346000B6BDF /* Sea@3x.png in Resources */,
+				0A4864EF1A8A625200CFE0EE /* ClearButton@2x.png in Resources */,
 				0A970A251A89202C00DED8A8 /* MenuCarn2@2x.png in Resources */,
 				518634241A6B3346000B6BDF /* Water@3x.png in Resources */,
 				6137D4721A888B7300C13C34 /* Alga_4@2x.png in Resources */,
@@ -632,6 +669,7 @@
 				0A99D7BD1A71975A00A21379 /* Peixe1.png in Resources */,
 				0A99D7C51A71975A00A21379 /* Nuvem3.png in Resources */,
 				6137D4731A888B7300C13C34 /* Alga_4@3x.png in Resources */,
+				0A4864F21A8A625200CFE0EE /* InfoButton@2x.png in Resources */,
 				0A970A211A89202C00DED8A8 /* MenuCarn1.png in Resources */,
 				518634131A6B3346000B6BDF /* Cage.png in Resources */,
 				6137D46D1A888B7300C13C34 /* Alga_2@3x.png in Resources */,
@@ -646,7 +684,9 @@
 				518634171A6B3346000B6BDF /* Island@2x.png in Resources */,
 				0A23B0E51A697121000C78A4 /* LaunchScreen.xib in Resources */,
 				51DC7B751A88FFFA00359324 /* FirstScreen.png in Resources */,
+				0A4864F81A8A6FE500CFE0EE /* InfoButton 2@2x.png in Resources */,
 				5100432A1A79222600B3F3B9 /* MiniTree.png in Resources */,
+				0A4864EE1A8A625200CFE0EE /* ClearButton.png in Resources */,
 				5186341F1A6B3346000B6BDF /* Sky.png in Resources */,
 				0A5762781A7BE89700C20B3D /* SnowParticle.sks in Resources */,
 				6137D4761A888B7300C13C34 /* Alga@3x.png in Resources */,
@@ -663,6 +703,7 @@
 				0A99D7C41A71975A00A21379 /* Nuvem2.png in Resources */,
 				0A99D7D21A71975A00A21379 /* Petróleo.png in Resources */,
 				6137D46F1A888B7300C13C34 /* Alga_3@2x.png in Resources */,
+				0A4864F91A8A6FE500CFE0EE /* InfoButton 2@3x.png in Resources */,
 				0A970A291A89202C00DED8A8 /* MenuGrass@3x.png in Resources */,
 				510043251A77CF7700B3F3B9 /* GroundTwo@2x.png in Resources */,
 				510043231A77CF7700B3F3B9 /* GroundThree@3x.png in Resources */,
@@ -683,11 +724,13 @@
 				510043261A77CF7700B3F3B9 /* GroundTwo@3x.png in Resources */,
 				518634201A6B3346000B6BDF /* Sky@2x.png in Resources */,
 				0A970A2E1A89202C00DED8A8 /* MenuInd@2x.png in Resources */,
+				0A4864F11A8A625200CFE0EE /* InfoButton.png in Resources */,
 				0A970A221A89202C00DED8A8 /* MenuCarn1@2x.png in Resources */,
 				0A970A241A89202C00DED8A8 /* MenuCarn2.png in Resources */,
 				0A99D7BC1A71975A00A21379 /* Pássaro2.png in Resources */,
 				0A99D7C71A71975A00A21379 /* Nuvem5.png in Resources */,
 				6137D46E1A888B7300C13C34 /* Alga_3@1x.png in Resources */,
+				0A4864F01A8A625200CFE0EE /* ClearButton@3x.png in Resources */,
 				0A99D7C81A71975A00A21379 /* Nuvem6.png in Resources */,
 				510043211A77CF7700B3F3B9 /* GroundThree.png in Resources */,
 				0A99D7C21A71975A00A21379 /* Lua.png in Resources */,
@@ -698,6 +741,7 @@
 				0A99D7C31A71975A00A21379 /* Nuvem1.png in Resources */,
 				0A507B0B1A76A4DD003C0808 /* spark.png in Resources */,
 				0A99D7C91A71975A00A21379 /* Sol.png in Resources */,
+				0A4864F71A8A6FE500CFE0EE /* InfoButton 2.png in Resources */,
 				0A99D7C01A71975A00A21379 /* Peixe4.png in Resources */,
 				0A23B0E01A697121000C78A4 /* Main.storyboard in Resources */,
 				6137D4701A888B7300C13C34 /* Alga_3@3x.png in Resources */,
