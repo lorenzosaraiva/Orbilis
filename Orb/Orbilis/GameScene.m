@@ -556,7 +556,7 @@
             [self.vegetableArray addObject:new];
             [self addChild:new];
             [self runAction:[SKAction playSoundFileNamed:@"TheSwipe.wav" waitForCompletion:YES]];
-            new.poisonLevel = self.pollution/10;
+            new.poisonLevel = self.earthPollution/100;
         }
     } else {
         int grassSpawn = arc4random()%100;
@@ -572,7 +572,7 @@
                 [self.vegetableArray addObject:new];
                 [self addChild:new];
                 [self runAction:[SKAction playSoundFileNamed:@"TheSwipe.wav" waitForCompletion:YES]];
-                new.poisonLevel = self.pollution/10;
+                new.poisonLevel = self.earthPollution/100;
             }
             
         }
@@ -589,6 +589,7 @@
         
         mainTestingVegetable.leaves++;
         mainTestingVegetable.leavesCounter = 0;
+        mainTestingVegetable.poisonLevel = self.earthPollution/100;
     }
     mainTestingVegetable.leavesCounter++;
     if (mainTestingVegetable.leavesCounter > mainTestingVegetable.leavesGrowth)
@@ -886,7 +887,7 @@
         self.earthPollution++;
     }
     for (int i = 0; i < self.vegetableArray.count; i++){
-        self.earthPollution -= 0.1f;
+        self.earthPollution -= 0.05f;
     }
     self.earthPollution--;
     
