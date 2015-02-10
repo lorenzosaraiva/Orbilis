@@ -80,7 +80,7 @@
         cell.imageView.image = [UIImage imageNamed:@"industria.png"];
     }
     if (indexPath.row == 4){
-        cell.textLabel.text = [[NSString alloc]initWithFormat:@"Vegetables : %f", self.vegetables];
+        cell.textLabel.text = [[NSString alloc]initWithFormat:@"Vegetables : %f.", self.vegetables];
         cell.imageView.image = [UIImage imageNamed:@"arvore3.png"];
     }
 

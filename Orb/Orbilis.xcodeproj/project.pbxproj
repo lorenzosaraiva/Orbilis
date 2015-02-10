@@ -629,11 +629,11 @@
 				TargetAttributes = {
 					0A23B0CB1A697121000C78A4 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = N4F3C8PWS8;
+						DevelopmentTeam = F9CXHW36C2;
 					};
 					0A23B0E91A697121000C78A4 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = N4F3C8PWS8;
+						DevelopmentTeam = F9CXHW36C2;
 						TestTargetID = 0A23B0CB1A697121000C78A4;
 					};
 				};

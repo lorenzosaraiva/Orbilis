@@ -885,7 +885,11 @@
     for (int i = 0; i < self.pollutionArray.count; i++){
         self.earthPollution++;
     }
+    for (int i = 0; i < self.vegetableArray.count; i++){
+        self.earthPollution -= 0.1f;
+    }
     self.earthPollution--;
+    
     if (self.earthPollution > 100)
         self.earthPollution = 100;
     if (self.earthPollution < 0)
@@ -911,8 +915,11 @@
 }
 
 -(void)updateHumidity{
-    
-    if (40 > self.temperature && self.temperature > 25)
+    if (43 > self.temperature && self.temperature >= 40)
+        self.humidity = self.humidity + 1.0f;
+    if (40 > self.temperature && self.temperature >= 32)
+        self.humidity = self.humidity + 0.5f;
+    if (32 > self.temperature && self.temperature > 25)
         self.humidity = self.humidity + 0.25f;
     if (self.temperature > 43)
         self.humidity = self.humidity - 1.0f;
