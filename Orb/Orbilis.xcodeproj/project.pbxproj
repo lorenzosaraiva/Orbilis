@@ -105,6 +105,14 @@
 		51DC7B751A88FFFA00359324 /* FirstScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B721A88FFFA00359324 /* FirstScreen.png */; };
 		51DC7B761A88FFFA00359324 /* FirstScreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B731A88FFFA00359324 /* FirstScreen@2x.png */; };
 		51DC7B771A88FFFA00359324 /* FirstScreen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B741A88FFFA00359324 /* FirstScreen@3x.png */; };
+		51DC7B7B1A8A444800359324 /* Music1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B7A1A8A444800359324 /* Music1.mp3 */; };
+		51DC7B7D1A8A490100359324 /* ThePop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B7C1A8A490100359324 /* ThePop.wav */; };
+		51DC7B821A8A6A7E00359324 /* TheWhip.wav in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B7E1A8A6A7E00359324 /* TheWhip.wav */; };
+		51DC7B831A8A6A7E00359324 /* TheSwipe.wav in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B7F1A8A6A7E00359324 /* TheSwipe.wav */; };
+		51DC7B841A8A6A7E00359324 /* ThePop2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B801A8A6A7E00359324 /* ThePop2.wav */; };
+		51DC7B871A8A6A9100359324 /* TheMenu.wav in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B861A8A6A9100359324 /* TheMenu.wav */; };
+		51DC7B891A8A6CFD00359324 /* TheWhip2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B881A8A6CFD00359324 /* TheWhip2.wav */; };
+		51DC7B8B1A8A6F9100359324 /* TheValidate.wav in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B8A1A8A6F9100359324 /* TheValidate.wav */; };
 		6137D45E1A888B0000C13C34 /* SkyDarkBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D45D1A888B0000C13C34 /* SkyDarkBlue.png */; };
 		6137D46B1A888B7300C13C34 /* Alga_2@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D45F1A888B7300C13C34 /* Alga_2@1x.png */; };
 		6137D46C1A888B7300C13C34 /* Alga_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D4601A888B7300C13C34 /* Alga_2@2x.png */; };
@@ -241,6 +249,14 @@
 		51DC7B721A88FFFA00359324 /* FirstScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FirstScreen.png; sourceTree = "<group>"; };
 		51DC7B731A88FFFA00359324 /* FirstScreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FirstScreen@2x.png"; sourceTree = "<group>"; };
 		51DC7B741A88FFFA00359324 /* FirstScreen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FirstScreen@3x.png"; sourceTree = "<group>"; };
+		51DC7B7A1A8A444800359324 /* Music1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Music1.mp3; sourceTree = "<group>"; };
+		51DC7B7C1A8A490100359324 /* ThePop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ThePop.wav; sourceTree = "<group>"; };
+		51DC7B7E1A8A6A7E00359324 /* TheWhip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TheWhip.wav; sourceTree = "<group>"; };
+		51DC7B7F1A8A6A7E00359324 /* TheSwipe.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TheSwipe.wav; sourceTree = "<group>"; };
+		51DC7B801A8A6A7E00359324 /* ThePop2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ThePop2.wav; sourceTree = "<group>"; };
+		51DC7B861A8A6A9100359324 /* TheMenu.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TheMenu.wav; sourceTree = "<group>"; };
+		51DC7B881A8A6CFD00359324 /* TheWhip2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TheWhip2.wav; sourceTree = "<group>"; };
+		51DC7B8A1A8A6F9100359324 /* TheValidate.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TheValidate.wav; sourceTree = "<group>"; };
 		6137D45D1A888B0000C13C34 /* SkyDarkBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SkyDarkBlue.png; sourceTree = "<group>"; };
 		6137D45F1A888B7300C13C34 /* Alga_2@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga_2@1x.png"; sourceTree = "<group>"; };
 		6137D4601A888B7300C13C34 /* Alga_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga_2@2x.png"; sourceTree = "<group>"; };
@@ -295,6 +311,14 @@
 		0A23B0CE1A697121000C78A4 /* Orbilis */ = {
 			isa = PBXGroup;
 			children = (
+				51DC7B8A1A8A6F9100359324 /* TheValidate.wav */,
+				51DC7B881A8A6CFD00359324 /* TheWhip2.wav */,
+				51DC7B861A8A6A9100359324 /* TheMenu.wav */,
+				51DC7B7E1A8A6A7E00359324 /* TheWhip.wav */,
+				51DC7B7F1A8A6A7E00359324 /* TheSwipe.wav */,
+				51DC7B801A8A6A7E00359324 /* ThePop2.wav */,
+				51DC7B7C1A8A490100359324 /* ThePop.wav */,
+				51DC7B7A1A8A444800359324 /* Music1.mp3 */,
 				0A23B0FE1A6971C0000C78A4 /* Assets */,
 				0A23B0FD1A6971BA000C78A4 /* Classes */,
 				0A23B0D31A697121000C78A4 /* AppDelegate.h */,
@@ -573,11 +597,11 @@
 				TargetAttributes = {
 					0A23B0CB1A697121000C78A4 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = F9CXHW36C2;
+						DevelopmentTeam = N4F3C8PWS8;
 					};
 					0A23B0E91A697121000C78A4 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = F9CXHW36C2;
+						DevelopmentTeam = N4F3C8PWS8;
 						TestTargetID = 0A23B0CB1A697121000C78A4;
 					};
 				};
@@ -622,6 +646,7 @@
 				6137D4741A888B7300C13C34 /* Alga@1x.png in Resources */,
 				0A57627A1A7C1F9300C20B3D /* SmokeParticle.sks in Resources */,
 				0A99D7BB1A71975A00A21379 /* Pássaro1.png in Resources */,
+				51DC7B821A8A6A7E00359324 /* TheWhip.wav in Resources */,
 				0A99D7D11A71975A00A21379 /* industria.png in Resources */,
 				0A99D7C11A71975A00A21379 /* Peixe5.png in Resources */,
 				0A99D7BD1A71975A00A21379 /* Peixe1.png in Resources */,
@@ -636,6 +661,8 @@
 				0A970A2F1A89202C00DED8A8 /* MenuInd@3x.png in Resources */,
 				0A5762721A79953800C20B3D /* SkyOrange.png in Resources */,
 				0A5762761A79A23C00C20B3D /* SkyLightBlue.png in Resources */,
+				51DC7B891A8A6CFD00359324 /* TheWhip2.wav in Resources */,
+				51DC7B841A8A6A7E00359324 /* ThePop2.wav in Resources */,
 				0A5762741A799E1B00C20B3D /* SkyLightOrange.png in Resources */,
 				51DC7B761A88FFFA00359324 /* FirstScreen@2x.png in Resources */,
 				518634171A6B3346000B6BDF /* Island@2x.png in Resources */,
@@ -678,6 +705,7 @@
 				510043261A77CF7700B3F3B9 /* GroundTwo@3x.png in Resources */,
 				518634201A6B3346000B6BDF /* Sky@2x.png in Resources */,
 				0A970A2E1A89202C00DED8A8 /* MenuInd@2x.png in Resources */,
+				51DC7B831A8A6A7E00359324 /* TheSwipe.wav in Resources */,
 				0A970A221A89202C00DED8A8 /* MenuCarn1@2x.png in Resources */,
 				0A970A241A89202C00DED8A8 /* MenuCarn2.png in Resources */,
 				0A99D7BC1A71975A00A21379 /* Pássaro2.png in Resources */,
@@ -690,6 +718,9 @@
 				6137D4711A888B7300C13C34 /* Alga_4@1x.png in Resources */,
 				5100431F1A77CF7700B3F3B9 /* GroundOne@2x.png in Resources */,
 				0A99D7BF1A71975A00A21379 /* Peixe3.png in Resources */,
+				51DC7B7D1A8A490100359324 /* ThePop.wav in Resources */,
+				51DC7B8B1A8A6F9100359324 /* TheValidate.wav in Resources */,
+				51DC7B871A8A6A9100359324 /* TheMenu.wav in Resources */,
 				0A99D7C31A71975A00A21379 /* Nuvem1.png in Resources */,
 				0A507B0B1A76A4DD003C0808 /* spark.png in Resources */,
 				0A99D7C91A71975A00A21379 /* Sol.png in Resources */,
@@ -698,6 +729,7 @@
 				6137D4701A888B7300C13C34 /* Alga_3@3x.png in Resources */,
 				0A970A2A1A89202C00DED8A8 /* MenuHerb.png in Resources */,
 				0A970A321A89202C00DED8A8 /* MenuTree@3x.png in Resources */,
+				51DC7B7B1A8A444800359324 /* Music1.mp3 in Resources */,
 				0A99D7CD1A71975A00A21379 /* Barril1.png in Resources */,
 				518634211A6B3346000B6BDF /* Sky@3x.png in Resources */,
 				0A970A311A89202C00DED8A8 /* MenuTree@2x.png in Resources */,

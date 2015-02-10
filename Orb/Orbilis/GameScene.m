@@ -36,6 +36,8 @@
     self.pollutionArray = [[NSMutableArray alloc] init];
     self.waterPollutionArray = [[NSMutableArray alloc]init];
     
+    self.userInteractionEnabled = YES;
+    
     [self drawWolrd];
     [self drawIslandRect];
     
@@ -350,6 +352,8 @@
     touchLocation = [self convertPointFromView:touchLocation];
     
     CGRect cloudArea = CGRectMake(0, 400, self.scene.frame.size.width, 300);
+    
+    [self runAction:[SKAction playSoundFileNamed:@"TheWhip2.wav" waitForCompletion:NO]];
     
     if (CGRectContainsPoint(cloudArea, touchLocation)){
         
@@ -668,6 +672,7 @@
         
         [self.animalArray addObject:newAnimal];
         [self addChild:newAnimal];
+        [self runAction:[SKAction playSoundFileNamed:@"TheSwipe.wav" waitForCompletion:YES]];
     }
 }
 
@@ -842,6 +847,7 @@
 
     if ([self pointInIsland:positionInScene]) {
        
+        [self runAction:[SKAction playSoundFileNamed:@"TheMenu.wav" waitForCompletion:NO]];
         
         SKMenuElement *menuAnimalOne = [SKMenuElement createMenuElementOfType:0 InPosition:positionInScene];
         SKMenuElement *menuAnimalTwo = [SKMenuElement createMenuElementOfType:1 InPosition:positionInScene];
@@ -918,6 +924,7 @@
                 [self addChild:temp];
                 self.isMenu = false;
                 self.clickedOnMenu = true;
+                [self runAction:[SKAction playSoundFileNamed:@"ThePop2.wav" waitForCompletion:NO]];
                 return;
             }
         }
@@ -946,6 +953,7 @@
                 
                 self.isMenu = false;
                 self.clickedOnMenu = true;
+                [self runAction:[SKAction playSoundFileNamed:@"ThePop2.wav" waitForCompletion:NO]];
                 return;
                 
             }
@@ -974,7 +982,7 @@
                     [self addSmokeOnFacotry:temp];
                     [self.pollutionArray addObject:temp];
                 }
-
+                [self runAction:[SKAction playSoundFileNamed:@"ThePop2.wav" waitForCompletion:NO]];
                 return;
                 
             }

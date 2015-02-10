@@ -22,8 +22,10 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
+    [self runAction:[SKAction playSoundFileNamed:@"TheValidate.wav" waitForCompletion:YES]];
     GameScene *scene = [GameScene sceneWithSize:self.view.bounds.size];
     [self.view presentScene:scene transition:[SKTransition fadeWithColor:[UIColor whiteColor] duration:1.5]];
+    [scene runAction:[SKAction repeatActionForever:[SKAction playSoundFileNamed:@"Music1.mp3" waitForCompletion:YES]]];
     
 }
 
