@@ -393,7 +393,7 @@
         }
         self.temperatureLabel.text = [NSString stringWithFormat:@"%.f",self.temperature];
         [self runAction:[SKAction playSoundFileNamed:@"TheWhip2.wav" waitForCompletion:YES]];
-        
+        [self colorSky];
     }
 }
 
