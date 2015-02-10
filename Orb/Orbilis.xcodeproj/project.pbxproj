@@ -113,6 +113,16 @@
 		51DC7B871A8A6A9100359324 /* TheMenu.wav in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B861A8A6A9100359324 /* TheMenu.wav */; };
 		51DC7B891A8A6CFD00359324 /* TheWhip2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B881A8A6CFD00359324 /* TheWhip2.wav */; };
 		51DC7B8B1A8A6F9100359324 /* TheValidate.wav in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B8A1A8A6F9100359324 /* TheValidate.wav */; };
+		51DC7B901A8A775500359324 /* InfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DC7B8E1A8A775500359324 /* InfoTableViewController.m */; };
+		51DC7B941A8A7B6300359324 /* InfoButton 2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B911A8A7B6300359324 /* InfoButton 2@3x.png */; };
+		51DC7B951A8A7B6300359324 /* InfoButton 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B921A8A7B6300359324 /* InfoButton 2@2x.png */; };
+		51DC7B961A8A7B6300359324 /* InfoButton 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B931A8A7B6300359324 /* InfoButton 2.png */; };
+		51DC7B9D1A8A7B7100359324 /* InfoButton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B971A8A7B7100359324 /* InfoButton@3x.png */; };
+		51DC7B9E1A8A7B7100359324 /* InfoButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B981A8A7B7100359324 /* InfoButton@2x.png */; };
+		51DC7B9F1A8A7B7100359324 /* InfoButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B991A8A7B7100359324 /* InfoButton.png */; };
+		51DC7BA01A8A7B7100359324 /* ClearButton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B9A1A8A7B7100359324 /* ClearButton@3x.png */; };
+		51DC7BA11A8A7B7100359324 /* ClearButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B9B1A8A7B7100359324 /* ClearButton@2x.png */; };
+		51DC7BA21A8A7B7100359324 /* ClearButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DC7B9C1A8A7B7100359324 /* ClearButton.png */; };
 		6137D45E1A888B0000C13C34 /* SkyDarkBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D45D1A888B0000C13C34 /* SkyDarkBlue.png */; };
 		6137D46B1A888B7300C13C34 /* Alga_2@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D45F1A888B7300C13C34 /* Alga_2@1x.png */; };
 		6137D46C1A888B7300C13C34 /* Alga_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6137D4601A888B7300C13C34 /* Alga_2@2x.png */; };
@@ -257,6 +267,17 @@
 		51DC7B861A8A6A9100359324 /* TheMenu.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TheMenu.wav; sourceTree = "<group>"; };
 		51DC7B881A8A6CFD00359324 /* TheWhip2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TheWhip2.wav; sourceTree = "<group>"; };
 		51DC7B8A1A8A6F9100359324 /* TheValidate.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TheValidate.wav; sourceTree = "<group>"; };
+		51DC7B8E1A8A775500359324 /* InfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoTableViewController.m; sourceTree = "<group>"; };
+		51DC7B8F1A8A775500359324 /* InfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoTableViewController.h; sourceTree = "<group>"; };
+		51DC7B911A8A7B6300359324 /* InfoButton 2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InfoButton 2@3x.png"; sourceTree = "<group>"; };
+		51DC7B921A8A7B6300359324 /* InfoButton 2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InfoButton 2@2x.png"; sourceTree = "<group>"; };
+		51DC7B931A8A7B6300359324 /* InfoButton 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InfoButton 2.png"; sourceTree = "<group>"; };
+		51DC7B971A8A7B7100359324 /* InfoButton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InfoButton@3x.png"; sourceTree = "<group>"; };
+		51DC7B981A8A7B7100359324 /* InfoButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InfoButton@2x.png"; sourceTree = "<group>"; };
+		51DC7B991A8A7B7100359324 /* InfoButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoButton.png; sourceTree = "<group>"; };
+		51DC7B9A1A8A7B7100359324 /* ClearButton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ClearButton@3x.png"; sourceTree = "<group>"; };
+		51DC7B9B1A8A7B7100359324 /* ClearButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ClearButton@2x.png"; sourceTree = "<group>"; };
+		51DC7B9C1A8A7B7100359324 /* ClearButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ClearButton.png; sourceTree = "<group>"; };
 		6137D45D1A888B0000C13C34 /* SkyDarkBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SkyDarkBlue.png; sourceTree = "<group>"; };
 		6137D45F1A888B7300C13C34 /* Alga_2@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga_2@1x.png"; sourceTree = "<group>"; };
 		6137D4601A888B7300C13C34 /* Alga_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alga_2@2x.png"; sourceTree = "<group>"; };
@@ -293,6 +314,8 @@
 		0A23B0C31A697121000C78A4 = {
 			isa = PBXGroup;
 			children = (
+				51DC7B8E1A8A775500359324 /* InfoTableViewController.m */,
+				51DC7B8F1A8A775500359324 /* InfoTableViewController.h */,
 				0A23B0CE1A697121000C78A4 /* Orbilis */,
 				0A23B0ED1A697121000C78A4 /* OrbilisTests */,
 				0A23B0CD1A697121000C78A4 /* Products */,
@@ -447,6 +470,15 @@
 		0A970A0C1A89200600DED8A8 /* MenuImages */ = {
 			isa = PBXGroup;
 			children = (
+				51DC7B971A8A7B7100359324 /* InfoButton@3x.png */,
+				51DC7B981A8A7B7100359324 /* InfoButton@2x.png */,
+				51DC7B991A8A7B7100359324 /* InfoButton.png */,
+				51DC7B9A1A8A7B7100359324 /* ClearButton@3x.png */,
+				51DC7B9B1A8A7B7100359324 /* ClearButton@2x.png */,
+				51DC7B9C1A8A7B7100359324 /* ClearButton.png */,
+				51DC7B911A8A7B6300359324 /* InfoButton 2@3x.png */,
+				51DC7B921A8A7B6300359324 /* InfoButton 2@2x.png */,
+				51DC7B931A8A7B6300359324 /* InfoButton 2.png */,
 				0A970A0D1A89202C00DED8A8 /* LandMenu.png */,
 				0A970A0E1A89202C00DED8A8 /* MenuCarn1.png */,
 				0A970A0F1A89202C00DED8A8 /* MenuCarn1@2x.png */,
@@ -640,6 +672,7 @@
 				6137D4751A888B7300C13C34 /* Alga@2x.png in Resources */,
 				518634161A6B3346000B6BDF /* Island.png in Resources */,
 				5186341E1A6B3346000B6BDF /* Sea@3x.png in Resources */,
+				51DC7BA11A8A7B7100359324 /* ClearButton@2x.png in Resources */,
 				0A970A251A89202C00DED8A8 /* MenuCarn2@2x.png in Resources */,
 				518634241A6B3346000B6BDF /* Water@3x.png in Resources */,
 				6137D4721A888B7300C13C34 /* Alga_4@2x.png in Resources */,
@@ -666,6 +699,7 @@
 				0A5762741A799E1B00C20B3D /* SkyLightOrange.png in Resources */,
 				51DC7B761A88FFFA00359324 /* FirstScreen@2x.png in Resources */,
 				518634171A6B3346000B6BDF /* Island@2x.png in Resources */,
+				51DC7BA21A8A7B7100359324 /* ClearButton.png in Resources */,
 				0A23B0E51A697121000C78A4 /* LaunchScreen.xib in Resources */,
 				51DC7B751A88FFFA00359324 /* FirstScreen.png in Resources */,
 				5100432A1A79222600B3F3B9 /* MiniTree.png in Resources */,
@@ -676,6 +710,7 @@
 				0A970A281A89202C00DED8A8 /* MenuGrass@2x.png in Resources */,
 				0A55A91E1A6996860028EEA3 /* tree.png in Resources */,
 				0A970A201A89202C00DED8A8 /* LandMenu.png in Resources */,
+				51DC7B9E1A8A7B7100359324 /* InfoButton@2x.png in Resources */,
 				0A970A2B1A89202C00DED8A8 /* MenuHerb@2x.png in Resources */,
 				510043221A77CF7700B3F3B9 /* GroundThree@2x.png in Resources */,
 				0A99D7CA1A71975A00A21379 /* arvore1.png in Resources */,
@@ -687,6 +722,8 @@
 				6137D46F1A888B7300C13C34 /* Alga_3@2x.png in Resources */,
 				0A970A291A89202C00DED8A8 /* MenuGrass@3x.png in Resources */,
 				510043251A77CF7700B3F3B9 /* GroundTwo@2x.png in Resources */,
+				51DC7B941A8A7B6300359324 /* InfoButton 2@3x.png in Resources */,
+				51DC7BA01A8A7B7100359324 /* ClearButton@3x.png in Resources */,
 				510043231A77CF7700B3F3B9 /* GroundThree@3x.png in Resources */,
 				518634191A6B3346000B6BDF /* Sand.png in Resources */,
 				518634181A6B3346000B6BDF /* Island@3x.png in Resources */,
@@ -698,6 +735,7 @@
 				0A99D7CF1A71975A00A21379 /* Barril_mar.png in Resources */,
 				0A23B0E21A697121000C78A4 /* Images.xcassets in Resources */,
 				0A99D7CE1A71975A00A21379 /* Barril2.png in Resources */,
+				51DC7B951A8A7B6300359324 /* InfoButton 2@2x.png in Resources */,
 				518634151A6B3346000B6BDF /* Cage@3x.png in Resources */,
 				0A99D7CB1A71975A00A21379 /* arvore2.png in Resources */,
 				5100432C1A79222600B3F3B9 /* MiniTree@3x.png in Resources */,
@@ -706,6 +744,7 @@
 				518634201A6B3346000B6BDF /* Sky@2x.png in Resources */,
 				0A970A2E1A89202C00DED8A8 /* MenuInd@2x.png in Resources */,
 				51DC7B831A8A6A7E00359324 /* TheSwipe.wav in Resources */,
+				51DC7B9D1A8A7B7100359324 /* InfoButton@3x.png in Resources */,
 				0A970A221A89202C00DED8A8 /* MenuCarn1@2x.png in Resources */,
 				0A970A241A89202C00DED8A8 /* MenuCarn2.png in Resources */,
 				0A99D7BC1A71975A00A21379 /* Pássaro2.png in Resources */,
@@ -719,6 +758,7 @@
 				5100431F1A77CF7700B3F3B9 /* GroundOne@2x.png in Resources */,
 				0A99D7BF1A71975A00A21379 /* Peixe3.png in Resources */,
 				51DC7B7D1A8A490100359324 /* ThePop.wav in Resources */,
+				51DC7B9F1A8A7B7100359324 /* InfoButton.png in Resources */,
 				51DC7B8B1A8A6F9100359324 /* TheValidate.wav in Resources */,
 				51DC7B871A8A6A9100359324 /* TheMenu.wav in Resources */,
 				0A99D7C31A71975A00A21379 /* Nuvem1.png in Resources */,
@@ -737,6 +777,7 @@
 				5100431E1A77CF7700B3F3B9 /* GroundOne.png in Resources */,
 				5186341A1A6B3346000B6BDF /* Sand@2x.png in Resources */,
 				51DC7B771A88FFFA00359324 /* FirstScreen@3x.png in Resources */,
+				51DC7B961A8A7B6300359324 /* InfoButton 2.png in Resources */,
 				5186341B1A6B3346000B6BDF /* Sand@3x.png in Resources */,
 				0A970A261A89202C00DED8A8 /* MenuCarn2@3x.png in Resources */,
 			);
@@ -761,6 +802,7 @@
 				0A970A351A892ACD00DED8A8 /* SKMenuElement.m in Sources */,
 				0A23B0D51A697121000C78A4 /* AppDelegate.m in Sources */,
 				51770FE01A792EC500FD8922 /* GameSceneOld.m in Sources */,
+				51DC7B901A8A775500359324 /* InfoTableViewController.m in Sources */,
 				0A23B0FC1A697197000C78A4 /* SKAnimals.m in Sources */,
 				0A23B0D81A697121000C78A4 /* GameScene.m in Sources */,
 				0A23B0D21A697121000C78A4 /* main.m in Sources */,
