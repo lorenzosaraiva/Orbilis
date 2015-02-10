@@ -18,7 +18,6 @@
 @property (strong, nonatomic) SKSpriteNode *dark;
 @property BOOL lightDark;
 
-
 @property (strong, nonatomic) SKShapeNode *islandShape;
 @property (strong, nonatomic) SKSpriteNode *infoButton;
 @property (strong, nonatomic) SKSpriteNode *removeButton;
