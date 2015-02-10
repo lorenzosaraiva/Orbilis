@@ -10,6 +10,7 @@
 #import "SKAnimals.h"
 #import "SKVegetables.h"
 #import "SKMenuElement.h"
+#import "InfoTableViewController.h"
 
 @interface GameScene : SKScene <UIGestureRecognizerDelegate, SKPhysicsContactDelegate>
 
@@ -19,7 +20,7 @@
 
 
 @property (strong, nonatomic) SKShapeNode *islandShape;
-@property (strong, nonatomic) SKShapeNode *seaShape;
+@property (strong, nonatomic) SKSpriteNode *infoButton;
 @property (strong, nonatomic) SKSpriteNode *sun;
 @property (strong, nonatomic) SKSpriteNode *moon;
 @property (strong, nonatomic) SKSpriteNode *island;

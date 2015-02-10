@@ -14,7 +14,7 @@
     
     self.backgroundColor = [UIColor colorWithRed:204/255.0 green:229/255.0 blue:180/255.0 alpha:1];
 
-    //Inicia e alloca as coisas iniciais
+    // inicia e alloca as coisas iniciais
     
     self.isMenu = false;
     self.clickedOnMenu = false;
@@ -29,6 +29,7 @@
     self.pollution = 0;
     self.waterPollution = 0;
     self.humidity = 0;
+    self.herbivores = 0;
     self.animalArray = [[NSMutableArray alloc] init];
     self.menuArray = [[NSMutableArray alloc] init];
     self.vegetableArray = [[NSMutableArray alloc] init];
@@ -37,7 +38,6 @@
     self.waterPollutionArray = [[NSMutableArray alloc]init];
     
     [self drawWolrd];
-    [self drawIslandRect];
     
     UIPinchGestureRecognizer *pinchGesture  = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(resizeSun:)];
     [self.view addGestureRecognizer:pinchGesture];
@@ -125,12 +125,12 @@
     self.sea.size = CGSizeMake(self.sea.frame.size.width*prop, self.sea.frame.size.height*prop);
     self.sea.zPosition = 0.11f;
     [self addChild:self.sea];
-    
-    SKSpriteNode *sand = [SKSpriteNode spriteNodeWithImageNamed:@"Sand.png"];
-    sand.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    sand.size = CGSizeMake(sand.frame.size.width*prop, sand.frame.size.height*prop);
-    sand.zPosition = 0.13f;
-    [self addChild:sand];
+   
+    self.sand = [SKSpriteNode spriteNodeWithImageNamed:@"Sand.png"];
+    self.sand.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    self.sand.size = CGSizeMake(self.sand.frame.size.width*prop, self.sand.frame.size.height*prop);
+    self.sand.zPosition = 0.13f;
+    [self addChild:self.sand];
     
     self.island = [SKSpriteNode spriteNodeWithImageNamed:@"Island.png"];
     self.island.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
@@ -158,6 +158,10 @@
     self.dark.zPosition = 1.0f;
     [self addChild:self.dark];
     
+    self.infoButton = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(30, 30)];
+    self.infoButton.position = CGPointMake(self.frame.size.width - 20, self.frame.size.height - 20);
+    self.infoButton.zPosition = 1.0f;
+    [self addChild:self.infoButton];
     
 }
 
@@ -186,7 +190,8 @@
 }
 
 -(void)resizeSun:(UIPinchGestureRecognizer*)recognizer{
-
+    if (self.isNight)
+        return;
     CGPoint touchLocation = [recognizer locationInView:recognizer.view];
     
     touchLocation = [self convertPointFromView:touchLocation];
@@ -402,7 +407,7 @@
 //        self.lightDark = true;
 //        self.light.alpha = 0.0f;
 //    }
-    
+    [self checkForInfoClick:positionInScene];
     [self checkForMenuClick:positionInScene];
     [self checkForAnimalClick:positionInScene];
     [self checkForClickOutsideMenu:positionInScene];
@@ -455,6 +460,18 @@
     }
 }
 
+- (void)checkForInfoClick:(CGPoint)positionInScene {
+    if ([self.infoButton containsPoint:positionInScene]){
+       
+        UIViewController *mainView = self.view.window.rootViewController;
+        InfoTableViewController *infoView = [[InfoTableViewController alloc]init];
+        infoView.temperature = self.temperature;
+        infoView.herbivores = self.herbivores;
+        [mainView presentViewController:infoView animated:YES completion:nil];
+        NSLog(@"LIZE");
+    }
+}
+
 - (void)updateTimeTick:(CFTimeInterval)currentTime {
 
     self.timeSinceLast += currentTime - self.lastUpdateTimeInterval;
@@ -472,6 +489,7 @@
     NSLog(@"%f humidade", self.humidity);
     NSLog(@"%f poluicao", self.earthPollution);
     NSLog(@"%lu animais", (unsigned long)self.animalArray.count);
+    NSLog(@"%d herbivoros", self.herbivores);
 
 }
 
@@ -482,6 +500,28 @@
     [self updatePollution];
     [self updateHumidity];
     [self updateNight];
+    [self moveClouds];
+}
+
+- (void)moveClouds{
+
+    for (int i = 0; i < self.sceneryArray.count; i++){
+        SKSpriteNode * testingCloud = self.sceneryArray[i];
+        CGRect cloudArea = CGRectMake(0, 400, self.scene.frame.size.width, 300);
+        float a = 0;
+        if (!self.isNight)
+             a = getRandomNum(-5, 0);
+        if (self.isNight)
+             a = getRandomNum(0, 5);
+        float b = getRandomNum(-4, 4);
+        SKAction * move;
+        if (CGRectContainsPoint(cloudArea, CGPointMake(testingCloud.position.x + a, testingCloud.position.y + b))){
+        move = [SKAction moveBy:CGVectorMake(a, b)duration:1.0f];
+        [testingCloud runAction:move];
+        }
+    }
+
+
 }
 
 - (void)reproduceVegetableWithId:(int)i {
@@ -547,7 +587,7 @@
     SKVegetables *mainTestingVegetable = self.vegetableArray[i];
     
     if (mainTestingVegetable.growthTime == 5 && mainTestingVegetable.vegetableType == Vegetable_Tree && mainTestingVegetable.isNew) {
-        if (mainTestingVegetable.growthCounter < 7){
+        if (mainTestingVegetable.growthCounter < mainTestingVegetable.maxGrowth){
             SKAction *scale = [SKAction scaleBy:1.1f duration:0.2];
             [mainTestingVegetable runAction:scale];
             mainTestingVegetable.growthCounter++;
@@ -604,6 +644,8 @@
     if (mainTestingAnimal.energy <= 0){
         SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
         [mainTestingAnimal runAction:killAnimal completion:^{[self.animalArray removeObject:mainTestingAnimal];}];
+        if (mainTestingAnimal.animalType == Animal_Herbivore)
+            self.herbivores--;
 
         
     }
@@ -633,7 +675,8 @@
             SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
           
              [mainTestingAnimal runAction:killAnimal completion:^{[self.animalArray removeObject:mainTestingAnimal];}];
-        
+            if (mainTestingAnimal.animalType == Animal_Herbivore)
+                self.herbivores--;
         }
     }
 }
@@ -650,7 +693,8 @@
         SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
         [mainTestingAnimal runAction:killAnimal];
         [self.animalArray removeObject:mainTestingAnimal];
-    
+//        if (mainTestingAnimal.animalType == Animal_Herbivore)
+//            self.herbivores--;
         
     }
 }
@@ -668,6 +712,8 @@
         
         [self.animalArray addObject:newAnimal];
         [self addChild:newAnimal];
+        if (mainTestingAnimal.animalType == Animal_Herbivore)
+            self.herbivores++;
     }
 }
 
@@ -706,6 +752,8 @@
                 if (testingPlant.poisonLevel > 7){
                     SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
                     [mainTestingAnimal runAction:killAnimal completion:^{[self.animalArray removeObject:mainTestingAnimal];}];
+                    if (mainTestingAnimal.animalType == Animal_Herbivore)
+                        self.herbivores--;
                     return;
                 }
             }
@@ -739,9 +787,36 @@
                 secondaryTestingAnimal.performingStopAction = YES;
 
                 [secondaryTestingAnimal runAction:killAnimal completion:^{[self.animalArray removeObject:secondaryTestingAnimal];}];
+                if (secondaryTestingAnimal.animalType == Animal_Herbivore)
+                    self.herbivores--;
             }
         }   
     }
+}
+
+-(void)restartGame{
+    [self removeChildrenInArray:self.animalArray];
+    [self removeChildrenInArray:self.pollutionArray];
+    [self removeChildrenInArray:self.sceneryArray];
+    [self removeChildrenInArray:self.vegetableArray];
+    self.isMenu = false;
+    self.clickedOnMenu = false;
+    self.isNight = false;
+    self.secondsToNight = 30;
+    self.nightDuration = 15;
+    self.temperature = 27;
+    self.timeSinceLast = 0;
+    self.earthPollution = 0;
+    self.global = 0;
+    self.tree = 0;
+    self.pollution = 0;
+    self.waterPollution = 0;
+    self.humidity = 0;
+    self.herbivores = 0;
+    [self.animalArray removeAllObjects];
+    [self.pollutionArray removeAllObjects];
+    [self.vegetableArray removeAllObjects];
+    [self.sceneryArray removeAllObjects];
 }
 
 -(void)updateNight{
@@ -804,6 +879,7 @@
     SKAction *colorSky = [SKAction colorizeWithColor:[UIColor grayColor] colorBlendFactor:self.earthPollution/100 duration:1.0f];
     [self.currentSky runAction:colorSky];
     [self.island runAction:colorSky];
+    [self.sand runAction:colorSky];
     
     for (int i = 0; i < self.waterPollutionArray.count; i++){
         self.waterPollution++;
@@ -813,6 +889,8 @@
         self.waterPollution = 100;
     if (self.waterPollution < 0)
         self.waterPollution = 0;
+    
+    self.waterPollution = self.earthPollution;
     SKAction *colorSea = [SKAction colorizeWithColor:[UIColor grayColor] colorBlendFactor:self.waterPollution/100 duration:1.0f];
     [self.sea runAction:colorSea];
     [self.water runAction:colorSea];
@@ -911,6 +989,8 @@
             if ([testingElement containsPoint:positionInScene]){
                 SKAnimals *temp = [SKAnimals createAnimalofType:(AnimalType)testingElement.elementType];
                 [self.animalArray addObject:temp];
+                if (temp.animalType == Animal_Herbivore)
+                    self.herbivores++;
                 [self removeChildrenInArray:self.menuArray];
                 [self.menuArray removeAllObjects];
                 temp.size = CGSizeMake(20, 20);
@@ -952,9 +1032,9 @@
         }
         else{
             if ([testingElement containsPoint:positionInScene]){
-                NSLog(@"entrou");
+                
                 SKSpriteNode *temp = [SKSpriteNode spriteNodeWithImageNamed:@"industria.png"];
-                temp.zPosition = 0.4f;
+                temp.zPosition = 0.45f;
                 [self removeChildrenInArray:self.menuArray];
                 [self.menuArray removeAllObjects];
                 temp.position = CGPointMake(self.lastTouch.x, self.lastTouch.y);
@@ -1007,10 +1087,30 @@
     for (int i = 0; i < self.animalArray.count; i++){
         SKAnimals *temp = self.animalArray[i];
         if ([temp containsPoint:positionInScene]){
+            [self.animalArray removeObject:temp];
+            [temp removeFromParent];
+            if (temp.animalType == Animal_Herbivore)
+                self.herbivores--;
+            return;
+        }
+    }
+    for (int i = 0; i < self.vegetableArray.count; i++){
+        SKVegetables *temp = self.vegetableArray[i];
+        if ([temp containsPoint:positionInScene]){
+            [self.vegetableArray removeObject:temp];
             [temp removeFromParent];
             return;
         }
     }
+    for (int i = 0; i < self.pollutionArray.count; i++){
+        SKSpriteNode *temp = self.pollutionArray[i];
+        if ([temp containsPoint:positionInScene]){
+            [self.pollutionArray removeObject:temp];
+            [temp removeFromParent];
+            return;
+        }
+    }
+    
     
 }
 
@@ -1023,23 +1123,6 @@
         self.clickedOnMenu = true;
         return;
     }
-}
-
-- (void)drawIslandRect {
-    
-//    float width = self.frame.size.width/1.5;
-//    float height = self.frame.size.height/5;
-//    float x = CGRectGetMidX(self.frame);
-//    float y = CGRectGetMidY(self.frame) - self.frame.size.height*0.02;
-//    
-//    SKShapeNode *shapeNode = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(width, height)];
-//    shapeNode.strokeColor = [SKColor redColor];
-//    shapeNode.position = CGPointMake(x, y);
-//    shapeNode.lineWidth = 3;
-//    shapeNode.zPosition = 9999;
-//    
-//    [self addChild:shapeNode];
-    
 }
 
 -(BOOL)pointInIsland:(CGPoint)point {

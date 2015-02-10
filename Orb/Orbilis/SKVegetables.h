@@ -41,6 +41,8 @@ typedef enum SKVegetableType {
 
 @property int growthTime;
 
+@property int maxGrowth;
+
 @property int multiplyRate;
 
 @property int poisonLevel;

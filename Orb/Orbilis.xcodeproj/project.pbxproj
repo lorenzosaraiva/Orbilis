@@ -16,6 +16,7 @@
 		0A23B0E51A697121000C78A4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A23B0E31A697121000C78A4 /* LaunchScreen.xib */; };
 		0A23B0F11A697121000C78A4 /* OrbilisTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A23B0F01A697121000C78A4 /* OrbilisTests.m */; };
 		0A23B0FC1A697197000C78A4 /* SKAnimals.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A23B0FB1A697197000C78A4 /* SKAnimals.m */; };
+		0A4864E41A8A442400CFE0EE /* InfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4864E31A8A442400CFE0EE /* InfoTableViewController.m */; };
 		0A507B0A1A76A4DD003C0808 /* RainParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0A507B081A76A4DD003C0808 /* RainParticle.sks */; };
 		0A507B0B1A76A4DD003C0808 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A507B091A76A4DD003C0808 /* spark.png */; };
 		0A55A91E1A6996860028EEA3 /* tree.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A55A91D1A6996860028EEA3 /* tree.png */; };
@@ -148,6 +149,8 @@
 		0A23B0F01A697121000C78A4 /* OrbilisTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrbilisTests.m; sourceTree = "<group>"; };
 		0A23B0FA1A697197000C78A4 /* SKAnimals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAnimals.h; sourceTree = "<group>"; };
 		0A23B0FB1A697197000C78A4 /* SKAnimals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAnimals.m; sourceTree = "<group>"; };
+		0A4864E21A8A442400CFE0EE /* InfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoTableViewController.h; path = ../InfoTableViewController.h; sourceTree = "<group>"; };
+		0A4864E31A8A442400CFE0EE /* InfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoTableViewController.m; path = ../InfoTableViewController.m; sourceTree = "<group>"; };
 		0A507B081A76A4DD003C0808 /* RainParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RainParticle.sks; sourceTree = "<group>"; };
 		0A507B091A76A4DD003C0808 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = ../spark.png; sourceTree = "<group>"; };
 		0A55A91D1A6996860028EEA3 /* tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree.png; sourceTree = "<group>"; };
@@ -303,6 +306,8 @@
 				0A23B0D71A697121000C78A4 /* GameScene.m */,
 				51DC7B6F1A88FBA000359324 /* MenuScene.h */,
 				51DC7B701A88FBA000359324 /* MenuScene.m */,
+				0A4864E21A8A442400CFE0EE /* InfoTableViewController.h */,
+				0A4864E31A8A442400CFE0EE /* InfoTableViewController.m */,
 				51770FDE1A792EC500FD8922 /* GameSceneOld.h */,
 				51770FDF1A792EC500FD8922 /* GameSceneOld.m */,
 				0A23B0DB1A697121000C78A4 /* GameViewController.h */,
@@ -729,6 +734,7 @@
 				0A970A351A892ACD00DED8A8 /* SKMenuElement.m in Sources */,
 				0A23B0D51A697121000C78A4 /* AppDelegate.m in Sources */,
 				51770FE01A792EC500FD8922 /* GameSceneOld.m in Sources */,
+				0A4864E41A8A442400CFE0EE /* InfoTableViewController.m in Sources */,
 				0A23B0FC1A697197000C78A4 /* SKAnimals.m in Sources */,
 				0A23B0D81A697121000C78A4 /* GameScene.m in Sources */,
 				0A23B0D21A697121000C78A4 /* main.m in Sources */,

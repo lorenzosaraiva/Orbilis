@@ -33,6 +33,7 @@
         new.growthCounter = 0;
         new.leavesGrowth = 5;
         new.growthTime = 0;
+        new.maxGrowth = getRandomN(5, 9);
         new.isNew = true;
         new.multiplyRate = 400;
         new.vegetableType = Vegetable_Tree;
@@ -52,6 +53,10 @@
     new.poisonLevel = 0;
     new.zPosition = 0.4f;
     return new;
+}
+
+float getRandomN(float minimum, float maximum) {
+    return arc4random_uniform((maximum - minimum) + 1.0) + minimum;
 }
 
 @end
