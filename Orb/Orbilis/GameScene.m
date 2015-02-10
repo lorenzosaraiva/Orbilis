@@ -14,7 +14,7 @@
     
     self.backgroundColor = [UIColor colorWithRed:204/255.0 green:229/255.0 blue:180/255.0 alpha:1];
 
-    // inicia e alloca as coisas iniciais
+    //Inicia e alloca as coisas iniciais
     
     self.isMenu = false;
     self.clickedOnMenu = false;
@@ -37,6 +37,7 @@
     self.waterPollutionArray = [[NSMutableArray alloc]init];
     
     [self drawWolrd];
+    [self drawIslandRect];
     
     UIPinchGestureRecognizer *pinchGesture  = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(resizeSun:)];
     [self.view addGestureRecognizer:pinchGesture];
@@ -839,7 +840,7 @@
 
 -(void)checkForOpenLandMenu:(CGPoint)positionInScene {
 
-    if ([self.islandShape containsPoint:positionInScene]) {
+    if ([self pointInIsland:positionInScene]) {
        
         
         SKMenuElement *menuAnimalOne = [SKMenuElement createMenuElementOfType:0 InPosition:positionInScene];
@@ -1022,6 +1023,23 @@
         self.clickedOnMenu = true;
         return;
     }
+}
+
+- (void)drawIslandRect {
+    
+//    float width = self.frame.size.width/1.5;
+//    float height = self.frame.size.height/5;
+//    float x = CGRectGetMidX(self.frame);
+//    float y = CGRectGetMidY(self.frame) - self.frame.size.height*0.02;
+//    
+//    SKShapeNode *shapeNode = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(width, height)];
+//    shapeNode.strokeColor = [SKColor redColor];
+//    shapeNode.position = CGPointMake(x, y);
+//    shapeNode.lineWidth = 3;
+//    shapeNode.zPosition = 9999;
+//    
+//    [self addChild:shapeNode];
+    
 }
 
 -(BOOL)pointInIsland:(CGPoint)point {
