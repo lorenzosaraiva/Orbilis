@@ -34,9 +34,6 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.scrollEnabled = NO;
     [self.view addSubview:self.tableView];
-    
-
-    
 
     // Do any additional setup after loading the view.
 }

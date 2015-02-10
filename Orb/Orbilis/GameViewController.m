@@ -47,6 +47,8 @@
     // Create and configure the scene.
     MenuScene *scene = [MenuScene sceneWithSize:skView.bounds.size];
     
+        [scene runAction:[SKAction repeatActionForever:[SKAction playSoundFileNamed:@"Music1.mp3" waitForCompletion:YES]]];
+    
     // Present the scene.
     [skView presentScene:scene];
 }
