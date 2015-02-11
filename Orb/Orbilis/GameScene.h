@@ -63,6 +63,8 @@
 @property int tree;
 @property int grass;
 @property int herbivores;
+@property int carnivores;
+@property int predators;
 
 @property BOOL isMenu;
 @property BOOL clickedOnMenu;

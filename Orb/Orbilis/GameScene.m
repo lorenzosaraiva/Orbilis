@@ -37,6 +37,7 @@
     self.pollutionArray = [[NSMutableArray alloc] init];
     self.waterPollutionArray = [[NSMutableArray alloc]init];
     
+    [self playMusic];
     [self drawWolrd];
     
     UIPinchGestureRecognizer *pinchGesture  = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(resizeSun:)];
@@ -69,7 +70,11 @@
     [self addChild:self.dark];
     
 }
+-(void)playMusic{
+    SKAction *playMusic = [SKAction repeatActionForever:[SKAction playSoundFileNamed:@"Music1.mp3" waitForCompletion:YES]];
+    [self runAction:playMusic];
 
+}
 - (void)drawWolrd {
     
     
@@ -468,12 +473,27 @@
 - (void)checkForButtonClick:(CGPoint)positionInScene {
     if ([self.infoButton containsPoint:positionInScene]){
         
+        self.herbivores = 0;
+        self.carnivores = 0;
+        self.predators = 0;
+        for (int i = 0; i < self.animalArray.count; i++){
+            SKAnimals *temp = self.animalArray[i];
+            if (temp.animalType == 0)
+                self.herbivores++;
+            if (temp.animalType == 1)
+                self.carnivores++;
+            if (temp.animalType == 2)
+                self.predators++;
+        }
         UIViewController *mainView = self.view.window.rootViewController;
         InfoTableViewController *infoView = [[InfoTableViewController alloc]init];
         infoView.temperature = self.temperature;
         infoView.animals = self.animalArray.count;
         infoView.humidity = self.humidity;
         infoView.pollution = self.earthPollution;
+        infoView.herbivores = self.herbivores;
+        infoView.carnivores = self.carnivores;
+        infoView.predators = self.predators;
         infoView.vegetables = self.vegetableArray.count;
         [mainView presentViewController:infoView animated:YES completion:nil];
         
@@ -523,7 +543,7 @@
         if (!self.isNight)
             a = getRandomNum(-5, 0);
         if (self.isNight)
-            a = getRandomNum(0, 5);
+            a = getRandomNum(0, 9);
         float b = getRandomNum(-4, 4);
         SKAction * move;
         if (CGRectContainsPoint(cloudArea, CGPointMake(testingCloud.position.x + a, testingCloud.position.y + b))){
@@ -556,7 +576,7 @@
             [self.vegetableArray addObject:new];
             [self addChild:new];
             [self runAction:[SKAction playSoundFileNamed:@"TheSwipe.wav" waitForCompletion:YES]];
-            new.poisonLevel = self.earthPollution/100;
+            new.poisonLevel = self.earthPollution/10;
         }
     } else {
         int grassSpawn = arc4random()%100;
@@ -572,7 +592,7 @@
                 [self.vegetableArray addObject:new];
                 [self addChild:new];
                 [self runAction:[SKAction playSoundFileNamed:@"TheSwipe.wav" waitForCompletion:YES]];
-                new.poisonLevel = self.earthPollution/100;
+                new.poisonLevel = self.earthPollution/10;
             }
             
         }
@@ -589,7 +609,7 @@
         
         mainTestingVegetable.leaves++;
         mainTestingVegetable.leavesCounter = 0;
-        mainTestingVegetable.poisonLevel = self.earthPollution/100;
+        mainTestingVegetable.poisonLevel = self.earthPollution/10;
     }
     mainTestingVegetable.leavesCounter++;
     if (mainTestingVegetable.leavesCounter > mainTestingVegetable.leavesGrowth)
@@ -658,10 +678,6 @@
     if (mainTestingAnimal.energy <= 0){
         SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
         [mainTestingAnimal runAction:killAnimal completion:^{[self.animalArray removeObject:mainTestingAnimal];}];
-        if (mainTestingAnimal.animalType == Animal_Herbivore){
-            
-            self.herbivores--;
-        }
     }
 }
 - (void)temperatureEffectOnPlantWithId:(int)i{
@@ -689,8 +705,6 @@
             SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
             
             [mainTestingAnimal runAction:killAnimal completion:^{[self.animalArray removeObject:mainTestingAnimal];}];
-            if (mainTestingAnimal.animalType == Animal_Herbivore)
-                self.herbivores--;
         }
     }
 }
@@ -707,8 +721,7 @@
         SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
         [mainTestingAnimal runAction:killAnimal];
         [self.animalArray removeObject:mainTestingAnimal];
-        //        if (mainTestingAnimal.animalType == Animal_Herbivore)
-        //            self.herbivores--;
+       
         
     }
 }
@@ -727,8 +740,6 @@
         [self.animalArray addObject:newAnimal];
         [self addChild:newAnimal];
         [self runAction:[SKAction playSoundFileNamed:@"TheSwipe.wav" waitForCompletion:YES]];
-        if (mainTestingAnimal.animalType == Animal_Herbivore)
-            self.herbivores++;
     }
 }
 
@@ -764,11 +775,9 @@
                     
                 }
                 
-                if (testingPlant.poisonLevel > 7){
+                if (testingPlant.poisonLevel > 8){
                     SKAction *killAnimal = [SKAction sequence:@[[SKAction scaleTo:0 duration:1],[SKAction removeFromParent]]];
                     [mainTestingAnimal runAction:killAnimal completion:^{[self.animalArray removeObject:mainTestingAnimal];}];
-                    if (mainTestingAnimal.animalType == Animal_Herbivore)
-                        self.herbivores--;
                     return;
                 }
             }
@@ -802,8 +811,6 @@
                 secondaryTestingAnimal.performingStopAction = YES;
                 
                 [secondaryTestingAnimal runAction:killAnimal completion:^{[self.animalArray removeObject:secondaryTestingAnimal];}];
-                if (secondaryTestingAnimal.animalType == Animal_Herbivore)
-                    self.herbivores--;
             }
         }
     }
@@ -828,6 +835,8 @@
     self.waterPollution = 0;
     self.humidity = 0;
     self.herbivores = 0;
+    self.carnivores = 0;
+    self.predators = 0;
     [self.animalArray removeAllObjects];
     [self.pollutionArray removeAllObjects];
     [self.vegetableArray removeAllObjects];
@@ -1012,8 +1021,6 @@
             if ([testingElement containsPoint:positionInScene]){
                 SKAnimals *temp = [SKAnimals createAnimalofType:(AnimalType)testingElement.elementType];
                 [self.animalArray addObject:temp];
-                if (temp.animalType == Animal_Herbivore)
-                    self.herbivores++;
                 [self removeChildrenInArray:self.menuArray];
                 [self.menuArray removeAllObjects];
                 temp.size = CGSizeMake(20, 20);
@@ -1115,8 +1122,6 @@
         if ([temp containsPoint:positionInScene]){
             [self.animalArray removeObject:temp];
             [temp removeFromParent];
-            if (temp.animalType == Animal_Herbivore)
-                self.herbivores--;
             [self runAction:[SKAction playSoundFileNamed:@"ThePop.wav" waitForCompletion:YES]];
             return;
         }

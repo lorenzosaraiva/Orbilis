@@ -53,7 +53,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return 7;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -67,19 +67,27 @@
         cell.imageView.image = [UIImage imageNamed:@"Sol.png"];
     }
     if (indexPath.row == 1){
-        cell.textLabel.text = [[NSString alloc]initWithFormat:@"Animals : %d", self.animals];
+        cell.textLabel.text = [[NSString alloc]initWithFormat:@"Herbivores : %d", self.herbivores];
         cell.imageView.image = [UIImage imageNamed:@"GroundOne.png"];
     }
     if (indexPath.row == 2){
+        cell.textLabel.text = [[NSString alloc]initWithFormat:@"Carnivores : %d", self.carnivores];
+        cell.imageView.image = [UIImage imageNamed:@"GroundTwo.png"];
+    }
+    if (indexPath.row == 3){
+        cell.textLabel.text = [[NSString alloc]initWithFormat:@"Predators : %d", self.predators];
+        cell.imageView.image = [UIImage imageNamed:@"GroundThree.png"];
+    }
+    if (indexPath.row == 4){
         cell.textLabel.text = [[NSString alloc]initWithFormat:@"Humidity : %.f %%", self.humidity];
         cell.imageView.image = [UIImage imageNamed:@"nuvem4.png"];
 
     }
-    if (indexPath.row == 3){
+    if (indexPath.row == 5){
         cell.textLabel.text = [[NSString alloc]initWithFormat:@"Pollution : %.f %%", self.pollution];
         cell.imageView.image = [UIImage imageNamed:@"industria.png"];
     }
-    if (indexPath.row == 4){
+    if (indexPath.row == 6){
         cell.textLabel.text = [[NSString alloc]initWithFormat:@"Vegetables : %.f", self.vegetables];
         cell.imageView.image = [UIImage imageNamed:@"arvore3.png"];
     }
