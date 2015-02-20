@@ -332,14 +332,6 @@
 		0A23B0CE1A697121000C78A4 /* Orbilis */ = {
 			isa = PBXGroup;
 			children = (
-				51DC7B8A1A8A6F9100359324 /* TheValidate.wav */,
-				51DC7B881A8A6CFD00359324 /* TheWhip2.wav */,
-				51DC7B861A8A6A9100359324 /* TheMenu.wav */,
-				51DC7B7E1A8A6A7E00359324 /* TheWhip.wav */,
-				51DC7B7F1A8A6A7E00359324 /* TheSwipe.wav */,
-				51DC7B801A8A6A7E00359324 /* ThePop2.wav */,
-				51DC7B7C1A8A490100359324 /* ThePop.wav */,
-				51DC7B7A1A8A444800359324 /* Music1.mp3 */,
 				0A23B0FE1A6971C0000C78A4 /* Assets */,
 				0A23B0FD1A6971BA000C78A4 /* Classes */,
 				0A23B0D31A697121000C78A4 /* AppDelegate.h */,
@@ -404,11 +396,27 @@
 		0A23B0FE1A6971C0000C78A4 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				0A4864FA1A8B9FF900CFE0EE /* Music */,
 				0A57627B1A7C222C00C20B3D /* Animations */,
 				0A99D79D1A71975A00A21379 /* Imagens */,
 				0A55A8F01A6974C60028EEA3 /* OrbImages */,
 			);
 			name = Assets;
+			sourceTree = "<group>";
+		};
+		0A4864FA1A8B9FF900CFE0EE /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				51DC7B8A1A8A6F9100359324 /* TheValidate.wav */,
+				51DC7B881A8A6CFD00359324 /* TheWhip2.wav */,
+				51DC7B861A8A6A9100359324 /* TheMenu.wav */,
+				51DC7B7E1A8A6A7E00359324 /* TheWhip.wav */,
+				51DC7B7F1A8A6A7E00359324 /* TheSwipe.wav */,
+				51DC7B801A8A6A7E00359324 /* ThePop2.wav */,
+				51DC7B7C1A8A490100359324 /* ThePop.wav */,
+				51DC7B7A1A8A444800359324 /* Music1.mp3 */,
+			);
+			name = Music;
 			sourceTree = "<group>";
 		};
 		0A55A8F01A6974C60028EEA3 /* OrbImages */ = {

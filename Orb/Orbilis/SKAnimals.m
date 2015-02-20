@@ -33,7 +33,7 @@
         temp.animalType = 1;
         temp.nextMeal = 0;
         temp.age = 0;
-        temp.ageLimit = 45;
+        temp.ageLimit = 40;
     }
     if (type == Animal_Predator){
         temp = [SKAnimals spriteNodeWithImageNamed:@"GroundThree.png"];

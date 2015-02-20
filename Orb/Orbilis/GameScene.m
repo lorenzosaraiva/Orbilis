@@ -44,6 +44,7 @@
     [self.view addGestureRecognizer:pinchGesture];
     
     UILongPressGestureRecognizer *holdGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleHoldGesture:)];
+    holdGesture.allowableMovement = 200;
     [self.view addGestureRecognizer:holdGesture];
     
     UISwipeGestureRecognizer *swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
@@ -52,9 +53,6 @@
     swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:swipeRightRecognizer];
     [self.view addGestureRecognizer:swipeLeftRecognizer];
-    
-    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleHoldGesture:)];
-    [self.view addGestureRecognizer:longPressRecognizer];
     
     //     CONTROLE DA LUMINOSIDADE (incompleto)
     //    self.light = [SKSpriteNode spriteNodeWithColor:[UIColor whiteColor] size:self.view.frame.size];
@@ -350,7 +348,7 @@
     CGPoint positionInScene = [recognizer locationInView:self.view];
     positionInScene = [self convertPointFromView:positionInScene];
     
-    //[self checkForMenuClick:positionInScene];
+    
     if (!self.clickedOnMenu&&!self.isMenu){
         [self checkForOpenLandMenu:positionInScene];
     }
@@ -399,6 +397,13 @@
         self.temperatureLabel.text = [NSString stringWithFormat:@"%.f",self.temperature];
         [self runAction:[SKAction playSoundFileNamed:@"TheWhip2.wav" waitForCompletion:YES]];
         [self colorSky];
+    }else{
+    if (!self.clickedOnMenu){
+        [self checkForAnimalClick:touchLocation];
+        //        [self checkForOpenLandMenu:positionInScene];
+        //        [self checkForWaterMenu:positionInScene];
+        
+    }
     }
 }
 
@@ -422,12 +427,6 @@
     [self checkForMenuClick:positionInScene];
     
     [self checkForClickOutsideMenu:positionInScene];
-    if (!self.clickedOnMenu){
-        [self checkForAnimalClick:positionInScene];
-        //        [self checkForOpenLandMenu:positionInScene];
-        //        [self checkForWaterMenu:positionInScene];
-        
-    }
     
     
 }
