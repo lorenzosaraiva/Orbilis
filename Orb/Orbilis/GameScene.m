@@ -76,78 +76,79 @@
 - (void)drawWolrd {
     
     
-    [self drawPath];
-    
-    float prop = 0.52f;
+    float propW = self.frame.size.width/650;
+    float propH = self.frame.size.height/1000;
     
     self.cage = [SKSpriteNode spriteNodeWithImageNamed:@"Cage.png"];
     self.cage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    self.cage.size = CGSizeMake(self.cage.frame.size.width*prop, self.cage.frame.size.height*prop);
+    self.cage.size = CGSizeMake(self.cage.frame.size.width*propW, self.cage.frame.size.height*propH);
     [self addChild:self.cage];
     
     self.sky = [SKSpriteNode spriteNodeWithImageNamed:@"Sky.png"];
     self.sky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    self.sky.size = CGSizeMake(self.sky.frame.size.width*prop, self.sky.frame.size.height*prop);
+    self.sky.size = CGSizeMake(self.sky.frame.size.width*propW, self.sky.frame.size.height*propH);
     self.currentSky = self.sky;
     [self addChild:self.sky];
     
     self.orangeSky = [SKSpriteNode spriteNodeWithImageNamed:@"SkyOrange.png"];
     self.orangeSky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    self.orangeSky.size = CGSizeMake(self.orangeSky.frame.size.width*prop, self.orangeSky.frame.size.height*prop);
+    self.orangeSky.size = CGSizeMake(self.orangeSky.frame.size.width*propW, self.orangeSky.frame.size.height*propH);
     self.orangeSky.alpha = 0.0f;
     [self addChild:self.orangeSky];
     
     self.lightOrangeSky = [SKSpriteNode spriteNodeWithImageNamed:@"SkyLightOrange.png"];
     self.lightOrangeSky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    self.lightOrangeSky.size = CGSizeMake(self.lightOrangeSky.frame.size.width*prop, self.lightOrangeSky.frame.size.height*prop);
+    self.lightOrangeSky.size = CGSizeMake(self.lightOrangeSky.frame.size.width*propW, self.lightOrangeSky.frame.size.height*propH);
     self.lightOrangeSky.alpha = 0.0f;
     [self addChild:self.lightOrangeSky];
     
     self.lightBlueSky = [SKSpriteNode spriteNodeWithImageNamed:@"SkyLightBlue.png"];
     self.lightBlueSky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    self.lightBlueSky.size = CGSizeMake(self.lightBlueSky.frame.size.width*prop, self.lightBlueSky.frame.size.height*prop);
+    self.lightBlueSky.size = CGSizeMake(self.lightBlueSky.frame.size.width*propW, self.lightBlueSky.frame.size.height*propH);
     self.lightBlueSky.alpha = 0.0f;
     [self addChild:self.lightBlueSky];
     
-    self.nightSky = [SKSpriteNode spriteNodeWithImageNamed:@"SkyDarkBlue.png"];
-    self.nightSky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+100);
-    self.nightSky.size = CGSizeMake(self.nightSky.frame.size.width*prop, self.nightSky.frame.size.height*prop);
+    self.nightSky = [SKSpriteNode spriteNodeWithImageNamed:@"SkyNight.png"];
+    self.nightSky.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    self.nightSky.size = CGSizeMake(self.nightSky.frame.size.width*propW, self.nightSky.frame.size.height*propH);
     self.nightSky.alpha = 0.0f;
     [self addChild:self.nightSky];
     
     self.water = [SKSpriteNode spriteNodeWithImageNamed:@"Water.png"];
     self.water.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    self.water.size = CGSizeMake(self.water.frame.size.width*prop, self.water.frame.size.height*prop);
+    self.water.size = CGSizeMake(self.water.frame.size.width*propW, self.water.frame.size.height*propH);
     self.water.zPosition = 0.12f;
     [self addChild:self.water];
     
     self.sea = [SKSpriteNode spriteNodeWithImageNamed:@"Sea.png"];
     self.sea.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    self.sea.size = CGSizeMake(self.sea.frame.size.width*prop, self.sea.frame.size.height*prop);
+    self.sea.size = CGSizeMake(self.sea.frame.size.width*propW, self.sea.frame.size.height*propH);
     self.sea.zPosition = 0.11f;
     [self addChild:self.sea];
     
     self.sand = [SKSpriteNode spriteNodeWithImageNamed:@"Sand.png"];
     self.sand.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    self.sand.size = CGSizeMake(self.sand.frame.size.width*prop, self.sand.frame.size.height*prop);
+    self.sand.size = CGSizeMake(self.sand.frame.size.width*propW, self.sand.frame.size.height*propH);
     self.sand.zPosition = 0.13f;
     [self addChild:self.sand];
     
     self.island = [SKSpriteNode spriteNodeWithImageNamed:@"Island.png"];
     self.island.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    self.island.size = CGSizeMake(self.island.frame.size.width*prop, self.island.frame.size.height*prop);
-    self.island.zPosition = 0.2f;
+    self.island.size = CGSizeMake(self.island.frame.size.width*propW, self.island.frame.size.height*propH);
+    self.island.zPosition = 0.21f;
     
     [self addChild:self.island];
     
     self.sun = [SKSpriteNode spriteNodeWithImageNamed:@"Sol.png"];
-    self.sun.position = CGPointMake(90, self.frame.size.height - 120);
+    self.sun.size = CGSizeMake(self.frame.size.width/3, self.frame.size.width/3);
+    self.sun.position = CGPointMake(self.sun.frame.size.height * 0.85, self.frame.size.height - self.sun.frame.size.height);
     self.sun.zPosition = 0.1f;
     
     [self addChild:self.sun];
     
     self.moon = [SKSpriteNode spriteNodeWithImageNamed:@"Lua.png"];
-    self.moon.position = CGPointMake(self.frame.size.width - 90, self.frame.size.height - 120);
+    self.moon.size = CGSizeMake(self.moon.size.width * (self.frame.size.width/320), self.moon.size.height * (self.frame.size.height/568));
+    self.moon.position = CGPointMake(self.frame.size.width - self.moon.frame.size.height * 0.85, self.frame.size.height - self.moon.frame.size.height);
     self.moon.zPosition = 0.1f;
     self.moon.alpha = 0.0f;
     
@@ -160,42 +161,26 @@
     [self addChild:self.dark];
     
     self.removeButton = [SKSpriteNode spriteNodeWithImageNamed:@"ClearButton.png"];
-    self.removeButton.size = CGSizeMake(30, 30);
-    self.removeButton.position = CGPointMake(20, self.frame.size.height - 20);
+    self.removeButton.size = CGSizeMake(self.size.width/10, self.size.width/10);
+    self.removeButton.position = CGPointMake(self.removeButton.size.width * 0.60, self.frame.size.height - self.removeButton.size.height * 0.60);
     self.removeButton.zPosition = 1.0f;
     [self addChild:self.removeButton];
     
     self.infoButton = [SKSpriteNode spriteNodeWithImageNamed:@"InfoButton.png"];
-    self.infoButton.size = CGSizeMake(30, 30);
-    self.infoButton.position = CGPointMake(self.frame.size.width - 20, self.frame.size.height - 20);
+    self.infoButton.size = CGSizeMake(self.size.width/10, self.size.width/10);
+    self.infoButton.position = CGPointMake(self.frame.size.width - self.infoButton.size.width * 0.60, self.frame.size.height - self.infoButton.size.height * 0.60);
     self.infoButton.zPosition = 1.0f;
     [self addChild:self.infoButton];
     
+    self.tutorialButton = [SKSpriteNode spriteNodeWithImageNamed:@"InfoButton.png"];
+    self.tutorialButton.size = CGSizeMake(self.size.width/10, self.size.width/10);
+    self.tutorialButton.position = CGPointMake(self.frame.size.width - self.tutorialButton.size.width * 0.60, self.tutorialButton.size.height * 0.60);
+    self.tutorialButton.zPosition = 1.0f;
+    [self addChild:self.tutorialButton];
 }
 
 
--(void)drawPath{
-    
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, nil, 25, 240);
-    CGPathAddLineToPoint(path, nil, 35, 250);
-    CGPathAddLineToPoint(path, nil, 40, 270);
-    CGPathAddLineToPoint(path, nil, 50, 290);
-    CGPathAddLineToPoint(path, nil, 75, 310);
-    CGPathAddLineToPoint(path, nil, 85, 330);
-    CGPathAddLineToPoint(path, nil, 120, 347);
-    CGPathAddLineToPoint(path, nil, 175, 347);
-    CGPathAddLineToPoint(path, nil, 270, 290);
-    CGPathAddLineToPoint(path, nil, 295, 250);
-    CGPathAddLineToPoint(path, nil, 295, 220);
-    CGPathAddLineToPoint(path, nil, 260, 210);
-    CGPathAddLineToPoint(path, nil, 50, 200);
-    CGPathAddLineToPoint(path, nil, 25, 240);
-    
-    self.islandShape = [SKShapeNode shapeNodeWithPath:path];
-    self.islandShape.alpha = 0.0f;
-    [self addChild:self.islandShape];
-}
+
 
 -(void)resizeSun:(UIPinchGestureRecognizer*)recognizer{
     if (self.isNight)
@@ -206,18 +191,18 @@
     
     if ([self.sun containsPoint:touchLocation]){
         if (recognizer.scale > 1){
-            if (self.sun.size.height * 1.03f < 180){
+            if (self.sun.size.height * 1.03f < self.frame.size.width/2){
                 self.sun.size = CGSizeMake(self.sun.size.width * 1.03f, self.sun.size.height * 1.03f);
-                self.temperature = self.sun.frame.size.height/4 - 0.5f * [self.sceneryArray count];
+                self.temperature = (self.sun.frame.size.height/self.frame.size.width) * 100  - 0.5f * [self.sceneryArray count];
                 
             }
             
         }
         else {
-            if (self.sun.size.height * 0.98f > 50){
+            if (self.sun.size.height * 0.98f > self.frame.size.width/8){
                 
                 self.sun.size = CGSizeMake(self.sun.size.width * 0.98f, self.sun.size.height * 0.98f);
-                self.temperature = self.sun.frame.size.height/4 - 0.5f * [self.sceneryArray count];
+                self.temperature = (self.sun.frame.size.height/self.frame.size.width) * 100 - 0.5f * [self.sceneryArray count];
             }
             
         }
@@ -362,9 +347,7 @@
     
     touchLocation = [self convertPointFromView:touchLocation];
     
-    CGRect cloudArea = CGRectMake(0, 400, self.scene.frame.size.width, 300);
-    
-    if (CGRectContainsPoint(cloudArea, touchLocation)){
+    if ([self pointInSky:touchLocation]){
         
         if ([(UISwipeGestureRecognizer*)recognizer direction] == UISwipeGestureRecognizerDirectionLeft && [self.sceneryArray count] > 0){
             SKSpriteNode * temp = self.sceneryArray[0];
@@ -385,8 +368,10 @@
                 a = -a;
             if (!d)
                 b = -b;
+    
             nuvem.position = CGPointMake(touchLocation.x + a, touchLocation.y + b);
             nuvem.color = [UIColor grayColor];
+            nuvem.size = CGSizeMake(nuvem.size.width * (self.view.frame.size.width/320),  nuvem.size.height * (self.view.frame.size.height/568));
             nuvem.colorBlendFactor = 0.0f;
             nuvem.zPosition = 0.2f;
             NSLog(@"nuvem %f", nuvem.position.y);
@@ -411,7 +396,7 @@
     
     UITouch *touch = [touches anyObject];
     CGPoint positionInScene = [touch locationInNode:self];
-    
+    [self pointInSky:positionInScene];
     //    TESTE DE LUMINOSIDADE
     //    if (self.lightDark){
     //    [self.light runAction:[SKAction fadeAlphaTo:0.3f duration:3.0f]];
@@ -471,35 +456,51 @@
 
 - (void)checkForButtonClick:(CGPoint)positionInScene {
     if ([self.infoButton containsPoint:positionInScene]){
-        
-        self.herbivores = 0;
-        self.carnivores = 0;
-        self.predators = 0;
-        for (int i = 0; i < self.animalArray.count; i++){
-            SKAnimals *temp = self.animalArray[i];
-            if (temp.animalType == 0)
-                self.herbivores++;
-            if (temp.animalType == 1)
-                self.carnivores++;
-            if (temp.animalType == 2)
-                self.predators++;
-        }
-        UIViewController *mainView = self.view.window.rootViewController;
-        InfoTableViewController *infoView = [[InfoTableViewController alloc]init];
-        infoView.temperature = self.temperature;
-        infoView.animals = self.animalArray.count;
-        infoView.humidity = self.humidity;
-        infoView.pollution = self.earthPollution;
-        infoView.herbivores = self.herbivores;
-        infoView.carnivores = self.carnivores;
-        infoView.predators = self.predators;
-        infoView.vegetables = self.vegetableArray.count;
-        [mainView presentViewController:infoView animated:YES completion:nil];
-        
+        [self presentInfo];
     }
     if ([self.removeButton containsPoint:positionInScene]){
         [self restartGame];
     }
+    if ([self.tutorialButton containsPoint:positionInScene]){
+        [self startTutorial];
+    }
+}
+
+-(void)startTutorial{
+  
+    UIViewController *mainView = self.view.window.rootViewController;
+    TutorialViewController *tutorialView = [[TutorialViewController alloc]init];
+    [mainView presentViewController:tutorialView animated:YES completion:nil];
+
+
+}
+
+-(void)presentInfo {
+
+    self.herbivores = 0;
+    self.carnivores = 0;
+    self.predators = 0;
+    for (int i = 0; i < self.animalArray.count; i++){
+        SKAnimals *temp = self.animalArray[i];
+        if (temp.animalType == 0)
+            self.herbivores++;
+        if (temp.animalType == 1)
+            self.carnivores++;
+        if (temp.animalType == 2)
+            self.predators++;
+    }
+    UIViewController *mainView = self.view.window.rootViewController;
+    InfoTableViewController *infoView = [[InfoTableViewController alloc]init];
+    infoView.temperature = self.temperature;
+    infoView.animals = (int)self.animalArray.count;
+    infoView.humidity = self.humidity;
+    infoView.pollution = self.earthPollution;
+    infoView.herbivores = self.herbivores;
+    infoView.carnivores = self.carnivores;
+    infoView.predators = self.predators;
+    infoView.vegetables = self.vegetableArray.count;
+    [mainView presentViewController:infoView animated:YES completion:nil];
+
 }
 
 - (void)updateTimeTick:(CFTimeInterval)currentTime {
@@ -537,7 +538,6 @@
     
     for (int i = 0; i < self.sceneryArray.count; i++){
         SKSpriteNode * testingCloud = self.sceneryArray[i];
-        CGRect cloudArea = CGRectMake(0, 400, self.scene.frame.size.width, 300);
         float a = 0;
         if (!self.isNight)
             a = getRandomNum(-5, 0);
@@ -545,7 +545,8 @@
             a = getRandomNum(0, 9);
         float b = getRandomNum(-4, 4);
         SKAction * move;
-        if (CGRectContainsPoint(cloudArea, CGPointMake(testingCloud.position.x + a, testingCloud.position.y + b))){
+        CGPoint cloudDirection = CGPointMake(testingCloud.position.x + a, testingCloud.position.y + b);
+        if ([self containsPoint:cloudDirection]){
             move = [SKAction moveBy:CGVectorMake(a, b)duration:1.0f];
             [testingCloud runAction:move];
         }
@@ -868,7 +869,8 @@
         [self.currentSky runAction:fadeOut];
         [self.nightSky runAction:fadeIn];
         self.temperature -= 5;
-        SKAction *sunDown = [SKAction moveByX:0 y:-250 duration:5.0f];
+        SKAction *sunDown = [SKAction moveToY:self.frame.size.height/2 - self.sun.size.height/2 duration:5.0f];
+        self.sunPosition = self.sun.position;
         [self.sun runAction:sunDown];
         [self.moon runAction:fadeIn];
         self.lastSky = self.currentSky;
@@ -880,7 +882,7 @@
         [self.nightSky runAction:fadeOut];
         [self.lastSky runAction:fadeIn];
         self.temperature+=5;
-        SKAction *sunUp = [SKAction moveByX:0 y:250 duration:5.0f];
+        SKAction *sunUp = [SKAction moveToY:self.sunPosition.y duration:5.0f];
         [self.sun runAction:sunUp];
         [self.moon runAction:fadeOut];
         [self.dark runAction:[SKAction fadeAlphaTo:0.0f duration:5.0f]];
@@ -1019,10 +1021,11 @@
         if (testingElement.elementType == 0|| testingElement.elementType == 1||testingElement.elementType == 2){
             if ([testingElement containsPoint:positionInScene]){
                 SKAnimals *temp = [SKAnimals createAnimalofType:(AnimalType)testingElement.elementType];
+                temp.size = CGSizeMake(temp.frame.size.width * (self.frame.size.width/320), temp.frame.size.height * (self.frame.size.height/568));
                 [self.animalArray addObject:temp];
                 [self removeChildrenInArray:self.menuArray];
                 [self.menuArray removeAllObjects];
-                temp.size = CGSizeMake(20, 20);
+                temp.size = CGSizeMake(20 * (self.frame.size.width/320), 20 * (self.frame.size.height/568));
                 temp.position = CGPointMake(self.lastTouch.x, self.lastTouch.y);
                 [self addChild:temp];
                 self.isMenu = false;
@@ -1037,11 +1040,11 @@
                 SKVegetables *temp;
                 if (testingElement.elementType == Vegetable_Grass_Menu){
                     temp = [SKVegetables createVegetableOfType:Vegetable_Grass];
-                    temp.size = CGSizeMake(25, 35);
+                    temp.size = CGSizeMake(25 * (self.frame.size.width/320), 35  * (self.frame.size.height/568));
                 }
                 if (testingElement.elementType == Vegetable_Tree_Menu){
                     temp = [SKVegetables createVegetableOfType:Vegetable_Tree];
-                    temp.size = CGSizeMake(30, 45);
+                    temp.size = CGSizeMake(30 * (self.frame.size.width/320), 45  * (self.frame.size.height/568));
                 }
                 temp.poisonLevel = self.earthPollution/10;
                 
@@ -1069,7 +1072,7 @@
                 [self removeChildrenInArray:self.menuArray];
                 [self.menuArray removeAllObjects];
                 temp.position = CGPointMake(self.lastTouch.x, self.lastTouch.y);
-                temp.size = CGSizeMake(40, 40);
+                temp.size = CGSizeMake(40 * (self.frame.size.width/320), 40 * (self.frame.size.height/568));
                 [self addChild:temp];
                 
                 self.isMenu = false;
@@ -1183,6 +1186,23 @@
         return false;
     }
     
+}
+
+-(BOOL)pointInSky:(CGPoint)point {
+    
+    float x = self.frame.size.width/20;
+    float width = self.frame.size.width - self.frame.size.width/10;
+    float y = self.frame.size.height * 0.66;
+    float height = self.frame.size.height/2;
+    CGRect rect = CGRectMake(x, y, width, height);
+    if ((CGRectContainsPoint(rect, point))){
+        NSLog(@"YES");
+        return true;
+    }
+    NSLog(@"NO");
+    return false;
+    
+
 }
 
 float getRandomNum(float minimum, float maximum) {

@@ -11,6 +11,7 @@
 #import "SKVegetables.h"
 #import "SKMenuElement.h"
 #import "InfoTableViewController.h"
+#import "TutorialViewController.h"
 
 @interface GameScene : SKScene <UIGestureRecognizerDelegate, SKPhysicsContactDelegate>
 
@@ -18,7 +19,7 @@
 @property (strong, nonatomic) SKSpriteNode *dark;
 @property BOOL lightDark;
 
-@property (strong, nonatomic) SKShapeNode *islandShape;
+@property (strong, nonatomic) SKSpriteNode *tutorialButton;
 @property (strong, nonatomic) SKSpriteNode *infoButton;
 @property (strong, nonatomic) SKSpriteNode *removeButton;
 @property (strong, nonatomic) SKSpriteNode *sun;
@@ -45,7 +46,7 @@
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
 @property (nonatomic) NSTimeInterval timeSinceLast;
 @property (nonatomic) CGPoint lastTouch;
-
+@property (nonatomic) CGPoint sunPosition;
 
 
 @property float temperature;

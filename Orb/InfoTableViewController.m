@@ -62,6 +62,12 @@
     UITableViewCell *cell = [[UITableViewCell alloc]init];
     cell.backgroundColor = [UIColor colorWithRed:204/255.0 green:229/255.0 blue:180/255.0 alpha:1];
     cell.userInteractionEnabled = NO;
+    if(self.view.frame.size.height>736)
+    {
+        cell.textLabel.font = [UIFont systemFontOfSize:30];
+    }
+    
+
     if (indexPath.row == 0){
         cell.textLabel.text = [[NSString alloc]initWithFormat:@"Temperature : %.f °C", self.temperature];
         cell.imageView.image = [UIImage imageNamed:@"Sol.png"];
