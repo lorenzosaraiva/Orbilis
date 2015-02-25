@@ -336,6 +336,7 @@
     
     if (!self.clickedOnMenu&&!self.isMenu){
         [self checkForOpenLandMenu:positionInScene];
+        [self checkForSkyMenu:positionInScene];
     }
     
     
@@ -642,8 +643,32 @@
     
     SKAnimals *mainTestingAnimal = self.animalArray[i];
     
-    if(mainTestingAnimal.performingStopAction==NO) {
+   
+    
+    //TESTE AI
+    CGRect rect = CGRectMake(mainTestingAnimal.position.x - 100, mainTestingAnimal.position.y - 100, 200,200);
+    
+    
+    if (mainTestingAnimal.nextMeal == 0 && mainTestingAnimal.animalType != Animal_Herbivore){
+        SKAnimals *secondaryAnimal;
+        for (int i = 0; i <self.animalArray.count; i++){
+            secondaryAnimal = self.animalArray[i];
+            
+            if (secondaryAnimal.animalType == Animal_Herbivore && CGRectContainsPoint(rect, secondaryAnimal.position)){
+            SKAction *hunt = [SKAction moveTo:secondaryAnimal.position duration:0.5f];
+            [mainTestingAnimal runAction:hunt];
+            mainTestingAnimal.performingStopAction = YES;
+            NSLog(@"THE HUNT BAGIN");
+            }
         
+        }
+        
+        
+        
+    }
+    //FIM TESTE
+
+    if(mainTestingAnimal.performingStopAction==NO) {
         float xMovement = getRandomNum(0,80) - 40;
         float yMovement = getRandomNum(0,80) - 40;
         
@@ -658,6 +683,10 @@
         if (mainTestingAnimal.animalType == Animal_Water_Predator || mainTestingAnimal.animalType == Animal_Water_Herbivore){
             if (CGRectContainsPoint(rectAgua, point))
                 [mainTestingAnimal runAction:move];
+        }
+        
+        if (mainTestingAnimal.animalType == Animal_Sky_Herbivore && [self pointInSky:point]){
+            [mainTestingAnimal runAction:move];
         }
         
     } else {
@@ -734,7 +763,7 @@
         mainTestingAnimal.energy = 0.5f;
         
         SKAnimals *newAnimal = [SKAnimals createAnimalofType:mainTestingAnimal.animalType];
-        newAnimal.size = CGSizeMake(20, 20);
+        newAnimal.size = CGSizeMake(20 * (self.frame.size.width/320), 20 * (self.frame.size.height/568));
         newAnimal.position = CGPointMake(mainTestingAnimal.position.x, mainTestingAnimal.position.y);
         
         [self.animalArray addObject:newAnimal];
@@ -980,6 +1009,25 @@
     }
 }
 
+-(void)checkForSkyMenu:(CGPoint)positionInScene{
+
+    if ([self pointInSky:positionInScene]) {
+        
+        [self runAction:[SKAction playSoundFileNamed:@"TheMenu.wav" waitForCompletion:YES]];
+        
+        SKMenuElement *menuBird = [SKMenuElement createMenuElementOfType:6 InPosition:positionInScene];
+        
+        
+        [self.menuArray addObject:menuBird];
+        
+        [self addChild:menuBird];
+       
+        self.isMenu = true;
+        self.lastTouch = positionInScene;
+    }
+
+}
+
 -(void)checkForWaterMenu:(CGPoint)positionInScene{
     
     CGRect rectAgua = CGRectMake(0,50,self.frame.size.width,130);
@@ -1021,7 +1069,6 @@
         if (testingElement.elementType == 0|| testingElement.elementType == 1||testingElement.elementType == 2){
             if ([testingElement containsPoint:positionInScene]){
                 SKAnimals *temp = [SKAnimals createAnimalofType:(AnimalType)testingElement.elementType];
-                temp.size = CGSizeMake(temp.frame.size.width * (self.frame.size.width/320), temp.frame.size.height * (self.frame.size.height/568));
                 [self.animalArray addObject:temp];
                 [self removeChildrenInArray:self.menuArray];
                 [self.menuArray removeAllObjects];
@@ -1064,7 +1111,7 @@
                 
             }
         }
-        else{
+        else if (testingElement.elementType == 5){
             if ([testingElement containsPoint:positionInScene]){
                 
                 SKSpriteNode *temp = [SKSpriteNode spriteNodeWithImageNamed:@"industria.png"];
@@ -1094,6 +1141,25 @@
                 
             }
             
+        }else if (testingElement.elementType == 6){
+            if ([testingElement containsPoint:positionInScene]){
+                
+                SKAnimals *temp = [SKAnimals createAnimalofType:5];
+                temp.size = CGSizeMake(temp.frame.size.width * (self.frame.size.width/320), temp.frame.size.height * (self.frame.size.height/568));
+                [self.animalArray addObject:temp];
+                [self removeChildrenInArray:self.menuArray];
+                [self.menuArray removeAllObjects];
+                temp.size = CGSizeMake(20 * (self.frame.size.width/320), 20 * (self.frame.size.height/568));
+                temp.position = CGPointMake(self.lastTouch.x, self.lastTouch.y);
+                [self addChild:temp];
+                self.isMenu = false;
+                self.clickedOnMenu = true;
+                [self runAction:[SKAction playSoundFileNamed:@"ThePop2.wav" waitForCompletion:YES]];
+                return;
+
+                
+            }
+        
         }
     }
 }

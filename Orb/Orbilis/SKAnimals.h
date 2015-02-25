@@ -16,7 +16,9 @@ typedef enum SKAnimalType {
     Animal_Carnivore  = 1,
     Animal_Predator  = 2,
     Animal_Water_Herbivore = 3,
-    Animal_Water_Predator = 4
+    Animal_Water_Predator = 4,
+    Animal_Sky_Herbivore = 5,
+    Animal_Sky_Carnivore = 6
     
 } AnimalType;
 

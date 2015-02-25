@@ -64,6 +64,14 @@
         newElement.zPosition = 1.0f;
         newElement.elementType = 5;
     }
+    
+    if (type == 6){
+        
+        newElement = [SKMenuElement spriteNodeWithImageNamed:@"bird.png"];
+        newElement.position = CGPointMake(positionInScene.x, positionInScene.y);
+        newElement.zPosition = 1.0f;
+        newElement.elementType = 6;
+    }
     return newElement;
 }
 

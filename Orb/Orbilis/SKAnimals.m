@@ -75,6 +75,18 @@
     
     
     }
+    if (type == Animal_Sky_Herbivore){
+        temp = [SKAnimals spriteNodeWithImageNamed:@"bird.png"];
+        temp.energy = 1;
+        temp.multiplyLimit = 4;
+        temp.animalType = Animal_Sky_Herbivore;
+        temp.nextMeal = 5;
+        temp.age = 0;
+        temp.ageLimit = 60;
+    
+    
+    
+    }
     
     temp.performingStopAction = NO;
     temp.zPosition = 0.5f;

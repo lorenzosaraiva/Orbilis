@@ -17,7 +17,8 @@ typedef enum SKMenuElementType {
     Animal_Predator_Menu = 2,
     Vegetable_Grass_Menu = 3,
     Vegetable_Tree_Menu = 4,
-    Pollution_Factory_Menu = 5
+    Pollution_Factory_Menu = 5,
+    Animal_Sky_Herbivore_Menu = 6
     
 } MenuElementType;
 
